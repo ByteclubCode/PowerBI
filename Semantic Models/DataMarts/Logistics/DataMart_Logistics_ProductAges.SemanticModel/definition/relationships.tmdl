@@ -1,0 +1,33 @@
+relationship d2ec7de8-9f97-948d-e935-fd4f48939f9d
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_01_Artikel Alter'.StorageId
+	toColumn: DIM_03_Laeger.LagerId
+
+relationship f701a654-766d-74ee-b3a7-2d78978f55b3
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_01_Artikel Alter'.ItemId
+	toColumn: DIM_01_Produkte.Id
+
+relationship 97e26988-c502-358b-9a4a-5b3f530f7f24
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_01_Artikel Alter'.StockVariantId
+	toColumn: DIM_02_Artikelvarianten.VariantId
+
+relationship 50b99a9c-529f-41be-a3d8-6254ee759efd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'FACT_01_Artikel Alter'.AeltersterBestand
+	toColumn: LocalDateTable_8a35a273-461b-407e-a604-9c532ae43c47.Date
+
+relationship 85872b3e-8653-4671-a800-47dee9b2225c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'FACT_01_Artikel Alter'.JuengsterBestand
+	toColumn: LocalDateTable_65293da5-5dac-4f3f-85e4-6e25580c7a86.Date
+
+relationship AutoDetected_5956ca55-36b1-4bee-9aa0-2944235a4878
+	fromColumn: FACT_02_Bewegungen.AgeKey
+	toColumn: 'FACT_01_Artikel Alter'.AgeKey
+
+relationship 1cba1239-7f71-e3d5-6a9a-accc4e340047
+	fromColumn: FACT_02_Bewegungen.Intervall
+	toColumn: Intervalle.Intervall
+

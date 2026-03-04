@@ -1,0 +1,21 @@
+table Intervalle
+	lineageTag: 75811da3-2f15-4100-8beb-9912504de1d9
+
+	column Intervall
+		formatString: 0
+		lineageTag: 92a4a2b4-db7a-4257-aa28-0dcf57915c62
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FACT_02_Bewegungen[Intervall]
+
+		annotation SummarizationSetBy = User
+
+	partition Intervalle = calculated
+		mode: import
+		source = ```
+				
+				    CALCULATETABLE( DISTINCT('FACT_02_Bewegungen'[Intervall]))
+				```
+
+	annotation PBI_Id = 0e910c3f5e2b4e7da65ea7ddd912dab2
+

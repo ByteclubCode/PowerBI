@@ -1,0 +1,313 @@
+table DIM_01_Produkte
+	lineageTag: ebc48596-03fd-4079-b54c-fabaeb34898a
+
+	column Id
+		dataType: int64
+		formatString: 0
+		lineageTag: 887accdb-7d71-47f9-891b-b5d4d360c5c7
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Artikelnummer
+		dataType: string
+		lineageTag: 1d5024b0-e965-4f9e-bfb6-b2c8015dc85b
+		summarizeBy: none
+		sourceColumn: Artikelnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column ArtikelName
+		dataType: string
+		lineageTag: efa9cb13-f701-4491-8e25-7156e77716b8
+		summarizeBy: none
+		sourceColumn: ArtikelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sortiment
+		dataType: string
+		lineageTag: ec14a29b-5f4e-4e2e-b68b-4af8b7d6afed
+		summarizeBy: none
+		sourceColumn: Sortiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortimentName
+		dataType: string
+		lineageTag: 2dbba157-8f6e-4f3c-b8d6-b107faadf8c9
+		summarizeBy: none
+		sourceColumn: SortimentName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MPN
+		dataType: string
+		lineageTag: b8bc64b8-8f43-4b37-a949-dbbf725be4c5
+		summarizeBy: none
+		sourceColumn: MPN
+
+		annotation SummarizationSetBy = Automatic
+
+	column EAN
+		dataType: string
+		lineageTag: 98d5cae8-ad81-4ea9-ab5a-0536e785c72c
+		summarizeBy: none
+		sourceColumn: EAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Handelsware
+		dataType: string
+		lineageTag: 9fbd7022-b81c-4de5-af69-b4c82f32c732
+		summarizeBy: none
+		sourceColumn: Handelsware
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hersteller
+		dataType: string
+		lineageTag: 59092d62-d80e-482f-9871-3b93ca6eba52
+		summarizeBy: none
+		sourceColumn: Hersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie1
+		dataType: string
+		lineageTag: 6c36973d-29f5-4c16-9d0b-693069f4ddaf
+		summarizeBy: none
+		sourceColumn: Kategorie1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie2
+		dataType: string
+		lineageTag: 6447d795-1676-4854-8630-46d8ad0370de
+		summarizeBy: none
+		sourceColumn: Kategorie2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie3
+		dataType: string
+		lineageTag: c73882a7-08d6-4136-85a4-5d670f56b069
+		summarizeBy: none
+		sourceColumn: Kategorie3
+
+		annotation SummarizationSetBy = Automatic
+
+	column ServiceKategorie
+		dataType: string
+		lineageTag: b69647b5-b1a3-42f8-986e-a563190a0509
+		summarizeBy: none
+		sourceColumn: ServiceKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column HerstellerGruppierung
+		dataType: string
+		lineageTag: 3c4f3ffd-4278-4bdc-b446-3ce33a04d165
+		summarizeBy: none
+		sourceColumn: HerstellerGruppierung
+
+		annotation SummarizationSetBy = Automatic
+
+	column GruppierungSortierung
+		dataType: int64
+		formatString: 0
+		lineageTag: fcb54a9d-2792-4454-acaf-683e7c448607
+		summarizeBy: none
+		sourceColumn: GruppierungSortierung
+
+		annotation SummarizationSetBy = Automatic
+
+	column ArtikelNamePlusNummer
+		dataType: string
+		lineageTag: 21620be1-f47b-49ba-b638-a61f17761f18
+		summarizeBy: none
+		sourceColumn: ArtikelNamePlusNummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBName
+		dataType: string
+		lineageTag: 17eabff4-617b-4461-967c-34c83e4bd46b
+		summarizeBy: none
+		sourceColumn: GfdBName
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBKategorie
+		dataType: string
+		lineageTag: a2fee4ee-e54e-4d78-9270-f086f4b363af
+		summarizeBy: none
+		sourceColumn: GfdBKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column CTO
+		dataType: string
+		lineageTag: 4ea2421b-1c86-4136-8a3e-1d15900196f5
+		summarizeBy: none
+		sourceColumn: CTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IstHandelsware
+		dataType: int64
+		formatString: 0
+		lineageTag: 60a5223a-8e22-4f6a-a4bf-80312800927c
+		summarizeBy: none
+		sourceColumn: IstHandelsware
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOB
+		dataType: string
+		lineageTag: 971226f6-d40c-499f-aa24-a51eb3790c46
+		summarizeBy: none
+		sourceColumn: LOB
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubLOB
+		dataType: string
+		lineageTag: 440efbc9-bd31-43e1-b554-69ccd6a0aa15
+		summarizeBy: none
+		sourceColumn: SubLOB
+
+		annotation SummarizationSetBy = Automatic
+
+	column Converge
+		dataType: string
+		lineageTag: 3ecc2eda-70c5-4197-a53e-ee9371941857
+		summarizeBy: none
+		sourceColumn: Converge
+
+		annotation SummarizationSetBy = Automatic
+
+	column SchutzbriefKategorie
+		dataType: string
+		lineageTag: eb066c8f-e169-4d7b-8898-c1641c75bda8
+		summarizeBy: none
+		sourceColumn: SchutzbriefKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column SchutzbriefTyp
+		dataType: string
+		lineageTag: 31ff19be-c1ce-4d52-b7c5-ec88517b4bc0
+		summarizeBy: none
+		sourceColumn: SchutzbriefTyp
+
+		annotation SummarizationSetBy = Automatic
+
+	column ArtikelStatus
+		dataType: string
+		lineageTag: 3f4e95fe-b658-45d2-addf-911b92288256
+		summarizeBy: none
+		sourceColumn: ArtikelStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ersteller
+		dataType: string
+		lineageTag: 16c1fc9d-8bdd-4a97-bb7e-38e73deb5147
+		summarizeBy: none
+		sourceColumn: Ersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	column Erstelldatum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0655012d-9abe-4e9a-982a-ba442fb71312
+		summarizeBy: none
+		sourceColumn: Erstelldatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column UVP_Netto
+		dataType: double
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: d963389b-deb0-4dbc-a7fd-5ec3b9e80acb
+		summarizeBy: none
+		sourceColumn: UVP_Netto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column UVP_Brutto
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 7f399b5a-4119-450f-ac5c-eb0ee36ba7fa
+		summarizeBy: none
+		sourceColumn: UVP_Brutto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column Zolltarifnummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 730a7a5c-3c43-4116-87d0-0c179a76c9fc
+		summarizeBy: none
+		sourceColumn: Zolltarifnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column IstSchutzbrief
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 65f30d98-22f7-4d32-836e-f227170da6c7
+		summarizeBy: none
+		sourceColumn: IstSchutzbrief
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleReport
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ea16e165-0868-4371-8f1f-40489ac2caed
+		summarizeBy: none
+		sourceColumn: AppleReport
+
+		annotation SummarizationSetBy = Automatic
+
+	column IstAppleCarePlusAbo
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 199c48b9-e722-4123-9f79-46e7aa9c627c
+		summarizeBy: none
+		sourceColumn: IstAppleCarePlusAbo
+
+		annotation SummarizationSetBy = Automatic
+
+	column EkLive
+		dataType: double
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: d9a79b82-7df2-48e2-bf36-9a092fca7261
+		summarizeBy: none
+		sourceColumn: EkLive
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_01_Produkte = m
+		mode: dual
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Product = Quelle{[Schema="PowerBI",Item="vDIM_Product"]}[Data]
+				in
+				    PowerBI_vDIM_Product
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,144 @@
+table KPI
+	lineageTag: f5713546-6914-41c2-be1f-221884c7a735
+
+	/// Berechnet den Lagerbestand
+	measure Lagerbestand = ```
+			
+			    bpi.Helper.ConvertToNonBlank(SUM('FACT_01_Artikel Alter'[Lagerbestand]), 0)
+			 
+			```
+		lineageTag: a5e4faae-94b3-4bd3-8cb1-03532fc481b5
+
+		formatStringDefinition = bpi.Formating.Qty()
+
+	/// Berechnet den EK
+	measure EK = ```
+			
+			    bpi.Helper.ConvertToNonBlank(SUM('FACT_01_Artikel Alter'[WertNachEKLive]),0)
+			```
+		lineageTag: 51409f9c-11b4-4ccd-8776-d22757f86a23
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	/// Berechnet den Durchschnittlichen EK.
+	measure 'Durchschnitt EK' = ```
+			
+			    bpi.Helper.ConvertToNonBlank(AVERAGE('FACT_01_Artikel Alter'[WertNachEKLive]),0)
+			```
+		lineageTag: dfe92c19-d876-4f96-a502-b771c900b3eb
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	/// Berechnet den Durchschnittlichen Lagerbestand
+	measure 'Durchschnitt Lagerbestand' = ```
+			
+			    bpi.Helper.ConvertToNonBlank(AVERAGE('FACT_01_Artikel Alter'[Lagerbestand]),0) 
+			```
+		lineageTag: aeb9473b-5bf7-4b58-bfc1-9562bf4e517e
+
+		formatStringDefinition = bpi.Formating.Qty()
+
+	/// Filter in Komplexen Abfragen die Daten die einen Wert haben
+	measure HatBestand = INT(NOT ISEMPTY('FACT_01_Artikel Alter'))
+		formatString: 0
+		lineageTag: a5e93f5e-bf5e-4428-82aa-8a424545d0f1
+
+	measure 'EK Unformatiert' = ```
+			
+			    SUM('FACT_01_Artikel Alter'[WertNachEKLive])
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 71b69f96-7511-4f67-9cf9-5971300b4c4f
+
+	measure 'Lagerbestand Unformatiert' = ```
+			
+			   bpi.Helper.ConvertToNonBlank(SUM('FACT_01_Artikel Alter'[Lagerbestand]), 0)
+			```
+		formatString: 0
+		lineageTag: c7e37379-85ce-44da-8a68-deffffe3b682
+
+	measure 'Älterster Bestand' = ```
+			
+			    MIN('FACT_01_Artikel Alter'[AeltersterBestand])
+			```
+		formatString: Short Date
+		lineageTag: 2c156ba6-a30f-4b55-a9ce-48a7d39527a8
+
+	measure 'Jüngster Bestand' = ```
+			
+			    Max('FACT_01_Artikel Alter'[JuengsterBestand])
+			```
+		formatString: Short Date
+		lineageTag: b2d92dca-afbd-4a2b-968f-4b96b8052d6e
+
+	measure 'Durchschnitt EK Unformatiert' = ```
+			
+			    AVERAGE('FACT_01_Artikel Alter'[WertNachEKLive]) 
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 26b629a3-59e5-41e7-a76c-b7393e45a6bc
+
+	measure 'Durchschnitt Lagerbestand Unformatiert' = ```
+			
+			    bpi.Helper.ConvertToNonBlank(AVERAGE('FACT_01_Artikel Alter'[Lagerbestand]),0) 
+			```
+		formatString: 0
+		lineageTag: 3f700ed4-8277-4847-925c-4b09090b3fe2
+
+	measure Prognose = DIVIDE([Lagerbestand], [Abgänge], "∞")
+		formatString: 0.00
+		displayFolder: Analyse
+		lineageTag: 34ca4ac5-c147-443f-b47d-f0441b5f4a56
+
+	measure Zugänge = ```
+			
+			    CALCULATE(SUM('FACT_02_Bewegungen'[Menge]), 'FACT_02_Bewegungen'[Art] = "Zugang")
+			```
+		formatString: 0
+		displayFolder: Bewegungen
+		lineageTag: cd5c5242-a085-4a46-b63c-2640bb896ceb
+
+	measure Abgänge = ```
+			
+			    CALCULATE(SUM('FACT_02_Bewegungen'[Menge]), 'FACT_02_Bewegungen'[Art] = "Abgang")
+			```
+		formatString: 0
+		displayFolder: Bewegungen
+		lineageTag: d5a4bcbe-79a5-49eb-83a9-3974f8386c32
+
+	measure Tage = ```
+			IF(ISNUMERIC([Prognose]), [Prognose] * [Intervall], [Prognose]) 
+			```
+		formatString: 0
+		displayFolder: Analyse
+		lineageTag: d6d6c295-64fc-4053-899e-56b3a6403dad
+
+	measure Intervall = SELECTEDVALUE(Intervalle[Intervall], "--")
+		formatString: 0
+		displayFolder: Analyse
+		lineageTag: 4f01e8a4-198d-4427-b4a1-3d3723191343
+
+	measure 'Geschätzes Lagerende' = IF(ISNUMERIC([Tage]), TODAY() + [Tage], [Tage])
+		formatString: Short Date
+		displayFolder: Analyse
+		lineageTag: 0c96ada4-e783-4384-b952-f8b2923ff664
+
+	measure 'Title Intervall' = ```
+			
+			    "Gewählter Intervall " & [Intervall]  
+			```
+		displayFolder: Analyse
+		lineageTag: a0f24a81-6920-4efc-b70e-3a72b7948135
+
+	partition KPI = m
+		mode: import
+		source =
+				let
+				    Quelle = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Spalte ""1""" = _t]),
+				    #"Geänderter Typ" = Table.TransformColumnTypes(Quelle,{{"Spalte ""1""", type text}}),
+				    #"Entfernte Spalten" = Table.RemoveColumns(#"Geänderter Typ",{"Spalte ""1"""})
+				in
+				    #"Entfernte Spalten"
+
+	annotation PBI_ResultType = Table
+

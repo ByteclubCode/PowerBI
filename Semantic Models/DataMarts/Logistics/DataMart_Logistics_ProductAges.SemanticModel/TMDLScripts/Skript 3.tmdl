@@ -1,0 +1,5 @@
+createOrReplace
+    /// AddTax takes in amount and returns amount including tax
+    function 'bpi.Helper.ConvertToNonBlank' = 
+        (input : val, output: val) =>
+            IF(ISBLANK(input), output, input)

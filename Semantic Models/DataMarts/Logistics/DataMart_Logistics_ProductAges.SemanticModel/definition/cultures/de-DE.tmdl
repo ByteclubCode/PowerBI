@@ -1,0 +1,18 @@
+cultureInfo de-DE
+
+	linguisticMetadata =
+			{
+			  "Version": "1.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "kpi.lagerbestand_unformatiert": {
+			      "Binding": {
+			        "ConceptualEntity": "KPI",
+			        "ConceptualProperty": "Lagerbestand Unformatiert"
+			      },
+			      "State": "Generated"
+			    }
+			  }
+			}
+		contentType: json
+

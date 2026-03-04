@@ -1,0 +1,144 @@
+createOrReplace
+
+	table 'FACT_01_Artikel Alter'
+		lineageTag: 21bd76d1-03f0-40d4-a134-9ffca208629e
+
+		column ItemId
+			dataType: int64
+			isHidden
+			formatString: 0
+			lineageTag: c657d2ce-4d16-4f86-82fd-b470d8b9cd14
+			summarizeBy: none
+			sourceColumn: ItemId
+
+			changedProperty = IsHidden
+
+			annotation SummarizationSetBy = Automatic
+
+		column StorageId
+			dataType: int64
+			isHidden
+			formatString: 0
+			lineageTag: 72f2af00-84ad-454a-bbb8-547f02149da5
+			summarizeBy: none
+			sourceColumn: StorageId
+
+			changedProperty = IsHidden
+
+			annotation SummarizationSetBy = Automatic
+
+		column StockVariantId
+			dataType: int64
+			isHidden
+			formatString: 0
+			lineageTag: 762018e8-8257-4fbd-917f-8478dc79b86f
+			summarizeBy: none
+			sourceColumn: StockVariantId
+
+			changedProperty = IsHidden
+
+			annotation SummarizationSetBy = Automatic
+
+		column DurchschnittlichesAlter
+			dataType: int64
+			formatString: 0
+			lineageTag: 3994f60b-4dfa-4356-9811-2c43013db7bd
+			summarizeBy: sum
+			sourceColumn: DurchschnittlichesAlter
+
+			annotation SummarizationSetBy = Automatic
+
+		column AeltersterBestand
+			dataType: dateTime
+			formatString: Short Date
+			lineageTag: 30dbcc2e-85e3-416e-82a7-3d4166fddfd9
+			summarizeBy: none
+			sourceColumn: AeltersterBestand
+
+			variation Variation
+				isDefault
+				relationship: 50b99a9c-529f-41be-a3d8-6254ee759efd
+				defaultHierarchy: LocalDateTable_8a35a273-461b-407e-a604-9c532ae43c47.Datumshierarchie
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation UnderlyingDateTimeDataType = Date
+
+		column JuengsterBestand
+			dataType: dateTime
+			formatString: Short Date
+			lineageTag: e6d8a5e5-9d1d-4dc3-88e8-f3cf343fc638
+			summarizeBy: none
+			sourceColumn: JuengsterBestand
+
+			variation Variation
+				isDefault
+				relationship: 85872b3e-8653-4671-a800-47dee9b2225c
+				defaultHierarchy: LocalDateTable_65293da5-5dac-4f3f-85e4-6e25580c7a86.Datumshierarchie
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation UnderlyingDateTimeDataType = Date
+
+		column Lagerbestand
+			dataType: double
+			isHidden
+			lineageTag: e73e53ab-b86e-49d9-9e5f-70fe224dff21
+			summarizeBy: sum
+			sourceColumn: Lagerbestand
+
+			changedProperty = IsHidden
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		column WertNachEKLive
+			dataType: double
+			isHidden
+			lineageTag: 878ed28c-ff3d-4e98-b794-454bcc0e2ed5
+			summarizeBy: sum
+			sourceColumn: WertNachEKLive
+
+			changedProperty = IsHidden
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		column Cluster
+			dataType: string
+			lineageTag: abebec36-e4d4-4234-aa1d-42db86756e2e
+			summarizeBy: none
+			sourceColumn: Cluster
+			sortByColumn: ClusterOrder
+
+			changedProperty = SortByColumn
+
+			annotation SummarizationSetBy = Automatic
+
+		column ClusterOrder
+			dataType: int64
+			isHidden
+			formatString: 0
+			lineageTag: 6d7b52b0-1eca-4988-b635-329dc925264d
+			summarizeBy: sum
+			sourceColumn: ClusterOrder
+
+			changedProperty = IsHidden
+
+			annotation SummarizationSetBy = Automatic
+
+		partition 'FACT_01_Artikel Alter' = m
+			mode: import
+			source =
+					let
+					    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+					    PowerBI_vFACT_Logistics_ItemAges = Quelle{[Schema="PowerBI",Item="vFACT_Logistics_ItemAges"]}[Data]
+					in
+					    PowerBI_vFACT_Logistics_ItemAges
+
+		annotation PBI_ResultType = Table
+
+		annotation PBI_NavigationStepName = Navigation
+

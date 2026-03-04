@@ -1,0 +1,27 @@
+model Model
+	culture: de-DE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: de-DE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["FACT_01_Artikel Alter","DIM_03_Laeger","DIM_01_Produkte","DIM_02_Artikelvarianten","KPI","FACT_02_Bewegungen"]
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DevMode"]
+
+ref table 'FACT_01_Artikel Alter'
+ref table DIM_03_Laeger
+ref table DIM_01_Produkte
+ref table DIM_02_Artikelvarianten
+ref table KPI
+ref table DateTableTemplate_1ebda46a-611f-4acc-b914-d1d1251d8302
+ref table LocalDateTable_8a35a273-461b-407e-a604-9c532ae43c47
+ref table LocalDateTable_65293da5-5dac-4f3f-85e4-6e25580c7a86
+ref table FACT_02_Bewegungen
+ref table Intervalle
+
+ref cultureInfo de-DE
+
