@@ -61,7 +61,7 @@ table KPIs
 		displayFolder: C2 Finanzierung
 		lineageTag: 5ff2a1cf-afb2-4484-b3ab-773cc8b43118
 
-	/// Gibt die Anzahl der Neukunden aus der C2 Finanzierung zurück. 
+	/// Gibt die Anzahl der Neukunden aus der C2 Finanzierung zurück.
 	measure 'Anzahl C2 Neukunden' = ```
 			
 			    CALCULATE( DISTINCTCOUNT('DIM_Leasing Kunden'[KundenId]) ,
@@ -71,7 +71,7 @@ table KPIs
 		displayFolder: C2 Finanzierung
 		lineageTag: 6cf6d4ff-ca5c-474d-958a-ddc15d193e4e
 
-	/// Gibt die Bestandskunden aus der C2 Finanzierung zurück. 
+	/// Gibt die Bestandskunden aus der C2 Finanzierung zurück.
 	measure 'Anzahl C2 Bestandskunden' = ```
 			
 			    CALCULATE( DISTINCTCOUNT('DIM_Leasing Kunden'[KundenId]), 
@@ -278,7 +278,7 @@ table KPIs
 		displayFolder: Vergleichszeitraum
 		lineageTag: d4b0ba31-ca4e-4928-9709-67a183356ad7
 
-	/// Gibt den Vergleichszeitraum nach Auswahl zurück. 
+	/// Gibt den Vergleichszeitraum nach Auswahl zurück.
 	measure 'Umsatz Switchauswertung' = ```
 			
 			SWITCH(SELECTEDVALUE(HLP_Vergleichszeitraum[Id]) , 
@@ -440,7 +440,7 @@ table KPIs
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		lineageTag: f645122d-7a3d-43e9-88aa-d5a7c90761ba
 
-	/// An Hand der Auswahl des Jahr vs. Jahr aus der Hilfstabelle wird ein 0 oder 1 zurückgeliefert das zum Filtern der Ergebnisse genutzt werden kann. 
+	/// An Hand der Auswahl des Jahr vs. Jahr aus der Hilfstabelle wird ein 0 oder 1 zurückgeliefert das zum Filtern der Ergebnisse genutzt werden kann.
 	measure 'Jahr Vs. Jahr Filter' = ```
 			
 			VAR Jahr1 = SELECTEDVALUE(HLP_JahrZuJahrVergleich[Jahr1]) 
@@ -469,7 +469,7 @@ table KPIs
 
 		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
 
-	/// Verhältnis von Schutzbriefen zu Verkauften Produkten in der Kategorie 
+	/// Verhältnis von Schutzbriefen zu Verkauften Produkten in der Kategorie
 	measure '% Schutzbrief' = ```
 			
 			    DIVIDE([Schutzbriefe], [Verkaufte Artikel], 0)
@@ -521,7 +521,7 @@ table KPIs
 		displayFolder: Umsatzkunden
 		lineageTag: c4334940-49cd-41bc-914f-92c122589c68
 
-	/// Berechnet den Durchschnitt der letzten 4 Jahre zum gegeben Intervall 
+	/// Berechnet den Durchschnitt der letzten 4 Jahre zum gegeben Intervall
 	measure Forecast = ```
 			
 			/*
@@ -542,7 +542,7 @@ table KPIs
 
 		formatStringDefinition = bpi.Formating.Currency()
 
-	/// Abweichung zwischen Berechneter Forcast und den Actuals 
+	/// Abweichung zwischen Berechneter Forcast und den Actuals
 	measure 'Abweichung zum Forecast' = ```
 			
 			    [Forecast] - [Actuals]  
@@ -552,7 +552,7 @@ table KPIs
 
 		formatStringDefinition = bpi.Formating.Currency()
 
-	/// Umsatz des Vorjahres basierend auf den Ausgewählten Jahr. 
+	/// Umsatz des Vorjahres basierend auf den Ausgewählten Jahr.
 	measure 'Gesamt Umsatz VJ' = ```
 			
 			VAR selectedYear = SELECTEDVALUE('DIM_Datum Umsatz'[Jahr]) 
@@ -618,7 +618,7 @@ table KPIs
 		displayFolder: Vorjahresvergleich
 		lineageTag: 04c7d70f-1695-4f0f-9428-b116bf5b582a
 
-	/// Menge des Vorjahres 
+	/// Menge des Vorjahres
 	measure 'Menge VJ' = ```
 			
 			VAR mindate = MIN('DIM_Datum Umsatz'[Datum]) 
@@ -705,7 +705,7 @@ table KPIs
 		displayFolder: Vorjahresvergleich
 		lineageTag: 3592351a-90c8-45ca-b813-c3ab272ad5f6
 
-	/// Aktuelle Marge 
+	/// Aktuelle Marge
 	measure 'Actual Marge' = ```
 			
 			VAR margin = SUM('FACT_Umsatz Produkt'[MargeOhneKosten]) 
@@ -716,7 +716,7 @@ table KPIs
 		displayFolder: Vorjahresvergleich
 		lineageTag: d4e1eed5-09ea-4dcb-8096-41c98d722547
 
-	/// Aktuelle Menge 
+	/// Aktuelle Menge
 	measure 'Actual Menge' = ```
 			
 			VAR _qty = SUM('FACT_Umsatz Produkt'[Menge])
@@ -755,7 +755,7 @@ table KPIs
 		displayFolder: TargoLeasing
 		lineageTag: 52649c83-173e-43ba-bd24-9ec0df34bc6f
 
-	/// Prozentuales Verhältnis zwischen Umsatz und Targoumsatz 
+	/// Prozentuales Verhältnis zwischen Umsatz und Targoumsatz
 	measure '% Verhältnis Umsatz zu Targo' = ```
 			
 			    DIVIDE([Umsatz TargoLeasing],SUM('FACT_Umsatz Produkt'[VKPreisStueck]), 1)
@@ -837,7 +837,7 @@ table KPIs
 		displayFolder: Durchschnitt
 		lineageTag: e99001d0-8746-4156-9e78-cde4a6f26d7c
 
-	/// Zeigt die Tage mit Marge an. 
+	/// Zeigt die Tage mit Marge an.
 	measure 'Tage mit Marge' = ```
 			
 			    CALCULATE(DISTINCTCOUNT('FACT_Umsatz Belege'[DateCreated]), 'FACT_Umsatz Produkt'[MargeOhneKosten] > 0) 

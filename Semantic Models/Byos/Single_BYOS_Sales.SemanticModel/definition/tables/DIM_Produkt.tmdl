@@ -20,7 +20,7 @@ table DIM_Produkt
 
 		annotation SummarizationSetBy = Automatic
 
-	/// EAN, kurz für European Article Number 
+	/// EAN, kurz für European Article Number
 	column EAN
 		dataType: string
 		lineageTag: 184b430f-352f-4cce-a464-47e52f9a2763
@@ -182,7 +182,7 @@ table DIM_Produkt
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Sortimentkennzeichen ähnlich ABC 
+	/// Sortimentkennzeichen ähnlich ABC
 	column Sortiment
 		dataType: string
 		lineageTag: bfcf8ec8-54d8-4118-a803-f031a4ab6190
@@ -191,7 +191,7 @@ table DIM_Produkt
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Sortimentname 
+	/// Sortimentname
 	column SortimentName
 		dataType: string
 		lineageTag: 561d75ad-074d-42cd-ad04-4d3590ca74bf
@@ -249,7 +249,7 @@ table DIM_Produkt
 
 	/// UVP in Netto
 	column UVP_Netto
-		dataType: decimal
+		dataType: double
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		lineageTag: 4c1b72cd-082c-456d-8cdd-c08848bd8137
 		summarizeBy: none
@@ -326,6 +326,16 @@ table DIM_Produkt
 		sourceColumn: IstAppleCarePlusAbo
 
 		annotation SummarizationSetBy = Automatic
+
+	column EkLive
+		dataType: double
+		lineageTag: 6996aa75-ad18-43a6-a7ed-6656a91dba1f
+		summarizeBy: none
+		sourceColumn: EkLive
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition DIM_Produkt-6d78226a-4d1f-4449-ab17-691645787cdd = m
 		mode: import

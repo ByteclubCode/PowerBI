@@ -1,6 +1,6 @@
 /// Enthält alle Datumswerte und Hilfsspalten für die Umsatzdaten
 /// 
-/// PowerBI.vDIM_DateVaules 
+/// PowerBI.vDIM_DateVaules
 table 'DIM_Datum Umsatz'
 	lineageTag: 8cf0ab3d-432b-40eb-81f1-87c68b40f638
 
@@ -37,7 +37,7 @@ table 'DIM_Datum Umsatz'
 
 		annotation SummarizationSetBy = User
 
-	/// Monat als Text und Jahr als Zahl. Beispiel Jan 2024 
+	/// Monat als Text und Jahr als Zahl. Beispiel Jan 2024
 	column MonatUndJahr2
 		dataType: string
 		lineageTag: 44476c28-cfd3-4567-b1ac-17d35bd5d4c2
@@ -76,7 +76,7 @@ table 'DIM_Datum Umsatz'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Quartalid im Format YYYYQ 
+	/// Quartalid im Format YYYYQ
 	column QUARTAL_ID
 		dataType: int64
 		formatString: 0
@@ -114,7 +114,7 @@ table 'DIM_Datum Umsatz'
 
 		annotation SummarizationSetBy = User
 
-	/// Monat als Zahl 1-12 
+	/// Monat als Zahl 1-12
 	column Monat_Nr
 		dataType: int64
 		formatString: 0
@@ -134,7 +134,7 @@ table 'DIM_Datum Umsatz'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Monat und Jahr im Format MM/YYYY 
+	/// Monat und Jahr im Format MM/YYYY
 	column Monat_Jahr
 		dataType: string
 		lineageTag: 6fc0d7b9-8b1c-41a0-a5b2-d9cda0ac79f4
@@ -265,7 +265,7 @@ table 'DIM_Datum Umsatz'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Sortierschlüssel 
+	/// Sortierschlüssel
 	column SortierungJahrMonat
 		dataType: int64
 		formatString: 0

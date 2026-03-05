@@ -30,7 +30,7 @@ table DIM_Filialen
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Gruppierung für Repair 
+	/// Gruppierung für Repair
 	column GruppierungRMA
 		dataType: string
 		lineageTag: 5b2a871d-1c44-4907-994d-e7d8a0a66959
@@ -39,7 +39,7 @@ table DIM_Filialen
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Wenn Repair oder Store dann wird CRP oder APR ausgeben. 
+	/// Wenn Repair oder Store dann wird CRP oder APR ausgeben.
 	column RMA
 		dataType: string
 		lineageTag: 22153570-ec7e-48e0-bc7d-295346a8b890

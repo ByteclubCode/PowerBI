@@ -22,7 +22,7 @@ table DIM_Belegarten
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Kurzbeschreibung des Beleges 
+	/// Kurzbeschreibung des Beleges
 	column Kurzbezeichung
 		dataType: string
 		lineageTag: 5a678fe7-4dba-4ccd-9029-1d67425c3ab8

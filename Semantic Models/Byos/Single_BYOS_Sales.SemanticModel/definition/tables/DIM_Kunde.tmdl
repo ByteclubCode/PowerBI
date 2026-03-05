@@ -105,7 +105,7 @@ table DIM_Kunde
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Funktion des Kunden innerhalb seines Unternehmens 
+	/// Funktion des Kunden innerhalb seines Unternehmens
 	column Funktion
 		dataType: string
 		sourceProviderType: nvarchar(50)
@@ -205,7 +205,7 @@ table DIM_Kunde
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Standardlieferart 
+	/// Standardlieferart
 	column Lieferbedingung
 		dataType: string
 		isNullable: false
@@ -216,7 +216,7 @@ table DIM_Kunde
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Laenderkuerzel 
+	/// Laenderkuerzel
 	column Laenderkuerzel
 		dataType: string
 		isNullable: false
@@ -368,11 +368,11 @@ table DIM_Kunde
 
 		annotation SummarizationSetBy = User
 
-	/// Beschreibt den Ursprung des Kunden. Mögliche Werte sind: 
-	/// Keine Klassifizierung : Keine Umsätze 
-	/// Sales : Nur Käufe 
+	/// Beschreibt den Ursprung des Kunden. Mögliche Werte sind:
+	/// Keine Klassifizierung : Keine Umsätze
+	/// Sales : Nur Käufe
 	/// Repair : Nur Reparaturen
-	/// Sales zu Repair : Erst Kauf, dann Reparatur 
+	/// Sales zu Repair : Erst Kauf, dann Reparatur
 	/// Repair zu Sales : Erst Reparatur, dann Kauf
 	column Klassifizierung
 		dataType: string
@@ -411,7 +411,7 @@ table DIM_Kunde
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Bezieht sich auf Kreis und gibt an ob Stadt oder Kreis. 
+	/// Bezieht sich auf Kreis und gibt an ob Stadt oder Kreis.
 	column Typ
 		dataType: string
 		lineageTag: 21490fc0-279b-4363-975c-7867952793d6

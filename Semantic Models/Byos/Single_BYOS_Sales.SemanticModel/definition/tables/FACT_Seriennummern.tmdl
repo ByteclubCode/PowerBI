@@ -33,7 +33,7 @@ table FACT_Seriennummern
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Wenn ein Lieferant ermittelt werden, dann wird hier der Name ausgeben. 
+	/// Wenn ein Lieferant ermittelt werden, dann wird hier der Name ausgeben.
 	column LieferantenName
 		dataType: string
 		lineageTag: a7388a95-93d7-434b-9e3d-da2df0a651ce

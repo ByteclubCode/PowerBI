@@ -2,7 +2,7 @@
 table DIM_Mandaten
 	lineageTag: 0f79639f-68ab-4981-9fee-8d4da3bb07c8
 
-	/// Mandantennummer 
+	/// Mandantennummer
 	column Id
 		dataType: int64
 		isKey

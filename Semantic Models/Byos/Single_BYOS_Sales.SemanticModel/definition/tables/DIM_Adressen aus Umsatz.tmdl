@@ -106,7 +106,7 @@ table 'DIM_Adressen aus Umsatz'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Das Länderkürzel des Kontaktes 
+	/// Das Länderkürzel des Kontaktes
 	column Laenderkuerzel
 		dataType: string
 		isNullable: false

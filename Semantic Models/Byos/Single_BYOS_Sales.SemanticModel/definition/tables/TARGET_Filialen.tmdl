@@ -21,7 +21,7 @@ table TARGET_Filialen
 		formatString: #,0.00\ %;-#,0.00\ %;#,0.00\ %
 		lineageTag: 5ef99f69-0748-4e7c-bffd-308390d768dc
 
-	/// Zielmarge 
+	/// Zielmarge
 	column Marge_TARGET
 		dataType: decimal
 		isHidden

@@ -2,7 +2,7 @@
 table DIM_KundengruppeAusPosition
 	lineageTag: 2cd7061c-a2ee-41f2-9e89-55df864652ca
 
-	/// Id 
+	/// Id
 	column Id
 		dataType: int64
 		isHidden
@@ -16,7 +16,7 @@ table DIM_KundengruppeAusPosition
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Kundengruppe 
+	/// Kundengruppe
 	column Kundengruppe
 		dataType: string
 		lineageTag: c5885edc-a830-4db5-8831-5f016210589e
@@ -25,7 +25,7 @@ table DIM_KundengruppeAusPosition
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Segment nach Apple 
+	/// Segment nach Apple
 	column AppleSegment
 		dataType: string
 		lineageTag: 11dc4bc1-41a1-4d3b-99d0-4610691ba16d

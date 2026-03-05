@@ -31,7 +31,7 @@ table 'DIM_Leasing Kunden'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Laenderkuerzel 
+	/// Laenderkuerzel
 	column Laenderkuerzel
 		dataType: string
 		lineageTag: c831e30d-c58f-4881-9215-2d3e769b4f36
@@ -104,7 +104,7 @@ table 'DIM_Leasing Kunden'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Funktion des Kunden innerhalb seines Unternehmens 
+	/// Funktion des Kunden innerhalb seines Unternehmens
 	column Funktion
 		dataType: string
 		lineageTag: 7fe41532-f2f5-4053-b93b-4200fe48f21d
@@ -198,7 +198,7 @@ table 'DIM_Leasing Kunden'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Standardlieferart 
+	/// Standardlieferart
 	column Lieferbedingung
 		dataType: string
 		lineageTag: ca2c7ba9-98e8-4bb0-b328-76edc3b22c22
@@ -312,11 +312,11 @@ table 'DIM_Leasing Kunden'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Beschreibt den Ursprung des Kunden. Mögliche Werte sind: 
-	/// Keine Klassifizierung : Keine Umsätze 
-	/// Sales : Nur Käufe 
+	/// Beschreibt den Ursprung des Kunden. Mögliche Werte sind:
+	/// Keine Klassifizierung : Keine Umsätze
+	/// Sales : Nur Käufe
 	/// Repair : Nur Reparaturen
-	/// Sales zu Repair : Erst Kauf, dann Reparatur 
+	/// Sales zu Repair : Erst Kauf, dann Reparatur
 	/// Repair zu Sales : Erst Reparatur, dann Kauf
 	column Klassifizierung
 		dataType: string
@@ -356,7 +356,7 @@ table 'DIM_Leasing Kunden'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Bezieht sich auf Kreis und gibt an ob Stadt oder Kreis. 
+	/// Bezieht sich auf Kreis und gibt an ob Stadt oder Kreis.
 	column Typ
 		dataType: string
 		lineageTag: 8871c1b9-e5c7-450d-b727-a1d8d61b7ebd

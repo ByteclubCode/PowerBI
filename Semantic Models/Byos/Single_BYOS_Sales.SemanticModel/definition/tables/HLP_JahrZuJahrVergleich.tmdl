@@ -28,7 +28,7 @@ table HLP_JahrZuJahrVergleich
 
 		annotation SummarizationSetBy = User
 
-	/// Auswahlfeld 
+	/// Auswahlfeld
 	column 'Jahr Vs. Jahr'
 		dataType: string
 		lineageTag: 99d5f8ae-380a-414a-9615-5df49c2aacb1

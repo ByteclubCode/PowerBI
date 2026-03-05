@@ -35,7 +35,7 @@ table 'DIM_Datum Lieferung'
 
 		annotation SummarizationSetBy = User
 
-	/// Monat als Text und Jahr als Zahl. Beispiel Jan 2024 
+	/// Monat als Text und Jahr als Zahl. Beispiel Jan 2024
 	column MonatUndJahr2
 		dataType: string
 		lineageTag: f6a8586d-c8fe-4902-a57f-488b9e264cd9
@@ -74,7 +74,7 @@ table 'DIM_Datum Lieferung'
 
 		annotation SummarizationSetBy = User
 
-	/// Quartalid im Format YYYYQ 
+	/// Quartalid im Format YYYYQ
 	column QUARTAL_ID
 		dataType: int64
 		formatString: 0
@@ -112,7 +112,7 @@ table 'DIM_Datum Lieferung'
 
 		annotation SummarizationSetBy = User
 
-	/// Monat als Zahl 1-12 
+	/// Monat als Zahl 1-12
 	column Monat_Nr
 		dataType: int64
 		formatString: 0
@@ -132,7 +132,7 @@ table 'DIM_Datum Lieferung'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Monat und Jahr im Format MM/YYYY 
+	/// Monat und Jahr im Format MM/YYYY
 	column Monat_Jahr
 		dataType: string
 		lineageTag: 76c9d3ca-326b-4e0d-9d03-7c4ee2ab9d77
@@ -165,7 +165,7 @@ table 'DIM_Datum Lieferung'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Quartal des Applegeschäftsjahr 
+	/// Quartal des Applegeschäftsjahr
 	column AppleQuartal
 		dataType: int64
 		formatString: 0
@@ -234,7 +234,7 @@ table 'DIM_Datum Lieferung'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Abweichendes Wirtschaftsjahr 
+	/// Abweichendes Wirtschaftsjahr
 	column AbWJJahr
 		dataType: int64
 		formatString: 0
@@ -263,7 +263,7 @@ table 'DIM_Datum Lieferung'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Sortierschlüssel 
+	/// Sortierschlüssel
 	column SortierungJahrMonat
 		dataType: int64
 		isHidden

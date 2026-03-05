@@ -1,4 +1,4 @@
-/// Enthält Daten der Kameras innerhalb der Stores. Es werden die Eingetroffenen und die Kunden die das Geschäft verlassen gezählt. 
+/// Enthält Daten der Kameras innerhalb der Stores. Es werden die Eingetroffenen und die Kunden die das Geschäft verlassen gezählt.
 table 'FACT_Kundenzähler '
 	lineageTag: 71f30b3f-842d-479a-851f-86f339f5d98c
 
@@ -17,7 +17,7 @@ table 'FACT_Kundenzähler '
 		formatString: #,0
 		lineageTag: bf2ca4f5-56fc-443b-a489-cf6a51478097
 
-	/// Verhältnis aus Rechnungen VJ und Kunden VJ 
+	/// Verhältnis aus Rechnungen VJ und Kunden VJ
 	measure 'Conversion Rate Kunden VJ' = DIVIDE([Anzahl Rechnungen VJ],[Eingetroffen Öffungszeiten VJ], 0)
 		lineageTag: 85c4ce91-7f35-4721-a5a4-67ef6ebf4459
 

@@ -51,7 +51,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	/// Um welche Belegart handelt es sich. 
+	/// Um welche Belegart handelt es sich.
 	column BelegArt
 		dataType: string
 		isNullable: false
@@ -62,7 +62,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Der Belegstatus 
+	/// Der Belegstatus
 	column BelegStatus
 		dataType: string
 		isNullable: false
@@ -73,7 +73,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Die Abteilung aus den Beleg 
+	/// Die Abteilung aus den Beleg
 	column Abteilung
 		dataType: string
 		isNullable: false
@@ -140,7 +140,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	/// Gesamt Brutto des Beleges 
+	/// Gesamt Brutto des Beleges
 	column BruttoGesamt
 		dataType: decimal
 		isHidden
@@ -245,7 +245,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Die FilialId 
+	/// Die FilialId
 	column FilialeId
 		dataType: string
 		isHidden
@@ -288,7 +288,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Die Belegnummer 
+	/// Die Belegnummer
 	column BelegId
 		dataType: string
 		sourceProviderType: nvarchar(50)
@@ -298,7 +298,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Die Marge 
+	/// Die Marge
 	column Marge
 		dataType: double
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
@@ -436,7 +436,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Die Transaktionsnummer aus den Portal, Paypal als Beispiel. 
+	/// Die Transaktionsnummer aus den Portal, Paypal als Beispiel.
 	column TransaktionsNummer
 		dataType: string
 		isNullable: false
@@ -563,7 +563,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Um welche Belegart handelt es sich. 
+	/// Um welche Belegart handelt es sich.
 	column BelegartAnzeige
 		dataType: string
 		lineageTag: 37b77888-dd5d-4f74-be2b-4ec464a10d8c
@@ -595,7 +595,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	/// KundenId des Leasingnehmers 
+	/// KundenId des Leasingnehmers
 	column LeasingKundenummer
 		dataType: int64
 		isHidden
@@ -711,7 +711,7 @@ table 'FACT_Umsatz Belege'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Alle Zahlartkosten 
+	/// Alle Zahlartkosten
 	column ZahlartkostenGesamt
 		dataType: decimal
 		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"

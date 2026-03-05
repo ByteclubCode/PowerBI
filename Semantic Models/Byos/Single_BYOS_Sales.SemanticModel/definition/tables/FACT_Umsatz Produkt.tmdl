@@ -325,7 +325,7 @@ table 'FACT_Umsatz Produkt'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	/// Gibt den Durchschnitts Umsatz der Vorjahre zurück. 
+	/// Gibt den Durchschnitts Umsatz der Vorjahre zurück.
 	measure 'Durchschnitts Umsatz der VJ' = ```
 			
 			    CALCULATE(
@@ -340,7 +340,7 @@ table 'FACT_Umsatz Produkt'
 
 		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
 
-	/// Gibt die Durchschnitts Margen der Vorjahre zurück. 
+	/// Gibt die Durchschnitts Margen der Vorjahre zurück.
 	measure 'Durchschnitts Marge GesamtKosten der VJ' = ```
 			
 			    CALCULATE(AVERAGE('FACT_Umsatz Produkt'[MargeGesamtkosten]) 
@@ -395,7 +395,7 @@ table 'FACT_Umsatz Produkt'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// EK pro Stueck 
+	/// EK pro Stueck
 	column EKProStueck
 		dataType: double
 		isNullable: false
@@ -431,7 +431,7 @@ table 'FACT_Umsatz Produkt'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Der VK Gesamtpreis aus der Position 
+	/// Der VK Gesamtpreis aus der Position
 	column VKPreisGesamt
 		dataType: decimal
 		isNullable: false
@@ -707,7 +707,7 @@ table 'FACT_Umsatz Produkt'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Backlog EK, wird berechnet aus Bestellter und gelieferter Menge. 
+	/// Backlog EK, wird berechnet aus Bestellter und gelieferter Menge.
 	column BacklogEK
 		dataType: decimal
 		isHidden
@@ -744,7 +744,7 @@ table 'FACT_Umsatz Produkt'
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Der UVP aus der Position 
+	/// Der UVP aus der Position
 	column UVP
 		dataType: decimal
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00

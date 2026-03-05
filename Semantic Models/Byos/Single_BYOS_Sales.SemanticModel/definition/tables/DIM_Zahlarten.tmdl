@@ -18,7 +18,7 @@ table DIM_Zahlarten
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Die Zahlart 
+	/// Die Zahlart
 	column Zahlart
 		dataType: string
 		isNullable: false
