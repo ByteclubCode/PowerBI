@@ -1,0 +1,165 @@
+/// Aufträge aus Fixably 
+table FACT_00_Aufträge
+	lineageTag: 6021bb2c-4be8-4311-add4-74f655af01a1
+
+	column Id
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 8637a457-c313-48a6-b995-311c12f77a29
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Erstelldatum
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 5dd201ac-ac0e-4772-973c-c0ecfc734a3c
+		summarizeBy: none
+		sourceColumn: Erstelldatum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IstAbgeschlossen
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8f3cf1ce-e22b-4f10-ba82-7f7dc9b55d4d
+		summarizeBy: none
+		sourceColumn: IstAbgeschlossen
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3d6be6e5-93ea-450b-8d9f-7d0f87555027
+		summarizeBy: none
+		sourceColumn: CustomerId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UmsatzNetto
+		dataType: double
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 8f35a5ca-2269-42e0-8ead-34a77cf3dd6d
+		summarizeBy: sum
+		sourceColumn: UmsatzNetto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column UmsatzBrutto
+		dataType: double
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: f507ff2f-349d-46b8-9ffd-027a98798dac
+		summarizeBy: sum
+		sourceColumn: UmsatzBrutto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column LocationId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9888c7b9-5abd-4ba7-8a62-09507cc41365
+		summarizeBy: none
+		sourceColumn: LocationId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusId
+		dataType: int64
+		formatString: 0
+		lineageTag: e4eaca27-c808-4aa9-942c-82f71371529b
+		summarizeBy: none
+		sourceColumn: StatusId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instance
+		dataType: string
+		lineageTag: 480d7daf-8f9b-4f60-a5f4-4ee5bd174cb4
+		summarizeBy: none
+		sourceColumn: Instance
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeviceId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1345232d-884b-49f9-8cf8-28282e3c2169
+		summarizeBy: none
+		sourceColumn: DeviceId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hersteller
+		dataType: string
+		lineageTag: 9375c6f2-3555-4208-a74b-cc6f286a40dd
+		summarizeBy: none
+		sourceColumn: Hersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	column Auftragsnummer
+		dataType: int64
+		formatString: 0
+		lineageTag: bb480488-5c93-4bd7-9e28-748571d14c55
+		summarizeBy: none
+		sourceColumn: Auftragsnummer
+
+		annotation SummarizationSetBy = User
+
+	column Abschlussdatum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 41d29b80-fee7-4905-a37f-649240b22233
+		summarizeBy: none
+		sourceColumn: Abschlussdatum
+
+		variation Variation
+			isDefault
+			relationship: 3a97f5e6-10af-4c53-98ae-578c42d99097
+			defaultHierarchy: LocalDateTable_0b4214a6-9f09-4bec-961e-efa81e4a8902.Datumshierarchie
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition FACT_00_Aufträge = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_Fixably_Order = Quelle{[Schema="PowerBI",Item="vFACT_Fixably_Orders"]}[Data]
+				in
+				    PowerBI_vFACT_Fixably_Order
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,69 @@
+/// Produkte aus Fixably 
+table 'DIM_03_Produkte Rechnungen'
+	lineageTag: cedf10e1-72b1-4533-881f-6a0a212a218c
+
+	column Id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 03bc792c-9a33-471c-9ef8-d5c29209e658
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: cf0e6cf7-510e-4db3-8d66-401908b59473
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: a0617374-4158-4566-8640-bc71a58500b7
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Typ
+		dataType: string
+		lineageTag: fe784767-1b34-478a-a41d-2f04e766ef7d
+		summarizeBy: none
+		sourceColumn: Typ
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie
+		dataType: string
+		lineageTag: 0ad7defd-c30e-44cf-82f6-bfac03cce576
+		summarizeBy: none
+		sourceColumn: Kategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hersteller
+		dataType: string
+		lineageTag: 1423771b-139a-4fd2-b585-fb2a7ab3877c
+		summarizeBy: none
+		sourceColumn: Hersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_03_Produkte Rechnungen-1aed2d05-cb1c-4542-95da-df80a5ae0ab2' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Fixably_Product = Quelle{[Schema="PowerBI",Item="vDIM_Fixably_Products"]}[Data]
+				in
+				    PowerBI_vDIM_Fixably_Product
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

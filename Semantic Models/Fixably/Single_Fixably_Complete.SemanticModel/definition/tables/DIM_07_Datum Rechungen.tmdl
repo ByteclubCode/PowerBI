@@ -1,0 +1,248 @@
+table 'DIM_07_Datum Rechungen'
+	lineageTag: 566467af-a5cc-4bf3-8b4a-4788dd8a8383
+
+	column Datum
+		formatString: General Date
+		lineageTag: 0e8634ef-3666-4efc-af69-cde2ec7c6d1b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Datum]
+
+		variation Variation
+			isDefault
+			relationship: 66e9f519-ce74-4133-8a44-2ecb0e649fa2
+			defaultHierarchy: LocalDateTable_a1ba53a9-868b-40dd-bb78-032bdf9cf3f4.Datumshierarchie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monat_Nr
+		formatString: 0
+		lineageTag: d2853b28-7a71-41a4-aff6-0579d0ee43e1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Monat_Nr]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Jahr
+		formatString: 0
+		lineageTag: d78d7c70-a049-428e-8b73-64a1acdac3ab
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Jahr]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quartal
+		formatString: 0
+		lineageTag: c3b64507-8a54-4e00-885b-cb38b7c2868f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Quartal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonatUndJahr2
+		lineageTag: 09827770-77fe-4f20-aa60-3f6e718b0f0e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[MonatUndJahr2]
+
+		annotation SummarizationSetBy = Automatic
+
+	column KalenderWoche
+		formatString: 0
+		lineageTag: 6b9bd738-c346-426f-8468-69effd354540
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[KalenderWoche]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameWochentag
+		lineageTag: cdec1367-a5d7-4149-9965-1f2d7ff901e4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[NameWochentag]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wochentag_Id
+		formatString: 0
+		lineageTag: b9e383a2-4b49-4110-99f3-50f39262c0a3
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Wochentag_Id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameMonat
+		lineageTag: 65981ce2-878d-4c0e-957e-129e63d7b97c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[NameMonat]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONAT_ID
+		formatString: 0
+		lineageTag: 7995635e-b8df-4ffa-8a96-e80631748fd1
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[MONAT_ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monat_Jahr
+		lineageTag: d9c62020-384a-450c-8b74-5d142c418865
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Monat_Jahr]
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTAL_ID
+		formatString: 0
+		lineageTag: b30e1a12-6381-4f5d-8e0e-8145b03b30c6
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[QUARTAL_ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTAL_BEZ
+		lineageTag: 5f231cb3-f0af-438f-adc1-ce134e5857e6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[QUARTAL_BEZ]
+
+		annotation SummarizationSetBy = Automatic
+
+	column WOCHE_BEZ
+		lineageTag: 2bbb6c76-617b-4f24-b693-48e1ec398165
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[WOCHE_BEZ]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vorjahr
+		formatString: 0
+		lineageTag: 8d1919d1-937e-4053-9128-eb86fcc2b5e1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Vorjahr]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleWoche
+		formatString: 0
+		lineageTag: 90e71e5d-7eae-4bfd-b7f9-83c8b3d35503
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[AppleWoche]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleQuartal
+		formatString: 0
+		lineageTag: bd14427f-1f20-42a0-9350-3f918ccc819b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[AppleQuartal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleFiskalJahr
+		formatString: 0
+		lineageTag: 1c49f92f-04e6-4749-92ba-da77abf711be
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[AppleFiskalJahr]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tag
+		formatString: 0
+		lineageTag: 2ae93e90-35ea-465b-af06-4550578c72c1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[Tag]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameMonatKurz
+		lineageTag: 16f3439c-e670-43c6-8c58-1d7f1b6e65da
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[NameMonatKurz]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameDesFeiertags
+		lineageTag: 57ca94c3-c6bf-4336-95c0-b94e0c1ecdb5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[NameDesFeiertags]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IstFeiertag
+		formatString: 0
+		lineageTag: ee657408-e99c-433a-b1a7-6cef40995f35
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[IstFeiertag]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJMonat
+		formatString: 0
+		lineageTag: 3c6c7686-5e54-41d8-a780-327e86032493
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[AbWJMonat]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJJahr
+		formatString: 0
+		lineageTag: 20478f87-33c8-411e-84a5-06a6b75a24a8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[AbWJJahr]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJQuartal
+		formatString: 0
+		lineageTag: 3a618f9e-253d-48cf-aace-25060ae24c41
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[AbWJQuartal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJMonatUndJahr
+		lineageTag: d8ad6efb-e239-4f63-a6f2-94bfffc4fbdf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[AbWJMonatUndJahr]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortierungJahrMonat
+		formatString: 0
+		lineageTag: 3ffde1f7-7d6f-4f2b-aa7b-a7dd70a6d025
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: DIM_00_Datum Aufträge[SortierungJahrMonat]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_07_Datum Rechungen' = calculated
+		mode: import
+		source = 'DIM_00_Datum Aufträge'
+
+	annotation PBI_Id = 4ab99ec0aed046a29411d460d620813a
+

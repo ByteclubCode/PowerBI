@@ -1,0 +1,102 @@
+table FACT_03_Rechnungspos
+	lineageTag: 99fb0ee6-5e56-4fa4-9b86-3bb2edf93fa8
+
+	column InvoiceId
+		dataType: int64
+		formatString: 0
+		lineageTag: fd7bccef-2e05-4056-b08b-4723bd555b8e
+		summarizeBy: none
+		sourceColumn: InvoiceId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: d2388dc8-8ed8-446c-83eb-39389ec95700
+		summarizeBy: none
+		sourceColumn: Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProduktName
+		dataType: string
+		lineageTag: 8ea9323d-9244-4ac5-a1e0-be58c896524d
+		summarizeBy: none
+		sourceColumn: ProduktName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Menge
+		dataType: double
+		formatString: 0
+		lineageTag: 20af286c-1fc0-4007-894a-207ed8f99947
+		summarizeBy: sum
+		sourceColumn: Menge
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PreisNetto
+		dataType: double
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: bd8e1e3f-2e5b-4941-af01-d57c4ff5ca26
+		summarizeBy: sum
+		sourceColumn: PreisNetto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductId
+		dataType: int64
+		formatString: 0
+		lineageTag: 422f5036-ed4a-4448-970b-a54bec9bc172
+		summarizeBy: none
+		sourceColumn: ProductId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PreisBrutto
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: ec789a16-a5d0-4a6d-b80a-3f2f565de788
+		summarizeBy: sum
+		sourceColumn: PreisBrutto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column Umsatzsteuerschlüssel
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f15cefb-040f-456f-9ba9-e735e8ebbcfb
+		summarizeBy: sum
+		sourceColumn: Umsatzsteuerschlüssel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_03_Rechnungspos-1b79272d-d428-46e6-809a-2fb14b3299db = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_Fixably_InvoiceLine = Quelle{[Schema="PowerBI",Item="vFACT_Fixably_InvoiceLines"]}[Data]
+				in
+				    PowerBI_vFACT_Fixably_InvoiceLine
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

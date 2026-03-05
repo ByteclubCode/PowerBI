@@ -1,0 +1,84 @@
+/// Geräte aus Fixably
+table 'DIM_05_Geräte Auftrag'
+	lineageTag: 88708eb6-2b4d-4c28-bd8f-286cb08b9ae1
+
+	column Konfiguration
+		dataType: string
+		lineageTag: 42da3b4a-7fc2-4bd3-83a8-340a9fa5f1c3
+		summarizeBy: none
+		sourceColumn: Konfiguration
+
+		annotation SummarizationSetBy = Automatic
+
+	column Model
+		dataType: string
+		lineageTag: 6e325791-c913-4668-8cf3-6c228481ef2c
+		summarizeBy: none
+		sourceColumn: Model
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hersteller
+		dataType: string
+		lineageTag: c2e51173-3987-4cf9-b9a3-7f5d9761221d
+		summarizeBy: none
+		sourceColumn: Hersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kaufland
+		dataType: string
+		lineageTag: c9d592df-716a-4e8b-b1b7-d7507850d2c5
+		summarizeBy: none
+		sourceColumn: Kaufland
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kaufdatum
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 01c22e60-ef78-4a04-88bd-40fcffdceab8
+		summarizeBy: none
+		sourceColumn: Kaufdatum
+
+		variation Variation
+			isDefault
+			relationship: 606c163b-22c7-4b9c-a330-1d7f92c9860b
+			defaultHierarchy: LocalDateTable_22c1b0f9-7297-4221-8930-e694060dfa16.Datumshierarchie
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Geräte Name'
+		dataType: string
+		lineageTag: 40674621-5ddf-402b-b4e8-6a94ee8718dd
+		summarizeBy: none
+		sourceColumn: Geräte Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 8540ea7d-7cfc-4f69-92de-6a7f6c5fe760
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_05_Geräte Auftrag' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Fixably_Device = Quelle{[Schema="PowerBI",Item="vDIM_Fixably_Devices"]}[Data]
+				in
+				    PowerBI_vDIM_Fixably_Device
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

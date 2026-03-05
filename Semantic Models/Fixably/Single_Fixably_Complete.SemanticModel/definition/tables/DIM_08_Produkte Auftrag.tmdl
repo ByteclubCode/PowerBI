@@ -1,0 +1,59 @@
+table 'DIM_08_Produkte Auftrag'
+	lineageTag: 9adf4658-d60d-44d2-9e03-cdddf9dfd290
+
+	column Id
+		isHidden
+		formatString: 0
+		lineageTag: 38e3a2dd-41e4-4da8-af53-000d85a1746d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_03_Produkte Rechnungen[Id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		lineageTag: feb57c88-6529-4b7f-9e02-284e50e98487
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_03_Produkte Rechnungen[Code]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		lineageTag: 83356a92-e98e-4fb2-92c9-5356e0057a3c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_03_Produkte Rechnungen[Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Typ
+		lineageTag: 1043f780-303f-4fec-bc4e-b07c4c7e23a6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_03_Produkte Rechnungen[Typ]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie
+		lineageTag: 7a6db4a9-85b2-4c19-abb1-59316f98cc3b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_03_Produkte Rechnungen[Kategorie]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hersteller
+		lineageTag: 88fd8832-0d34-427a-9c14-007a163d6c45
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_03_Produkte Rechnungen[Hersteller]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_08_Produkte Auftrag' = calculated
+		mode: import
+		source = 'DIM_03_Produkte Rechnungen'
+
+	annotation PBI_Id = 6453788bb87d445db0ab03c7df841925
+

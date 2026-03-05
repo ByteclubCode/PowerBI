@@ -1,0 +1,51 @@
+table 'DIM_09_Kunden Rechnung'
+	lineageTag: bb4dc794-7169-4446-a3e1-52bd70732ac0
+
+	column Rechtsformgruppe
+		lineageTag: 9b74d52c-bee7-42e3-abe8-47c7b9e1d2d1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_01_Kunden[Rechtsformgruppe]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		lineageTag: f316e866-33a1-4a92-8b1e-814c8dd94631
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_01_Kunden[Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instance
+		lineageTag: f57c56e8-196e-4d54-ab4b-fb498439c001
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_01_Kunden[Instance]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		formatString: 0
+		lineageTag: e33effb3-904a-49af-8fc6-c8239cb8706a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_01_Kunden[Id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kundenummer
+		formatString: 0
+		lineageTag: b660838f-8f33-4cc2-817c-d70cdd05ee7a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_01_Kunden[Kundenummer]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_09_Kunden Rechnung' = calculated
+		mode: import
+		source = DIM_01_Kunden
+
+	annotation PBI_Id = a6745a5188e24df5922b02847f2a5195
+

@@ -1,0 +1,91 @@
+/// Positionen aus Fixably 
+table FACT_01_Auftragspos
+	lineageTag: b098cf43-0b45-42d9-90dd-5b0369a1fe98
+
+	column OrderId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e5992482-77cf-40ee-8d07-399b78779258
+		summarizeBy: none
+		sourceColumn: OrderId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 344c7f00-df63-4adb-a70c-e787f1642e11
+		summarizeBy: none
+		sourceColumn: ProductId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Menge
+		dataType: double
+		isHidden
+		formatString: 0
+		lineageTag: ccb61005-be83-4624-921c-009aea3a352b
+		summarizeBy: sum
+		sourceColumn: Menge
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UmsatzNetto
+		dataType: double
+		isHidden
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 240a910b-319a-44e8-a70e-7d7b159a166b
+		summarizeBy: sum
+		sourceColumn: UmsatzNetto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column Umsatzsteuerschluessel
+		dataType: double
+		lineageTag: d40f0dd8-567e-4a48-a2c2-444e3131cc41
+		summarizeBy: none
+		sourceColumn: Umsatzsteuerschluessel
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Einkaufspreis
+		dataType: double
+		isHidden
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: c94ccd79-173e-4647-8f13-5850b6944bbc
+		summarizeBy: sum
+		sourceColumn: Einkaufspreis
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	partition FACT_01_Auftragspos = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    #"PowerBI_vFACT_Fixably_ OrderLine" = Quelle{[Schema="PowerBI",Item="vFACT_Fixably_OrderLines"]}[Data]
+				in
+				    #"PowerBI_vFACT_Fixably_ OrderLine"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

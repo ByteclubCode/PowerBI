@@ -1,0 +1,174 @@
+table FACT_02_Rechnungen
+	lineageTag: 1335ceb8-41a6-4db9-b6bf-d4d0fb911f1e
+
+	column CustomerId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 538b6278-7e7c-4d3c-a0bd-c4b3afb03af7
+		summarizeBy: none
+		sourceColumn: CustomerId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BelegTyp
+		dataType: string
+		lineageTag: 45ed6c20-0a59-4273-ae8e-e9514d2365be
+		summarizeBy: none
+		sourceColumn: BelegTyp
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Belegdatum
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 29cb7a77-0c9c-4507-9464-70d80d726294
+		summarizeBy: none
+		sourceColumn: Belegdatum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Zahldatum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7b029476-1e4c-48ed-a321-1674a80c119d
+		summarizeBy: none
+		sourceColumn: Zahldatum
+
+		variation Variation
+			isDefault
+			relationship: bfe9546c-cb82-4ca7-a473-7f255f3a1911
+			defaultHierarchy: LocalDateTable_58c1f8e1-54fc-420d-971b-9053c0cde06e.Datumshierarchie
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column UmsatzNetto
+		dataType: double
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 33ebbc4b-8d06-4cc3-b9e6-e7fe501a3e99
+		summarizeBy: sum
+		sourceColumn: UmsatzNetto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GezahltNetto
+		dataType: double
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: bcae5345-3686-431b-9026-c4b47ae97935
+		summarizeBy: sum
+		sourceColumn: GezahltNetto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OffenNetto
+		dataType: double
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 97ba1ef1-59bd-4fc2-9bd7-55820c571901
+		summarizeBy: sum
+		sourceColumn: OffenNetto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationId
+		dataType: int64
+		formatString: 0
+		lineageTag: 11bc1c77-618f-46d2-aa95-3b196e8f0201
+		summarizeBy: count
+		sourceColumn: LocationId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderId
+		dataType: int64
+		formatString: 0
+		lineageTag: b4aa7d8d-05d5-4bd7-ae9b-f65baa36f3a8
+		summarizeBy: none
+		sourceColumn: OrderId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instance
+		dataType: string
+		lineageTag: af724a1c-ef02-420f-8646-68a724d1ea69
+		summarizeBy: none
+		sourceColumn: Instance
+
+		annotation SummarizationSetBy = Automatic
+
+	column UmsatzBrutto
+		dataType: double
+		lineageTag: f7714408-4d87-42a4-94a6-9e1300f6e657
+		summarizeBy: sum
+		sourceColumn: UmsatzBrutto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Umsatzsteuer
+		dataType: double
+		lineageTag: 845faadc-3070-486d-81d9-abe1afb0d9d7
+		summarizeBy: sum
+		sourceColumn: Umsatzsteuer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 51c15037-ce3b-4080-ad59-5410aafb5b0e
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rechnungsnummer
+		dataType: int64
+		formatString: 0
+		lineageTag: db933c12-63d0-4618-a586-a601e9e934c6
+		summarizeBy: none
+		sourceColumn: Rechnungsnummer
+
+		annotation SummarizationSetBy = User
+
+	partition FACT_02_Rechnungen-287d54f2-8c68-4d32-af4a-1751c3f1ebf4 = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_Fixably_Invoice = Quelle{[Schema="PowerBI",Item="vFACT_Fixably_Invoices"]}[Data]
+				in
+				    PowerBI_vFACT_Fixably_Invoice
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

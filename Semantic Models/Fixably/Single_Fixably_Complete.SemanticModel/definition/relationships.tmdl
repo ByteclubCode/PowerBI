@@ -1,0 +1,78 @@
+relationship bfe9546c-cb82-4ca7-a473-7f255f3a1911
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FACT_02_Rechnungen.Zahldatum
+	toColumn: LocalDateTable_58c1f8e1-54fc-420d-971b-9053c0cde06e.Date
+
+relationship 606c163b-22c7-4b9c-a330-1d7f92c9860b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DIM_05_Geräte Auftrag'.Kaufdatum
+	toColumn: LocalDateTable_22c1b0f9-7297-4221-8930-e694060dfa16.Date
+
+relationship 9b8838cc-bce0-4793-865d-4209e7d93565
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DIM_00_Datum Aufträge'.Datum
+	toColumn: LocalDateTable_95654a6f-8f0e-4e61-b70d-c761e94bb9a4.Date
+
+relationship 66e9f519-ce74-4133-8a44-2ecb0e649fa2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DIM_07_Datum Rechungen'.Datum
+	toColumn: LocalDateTable_a1ba53a9-868b-40dd-bb78-032bdf9cf3f4.Date
+
+relationship AutoDetected_e320d882-5457-4a9f-a40d-f4fb7ed67e0b
+	fromColumn: FACT_00_Aufträge.Instance
+	toColumn: DIM_02_Mandanten.Instance
+
+relationship 50bd10eb-a123-dadf-16b0-207b8e10e39a
+	fromColumn: FACT_02_Rechnungen.Belegdatum
+	toColumn: 'DIM_07_Datum Rechungen'.Datum
+
+relationship f497eb1c-8887-3a2b-04d6-5e7c8fc809ee
+	fromColumn: FACT_00_Aufträge.LocationId
+	toColumn: DIM_04_Filialen.Id
+
+relationship 65b87661-b020-4db9-e79b-d133ebd71535
+	fromColumn: FACT_00_Aufträge.StatusId
+	toColumn: 'DIM_06_Status Auftrag'.Id
+
+relationship 6985820e-ea08-a49c-2ada-0189c9c733a8
+	fromColumn: FACT_00_Aufträge.DeviceId
+	toColumn: 'DIM_05_Geräte Auftrag'.Id
+
+relationship 3c8a562e-a55c-0af8-4781-0bef62235470
+	fromColumn: FACT_00_Aufträge.Erstelldatum
+	toColumn: 'DIM_00_Datum Aufträge'.Datum
+
+relationship 45ecbe9e-f7d5-c8dc-1bb1-b4d937ceee8b
+	fromColumn: FACT_03_Rechnungspos.ProductId
+	toColumn: 'DIM_03_Produkte Rechnungen'.Id
+
+relationship 94464c33-f6f8-9c57-e735-ca06a691aa2e
+	fromColumn: FACT_01_Auftragspos.ProductId
+	toColumn: 'DIM_08_Produkte Auftrag'.Id
+
+relationship 2f5172af-9b31-f148-1672-3915386a99ab
+	fromColumn: FACT_03_Rechnungspos.InvoiceId
+	toColumn: FACT_02_Rechnungen.Id
+
+relationship 7e9ca16f-7009-f4a5-484f-935bfd03e902
+	fromColumn: FACT_01_Auftragspos.OrderId
+	toColumn: FACT_00_Aufträge.Id
+
+relationship 71aef71d-c2d8-8fed-c5a4-5adb5ff1df5f
+	crossFilteringBehavior: bothDirections
+	fromColumn: FACT_02_Rechnungen.OrderId
+	toColumn: FACT_00_Aufträge.Id
+
+relationship 7be92ab5-4031-b03b-fc0e-01a927c71917
+	fromColumn: FACT_00_Aufträge.CustomerId
+	toColumn: DIM_01_Kunden.Id
+
+relationship d309cc74-fca1-edc6-4847-270a0c7a7c07
+	fromColumn: FACT_02_Rechnungen.CustomerId
+	toColumn: 'DIM_09_Kunden Rechnung'.Id
+
+relationship 3a97f5e6-10af-4c53-98ae-578c42d99097
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FACT_00_Aufträge.Abschlussdatum
+	toColumn: LocalDateTable_0b4214a6-9f09-4bec-961e-efa81e4a8902.Date
+

@@ -1,0 +1,37 @@
+model Model
+	culture: de-DE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: de-DE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DIM_02_Mandanten","DIM_01_Kunden","FACT_02_Rechnungen","FACT_03_Rechnungspos","DIM_03_Produkte Rechnungen","DIM_04_Filialen","DIM_05_Geräte Auftrag","FACT_00_Aufträge","FACT_01_Auftragspos","DIM_06_Status Auftrag","DIM_00_Datum Aufträge"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DIM_02_Mandanten
+ref table DateTableTemplate_f265f1ab-40da-4e94-8401-98f0ae3f8993
+ref table DIM_01_Kunden
+ref table FACT_02_Rechnungen
+ref table LocalDateTable_58c1f8e1-54fc-420d-971b-9053c0cde06e
+ref table FACT_03_Rechnungspos
+ref table 'DIM_03_Produkte Rechnungen'
+ref table DIM_04_Filialen
+ref table 'DIM_05_Geräte Auftrag'
+ref table LocalDateTable_22c1b0f9-7297-4221-8930-e694060dfa16
+ref table FACT_00_Aufträge
+ref table FACT_01_Auftragspos
+ref table 'DIM_06_Status Auftrag'
+ref table 'DIM_00_Datum Aufträge'
+ref table LocalDateTable_95654a6f-8f0e-4e61-b70d-c761e94bb9a4
+ref table 'DIM_07_Datum Rechungen'
+ref table LocalDateTable_a1ba53a9-868b-40dd-bb78-032bdf9cf3f4
+ref table 'DIM_08_Produkte Auftrag'
+ref table 'DIM_09_Kunden Rechnung'
+ref table LocalDateTable_0b4214a6-9f09-4bec-961e-efa81e4a8902
+
+ref cultureInfo de-DE
+

@@ -1,0 +1,60 @@
+/// Kunden aus Fixably
+table DIM_01_Kunden
+	lineageTag: 58f78eed-338b-44ff-a4d1-72b2a8e7fb13
+
+	column Rechtsformgruppe
+		dataType: string
+		lineageTag: 9deb42f1-c118-4272-9d3f-29eb5e251c69
+		summarizeBy: none
+		sourceColumn: Rechtsformgruppe
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 47ff0c60-f442-4ec3-935f-d13959027199
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instance
+		dataType: string
+		lineageTag: 7209c4ff-3d57-4d37-b403-f18c6cb2d6be
+		summarizeBy: none
+		sourceColumn: Instance
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: ab691fa8-aa1d-4b16-8f8c-7993e9464458
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kundenummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 5471ad11-c793-48e2-9682-c5fa4d834895
+		summarizeBy: none
+		sourceColumn: Kundenummer
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_01_Kunden-bc957073-f472-480c-925e-b5f7a609894f = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Fixably_Customer = Quelle{[Schema="PowerBI",Item="vDIM_Fixably_Customers"]}[Data]
+				in
+				    PowerBI_vDIM_Fixably_Customer
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,38 @@
+/// Status aus Fixably
+table 'DIM_06_Status Auftrag'
+	lineageTag: 68223365-3c74-4955-a903-c1bccca457b9
+
+	column Id
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 79c845f5-3abb-4e8f-a9de-e52b41737ee0
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Status Anzeige'
+		dataType: string
+		lineageTag: 62701013-c0bc-4420-8752-1ba7196e00ec
+		summarizeBy: none
+		sourceColumn: Status Anzeige
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_06_Status Auftrag' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Fixably_State = Quelle{[Schema="PowerBI",Item="vDIM_Fixably_Statuses"]}[Data]
+				in
+				    PowerBI_vDIM_Fixably_State
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
