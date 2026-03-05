@@ -1,0 +1,73 @@
+/// PowerBI.vDIM_Client
+table DIM_Mandaten
+	lineageTag: 87e14e8d-095f-466f-86c3-29a5d7cb4bbc
+
+	column Id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f4f98b28-b39a-413f-a501-f7f732451e2e
+		summarizeBy: none
+		sourceColumn: Id
+		sortByColumn: Sortierung
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirmenName
+		dataType: string
+		lineageTag: d30453f3-f68f-4a85-96fc-0791d252bb09
+		summarizeBy: none
+		sourceColumn: FirmenName
+		sortByColumn: Sortierung
+
+		annotation SummarizationSetBy = Automatic
+
+	column LogoURL
+		dataType: string
+		lineageTag: e302f878-d6be-4827-85a2-d4e6d4b2fca0
+		summarizeBy: none
+		sourceColumn: LogoURL
+
+		annotation SummarizationSetBy = Automatic
+
+	column LogoInJpg
+		dataType: string
+		lineageTag: 1a8b9549-9644-4382-bbc9-ac2512875446
+		summarizeBy: none
+		sourceColumn: LogoInJpg
+
+		annotation SummarizationSetBy = Automatic
+
+	column LogoInPng
+		dataType: string
+		lineageTag: 703d4f89-ccbc-4c64-b421-3a6815e8ef06
+		summarizeBy: none
+		sourceColumn: LogoInPng
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sortierung
+		dataType: int64
+		formatString: 0
+		lineageTag: 602069a2-61a9-4cf0-adc1-29598a35cd6a
+		summarizeBy: none
+		sourceColumn: Sortierung
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Mandaten-2d69edaa-e9c3-46d3-aa00-3bc4f138284a = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Client = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Client"]}[Data]
+				in
+				    PowerBI_vDIM_Client
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{FirmenName,1}"],"ColumnCount":2,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{FirmenName,1}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Exception
+

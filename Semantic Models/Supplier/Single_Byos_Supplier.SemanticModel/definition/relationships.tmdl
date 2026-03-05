@@ -1,0 +1,95 @@
+relationship 55a77957-f163-4d09-8ab9-6af4787fb95a
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_Lieferanten Bestellungen'.LieferantenId
+	toColumn: DIM_Lieferanten.Nummer
+
+relationship 13385482-faf0-41fa-9e0a-c8231a084cca
+	crossFilteringBehavior: bothDirections
+	relyOnReferentialIntegrity
+	fromColumn: FACT_Bestellpositionen.OrderId
+	toColumn: 'FACT_Lieferanten Bestellungen'.OrderId
+
+relationship 6eacd998-4827-49d0-9d61-25ae7b5824ae
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DIM_Datum Beleg'.Datum
+	toColumn: LocalDateTable_a1e334d8-f271-4ba7-88ee-3ce3d9469f73.Date
+
+relationship 7736a653-1871-43a1-8bd5-6fbd642ac444
+	fromColumn: 'FACT_Lieferanten Bestellungen'.DatumBeleg
+	toColumn: 'DIM_Datum Beleg'.Datum
+
+relationship 622fa706-3fd5-4d81-a58d-f42568786a59
+	fromColumn: 'FACT_Lieferanten Bestellungen'.MandantId
+	toColumn: DIM_Mandaten.Id
+
+relationship d459e2cc-61fd-46b3-af0d-ed978c52b38d
+	fromColumn: 'FACT_Lieferanten Bestellungen'.FilialeId
+	toColumn: DIM_Filialen.FilialeId
+
+relationship ae2fdb1c-f198-4e4b-ab6a-01c04d85daa2
+	fromColumn: FACT_Bestellpositionen.ItemId
+	toColumn: DIM_Produkt.Id
+
+relationship 0b7ea761-8ca2-42c7-98e1-e87ca1b3dfe7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DIM_Datum Wareneingang'.Datum
+	toColumn: LocalDateTable_e2099a36-07fa-4842-9b1b-42609aa1cc57.Date
+
+relationship 706d9f8d-886f-4725-8378-2dab24d6d2f1
+	fromColumn: FACT_Wareneingang.Datum
+	toColumn: 'DIM_Datum Wareneingang'.Datum
+
+relationship 51a22cdd-f5d7-44af-a116-3e345b19aad3
+	fromColumn: FACT_Wareneingang.Zeit
+	toColumn: 'DIM_Stunde Wareneingang'.id
+
+relationship 6786e643-112d-483f-882f-476690844838
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FACT_Stichtagsbestand.Stichtag
+	toColumn: LocalDateTable_238b2219-8c6d-4eeb-a54a-d5315a9fb420.Date
+
+relationship 6bd80af6-785d-4407-9856-968c8dc3fc78
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: FACT_Bestellpositionen.ItemId
+	toColumn: FACT_Stichtagsbestand.ArtikelId
+
+relationship 1096a56e-ead9-414b-8bc7-a636ee1d1061
+	fromColumn: FACT_Bestellpositionen.ItemId
+	toColumn: FACT_Backlog.ItemId
+
+relationship 79f07f9d-01f1-4581-a5d9-06b8d7e93390
+	fromColumn: FACT_Bestellpositionen.ItemId
+	toColumn: 'FACT_Artikel Verkäufe Vormonat'.ItemId
+
+relationship ff28b833-31b2-4825-99a9-8f573fdb836d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DIM_Datum Bestellung'.Datum
+	toColumn: LocalDateTable_fe18ea95-8d43-4f0e-aa20-443cd0ff119c.Date
+
+relationship 8c380888-35e0-442d-a585-aa2c8d982ee7
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_Lieferanten Bestellungen'.Bestelldatum
+	toColumn: 'DIM_Datum Bestellung'.Datum
+
+relationship 50db5729-6dda-4e16-8a15-a1ee23c7d441
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: FACT_Bestellpositionen.ItemId
+	toColumn: 'FACT_Verfügbarer Bestand'.ItemId
+
+relationship c738cfae-c36d-48bd-9135-7c181d2dc2d3
+	crossFilteringBehavior: bothDirections
+	fromColumn: FACT_Wareneingang.SupplierPositionId
+	toColumn: FACT_Bestellpositionen.ExternalId
+
+relationship f3d70c48-2a01-47e3-9ee5-6d32676d700e
+	toCardinality: many
+	fromColumn: FACT_Seriennummern.OrderItemId
+	toColumn: FACT_Wareneingang.SupplierPositionId
+
+relationship 1545c9f9-0381-4326-b98f-c545f24200eb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_Produkt.Erstelldatum
+	toColumn: LocalDateTable_3a5ecafa-68a9-4dd9-91c9-0110bbd79788.Date
+

@@ -1,0 +1,534 @@
+/// PowerBI vFACT_SupplierOrderItems
+table FACT_Bestellpositionen
+	lineageTag: ba729950-ebf0-4bde-8802-05b5c4516eb1
+
+	measure 'EK Bestellte Menge VJ' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Bestellte Menge]) , 
+			    DATEADD('DIM_Datum Beleg'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 58d676d6-7b2e-461e-9802-f584689f09d6
+
+	measure 'EK Gelieferte Menge VJ' = ```
+			
+			    CALCULATE(SUM(FACT_Bestellpositionen[EK Gelieferte Menge]), DATEADD('DIM_Datum Beleg'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 339c0e17-69b3-4f0a-97a7-24bece2966d1
+
+	measure 'EK Offene Menge VJ' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Offene Menge]), 
+			    DATEADD('DIM_Datum Beleg'[Datum], -1, YEAR)
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: b85b71e7-3c68-4b43-bc18-784d2ada24fc
+
+	measure 'EK Bestellte Menge VJ Gesamt' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Bestellte Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Beleg'[Datum])
+			    )
+			               
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 45d78c4e-4c3d-4cfc-acf9-cf1582843698
+
+	measure 'EK Gelieferte Menge VJ Gesamt' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Gelieferte Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Beleg'[Datum])
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 5e216d1e-062c-49ae-90de-b654aa097227
+
+	measure 'EK Offene Menge VJ Gesamt' = ```
+			
+			    CALCULATE(SUM(FACT_Bestellpositionen[EK Offene Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Beleg'[Datum])
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: de03c050-61cf-4fd1-88ea-f0343140cdcd
+
+	measure Jahr = YEAR(TODAY()) -1
+		formatString: 0
+		lineageTag: 80c63fc9-7f41-40a3-b540-3a54d274b041
+
+	measure 'EK Bestellte Menge VJ Abweichung' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Bestellte Menge]) - [EK Bestellte Menge VJ]
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: eccde1fe-7612-4067-a801-d5fb9d320553
+
+	measure 'EK Bestellte Menge VJ Abweichung%' = ```
+			
+			    DIVIDE([EK Bestellte Menge VJ Abweichung], SUM(FACT_Bestellpositionen[EK Bestellte Menge]) ,0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 47f53329-f37d-4372-8c6a-247b10b9feb8
+
+	measure 'EK Gelieferte Menge VJ Abweichung' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Gelieferte Menge]) - [EK Gelieferte Menge VJ]
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: e4c8a32d-667b-4120-a629-01c1b442862e
+
+	measure 'EK Gelieferte Menge VJ Abweichung%' = ```
+			
+			    DIVIDE([EK Gelieferte Menge VJ Abweichung], SUM(FACT_Bestellpositionen[EK Gelieferte Menge]),0 )
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: ffcf531e-f15f-4d0c-8613-cb7fe9df50b8
+
+	measure 'EK Offene Menge VJ Abweichung' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Offene Menge]) - [EK Offene Menge VJ]
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 30bd1048-b50e-4955-a68b-6b3f66a83cf1
+
+	measure 'EK Offene Menge VJ Abweichung%' = ```
+			
+			    DIVIDE([EK Offene Menge VJ Abweichung], SUM(FACT_Bestellpositionen[EK Offene Menge]),0)
+			```
+		lineageTag: b9bced5c-0897-4fdd-82fc-b6e979a5945c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'EK Bestellte Menge VJ nach Bestelldatum' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Bestellte Menge]) , 
+			    DATEADD('DIM_Datum Bestellung'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: bc2e045b-c1ba-43a3-b27e-7e9ff14c97d7
+
+		changedProperty = FormatString
+
+	measure 'EK Bestellte Menge VJ Abweichung nach Bestelldatum' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Bestellte Menge]) - [EK Bestellte Menge VJ nach Bestelldatum]
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: f25cfa18-fea5-4b80-bd6d-7bb221911200
+
+		changedProperty = FormatString
+
+	measure 'EK Bestellte Menge VJ Abweichung% nach Bestelldatum' = ```
+			
+			    DIVIDE([EK Bestellte Menge VJ Abweichung nach Bestelldatum], SUM(FACT_Bestellpositionen[EK Bestellte Menge]) ,0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 74d08238-a895-4b18-83ec-764224266b4c
+
+		changedProperty = FormatString
+
+	measure 'EK Bestellte Menge VJ Gesamt nach Bestelldatum' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Bestellte Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Bestellung'[Datum])
+			    )
+			               
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 02bac99b-3dc5-404d-8813-c1110f67b7cf
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ nach Bestelldatum' = ```
+			
+			    CALCULATE(SUM(FACT_Bestellpositionen[EK Gelieferte Menge]), DATEADD('DIM_Datum Bestellung'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 566306f7-ae81-4a89-870b-e0fc46c1e403
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ Abweichung nach Bestelldatum' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Gelieferte Menge]) - [EK Gelieferte Menge VJ nach Bestelldatum]
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: d4f47a5a-7566-4685-a62c-0fd1452550a1
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ Abweichung% nach Bestelldatum' = ```
+			
+			    DIVIDE([EK Gelieferte Menge VJ Abweichung nach Bestelldatum], SUM(FACT_Bestellpositionen[EK Gelieferte Menge]),0 )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 152f27a6-12e4-41c8-ac77-efd5a7308b87
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ Gesamt nach Bestelldatum' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Gelieferte Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Bestellung'[Datum])
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 0a19a68d-58da-4e0a-93a2-0975385b17e6
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ nach Bestelldatum' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Offene Menge]), 
+			    DATEADD('DIM_Datum Bestellung'[Datum], -1, YEAR)
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 10ac84e1-6c4a-4c42-9628-7db5b5c3c4cb
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ Abweichung nach Bestelldatum' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Offene Menge]) - [EK Offene Menge VJ nach Bestelldatum]
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 36227aef-c51d-476f-bef6-5dae2aba5e8a
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ Abweichung% nach Bestelldatum' = ```
+			
+			    DIVIDE([EK Offene Menge VJ Abweichung nach Bestelldatum], SUM(FACT_Bestellpositionen[EK Offene Menge]),0)
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: 0f25d94f-e4ac-4db9-aa66-8615dd3ddd81
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ Gesamt nach Bestelldatum' = ```
+			
+			    CALCULATE(SUM(FACT_Bestellpositionen[EK Offene Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Bestellung'[Datum])
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Bestelldatum
+		lineageTag: da0053d8-91c8-4dd7-9639-fa6bc9f78900
+
+		changedProperty = FormatString
+
+	measure 'Gelieferte Menge VJ nach Wareneingang' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[GelieferteMenge]) , 
+			    DATEADD('DIM_Datum Wareneingang'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: #,0
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: 4caa36d3-90b6-4154-b2d0-354c81ce752e
+
+		changedProperty = FormatString
+
+	measure 'EK Bestellte Menge VJ Abweichung nach Wareneingang' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Bestellte Menge]) - [Gelieferte Menge VJ nach Wareneingang]
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: 44987fc5-c87d-4870-b963-98b7bb74405f
+
+		changedProperty = FormatString
+
+	measure 'EK Bestellte Menge VJ Abweichung% nach Wareneingang' = ```
+			
+			    DIVIDE([EK Bestellte Menge VJ Abweichung nach Wareneingang], SUM(FACT_Bestellpositionen[EK Bestellte Menge]) ,0) 
+			```
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: ee8659b1-ab97-446f-9e79-17de846a2aed
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'EK Bestellte Menge VJ Gesamt nach Wareneingang' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Bestellte Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Wareneingang'[Datum])
+			    )
+			               
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: f6ad05b9-9ee4-4c7e-b2a6-2db3132aa532
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ nach Wareneingang' = ```
+			
+			    CALCULATE(SUM(FACT_Bestellpositionen[EK Gelieferte Menge]), DATEADD('DIM_Datum Wareneingang'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: a19e6731-2199-4c01-873e-68696c9a2285
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ Abweichung nach Wareineingang' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Gelieferte Menge]) - [EK Gelieferte Menge VJ nach Wareneingang]
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: 319eb2ef-13be-4e61-a751-9b173c5bb62d
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ Abweichung% nach Wareneingang' = ```
+			
+			    DIVIDE([EK Gelieferte Menge VJ Abweichung nach Wareineingang], SUM(FACT_Bestellpositionen[EK Gelieferte Menge]),0 )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: 513fc29f-9c6f-44cf-9f0c-7e78d835ee85
+
+		changedProperty = FormatString
+
+	measure 'EK Gelieferte Menge VJ Gesamt nach Wareneingang' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Gelieferte Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Wareneingang'[Datum])
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: 36d902b8-0ca4-4747-b70d-ddb952ae5f8a
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ nach Wareneingang' = ```
+			
+			    CALCULATE( SUM(FACT_Bestellpositionen[EK Offene Menge]), 
+			    DATEADD('DIM_Datum Wareneingang'[Datum], -1, YEAR)
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 64ea7a65-745e-4f72-b336-219f60112ad5
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ Abweichung nach Wareneingang' = ```
+			
+			    SUM(FACT_Bestellpositionen[EK Offene Menge]) - [EK Offene Menge VJ nach Wareneingang]
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: 4ade6642-1bc0-4005-8120-f24598b3f699
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ Abweichung% nach Wareneingang' = ```
+			
+			    DIVIDE([EK Offene Menge VJ Abweichung nach Wareneingang], SUM(FACT_Bestellpositionen[EK Offene Menge]),0)
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: a45567e7-7f7c-4e64-92cc-d5536e2e442f
+
+		changedProperty = FormatString
+
+	measure 'EK Offene Menge VJ Gesamt nach Wareneingang' = ```
+			
+			    CALCULATE(SUM(FACT_Bestellpositionen[EK Offene Menge]), 
+			    PREVIOUSYEAR('DIM_Datum Wareneingang'[Datum])
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measure\Nach Wareneingang
+		lineageTag: 04d7e910-4171-4767-815e-373ed414551c
+
+		changedProperty = FormatString
+
+	column Id
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: dd731c85-d9b7-4d99-aa4a-db1352bffbb6
+		summarizeBy: count
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ItemId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5293e609-3898-49d8-b49c-7690f90a424a
+		summarizeBy: none
+		sourceColumn: ItemId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NettoEk
+		dataType: decimal
+		isNullable: false
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		sourceProviderType: money
+		lineageTag: fa15c4eb-d2e2-4d70-a88b-4c2da0db2abd
+		summarizeBy: sum
+		sourceColumn: NettoEk
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Bestellte Menge ist die Summe aus Bestellt - Storniert
+	column BestellteMenge
+		dataType: double
+		isNullable: false
+		formatString: #,0
+		sourceProviderType: decimal(12, 4)
+		lineageTag: 9933c682-56fa-4707-9e50-0828a8c9010c
+		summarizeBy: sum
+		sourceColumn: BestellteMenge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column GelieferteMenge
+		dataType: double
+		isNullable: false
+		formatString: #,0
+		sourceProviderType: decimal(12, 4)
+		lineageTag: cd826b77-8671-4cc0-9fdd-bbbf868fa3b6
+		summarizeBy: sum
+		sourceColumn: GelieferteMenge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column StornierteMenge
+		dataType: double
+		isNullable: false
+		formatString: #,0
+		sourceProviderType: decimal(12, 4)
+		lineageTag: 318df936-b591-4598-b3fe-8021981051fd
+		summarizeBy: sum
+		sourceColumn: StornierteMenge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column OrderId
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 465b03f8-9d0f-4458-b3d3-f1f3e8f14e04
+		summarizeBy: none
+		sourceColumn: OrderId
+
+		annotation SummarizationSetBy = Automatic
+
+	column OffenMenge
+		dataType: double
+		formatString: #,0
+		sourceProviderType: decimal(14, 4)
+		lineageTag: bf9008bb-ff84-42b1-a5e0-e86553b7fe6a
+		summarizeBy: sum
+		sourceColumn: OffenMenge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column 'EK Bestellte Menge'
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 718ab875-1fe0-43e9-acce-f8d9ed3a57d5
+		summarizeBy: sum
+		sourceColumn: EK Bestellte Menge
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EK Gelieferte Menge'
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 0aa5fcdc-975f-47a7-9a37-a6d12414906e
+		summarizeBy: sum
+		sourceColumn: EK Gelieferte Menge
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Offene Menge ist die Summe aus Gelieferte Menge - Bestellte Menge (Bestellete Menge ist die Menge abzüglich dem Storno). Negative Werte zeigen Fehlenden Mengen an, Positive eine Überlieferung
+	column 'EK Offene Menge'
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: e5b364ef-fad5-4471-bd65-e266b128582f
+		summarizeBy: sum
+		sourceColumn: EK Offene Menge
+
+		annotation SummarizationSetBy = Automatic
+
+	/// BYOS Id für die Beziehung von Position zum Wareneingang
+	column ExternalId
+		dataType: string
+		isHidden
+		lineageTag: d0330245-b97a-4bee-934d-c1660863c733
+		summarizeBy: none
+		sourceColumn: ExternalId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExternalIdForSerialNumbers
+		dataType: string
+		isHidden
+		lineageTag: b2de5f35-7689-44a9-8b90-5471e6ba803d
+		summarizeBy: none
+		sourceColumn: ExternalIdForSerialNumbers
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Bestellpositionen-42fc534a-5e56-4c6d-a294-394acb049c67 = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vFACT_SupplierOrderItems = BYTECLUB_DWH20{[Schema="PowerBI",Item="vFACT_SupplierOrderItems"]}[Data]
+				in
+				    PowerBI_vFACT_SupplierOrderItems
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,609 @@
+cultureInfo de-DE
+
+	linguisticMetadata =
+			{
+			  "Version": "1.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "PowerBI_vDIM_Product": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Produkte": {}
+			        },
+			        {
+			          "PowerBI vDIM_Product": {
+			            "State": "Deleted"
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.artikel_name": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "ArtikelName"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "artikel name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "artikel name": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ArtikelName": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "artikel nickname": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.72749998072783162
+			          }
+			        },
+			        {
+			          "artikel title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.72749998072783162
+			          }
+			        },
+			        {
+			          "artikel label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.72749998072783162
+			          }
+			        },
+			        {
+			          "artikel tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Weight": 0.72749998072783162
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.mpn": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "MPN"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "mpn": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "mpn": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.ean": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "EAN"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ean": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ean": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.handelsware": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "Handelsware"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "handelsware": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "handelsware": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.hersteller": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "Hersteller"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "hersteller": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "hersteller": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.kategorie_1": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "Kategorie1"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "kategorie 1": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "kategorie 1": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Kategorie1": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.kategorie_2": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "Kategorie2"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "kategorie 2": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "kategorie 2": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Kategorie2": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product.kategorie_3": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt",
+			        "ConceptualProperty": "Kategorie3"
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "kategorie 3": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "kategorie 3": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Kategorie3": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "PowerBI_vDIM_Product_is_named_number": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.number": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.number"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Name": {
+			              "Role": "PowerBI_vDIM_Product.number"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.number"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_artikel_id": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.artikel_id": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.artikel_id"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.artikel_id"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_artikel_name": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.artikel_name": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.artikel_name"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.artikel_name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_kz_ABC": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.kz_ABC": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.kz_ABC"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.kz_ABC"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_mpn": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.mpn": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.mpn"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.mpn"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_ean": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.ean": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.ean"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.ean"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_handelsware": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.handelsware": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.handelsware"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.handelsware"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_hersteller": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.hersteller": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.hersteller"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.hersteller"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_kategorie_1": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.kategorie_1": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.kategorie_1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.kategorie_1"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_kategorie_2": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.kategorie_2": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.kategorie_2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.kategorie_2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    },
+			    "PowerBI_vDIM_Product_has_kategorie_3": {
+			      "Binding": {
+			        "ConceptualEntity": "DIM_Produkt"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "PowerBI_vDIM_Product": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product"
+			          }
+			        },
+			        "PowerBI_vDIM_Product.kategorie_3": {
+			          "Target": {
+			            "Entity": "PowerBI_vDIM_Product.kategorie_3"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "PowerBI_vDIM_Product"
+			            },
+			            "Object": {
+			              "Role": "PowerBI_vDIM_Product.kategorie_3"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

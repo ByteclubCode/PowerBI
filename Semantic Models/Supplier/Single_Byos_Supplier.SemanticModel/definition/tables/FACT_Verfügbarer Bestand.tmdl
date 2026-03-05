@@ -1,0 +1,36 @@
+/// PowerBI vFACT_AvailableInventory
+table 'FACT_Verfügbarer Bestand'
+	lineageTag: 8409726b-6877-4f84-a00d-63a52c688fce
+
+	column VerfügbarerBestand
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 40c1365a-0209-4368-92df-3c19b21275f0
+		summarizeBy: sum
+		sourceColumn: VerfügbarerBestand
+
+		annotation SummarizationSetBy = Automatic
+
+	column ItemId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8f9b2d83-e588-47a9-b1c7-ecbeac4261da
+		summarizeBy: none
+		sourceColumn: ItemId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT_Verfügbarer Bestand-afc9af63-4bd7-4921-ad71-00f57a09ba3b' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_AvailableInventory = Quelle{[Schema="PowerBI",Item="vFACT_AvailableInventory"]}[Data]
+				in
+				    PowerBI_vFACT_AvailableInventory
+
+	annotation PBI_ResultType = Table
+

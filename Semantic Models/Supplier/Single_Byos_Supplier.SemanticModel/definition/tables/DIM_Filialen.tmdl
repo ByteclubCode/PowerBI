@@ -1,0 +1,76 @@
+/// PowerBI.vDIM_Branche
+table DIM_Filialen
+	lineageTag: d19ed4d2-2454-4c73-902b-debedf6718ed
+
+	column LagerId
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a8900d6-5cb6-43b1-b431-feb4f6402cb7
+		summarizeBy: none
+		sourceColumn: LagerId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stadt
+		dataType: string
+		lineageTag: a6cc81cb-21ff-4b94-8c74-203788d3f566
+		summarizeBy: none
+		sourceColumn: Stadt
+
+		annotation SummarizationSetBy = Automatic
+
+	column FilialeName
+		dataType: string
+		lineageTag: 93647fd0-79b1-4826-8b21-7c35c429c61b
+		summarizeBy: none
+		sourceColumn: FilialeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column FilialeId
+		dataType: string
+		lineageTag: 172f3d56-c915-4f85-af14-f535d5100b65
+		summarizeBy: none
+		sourceColumn: FilialeId
+
+		annotation SummarizationSetBy = Automatic
+
+	column GruppierungRMA
+		dataType: string
+		lineageTag: aba02024-cdd8-4888-b3fc-621ce11dd92a
+		summarizeBy: none
+		sourceColumn: GruppierungRMA
+
+		annotation SummarizationSetBy = Automatic
+
+	column RMA
+		dataType: string
+		lineageTag: 7f2de5bf-2fd8-4b65-9fb8-d4f978f65bb1
+		summarizeBy: none
+		sourceColumn: RMA
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleId
+		dataType: int64
+		formatString: 0
+		lineageTag: 68498150-6f81-41d7-ab1d-bc0b968b9606
+		summarizeBy: none
+		sourceColumn: AppleId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Filialen-46eec371-39b2-4514-a6bb-f8edd782081b = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Branche = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Branche"]}[Data]
+				in
+				    PowerBI_vDIM_Branche
+
+	annotation PBI_QueryRelationships = {"columnCount":5,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{FilialeName,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{LagerId,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{PLZ,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Stadt,4}"],"ColumnCount":5,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{FilialeName,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{LagerId,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{PLZ,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Stadt,4}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Exception
+

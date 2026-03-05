@@ -1,0 +1,40 @@
+model Model
+	culture: de-DE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: de-DE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DIM_Produkt","DIM_Datum Beleg","DIM_Mandaten","DIM_Filialen","FACT_Lieferanten Bestellungen","FACT_Bestellpositionen","DIM_Lieferanten","FACT_Wareneingang","DIM_Datum Wareneingang","DIM_Stunde Wareneingang","KPI","FACT_Stichtagsbestand","FACT_Backlog","FACT_Artikel Verkäufe Vormonat","DIM_Datum Bestellung","FACT_Verfügbarer Bestand","FACT_Seriennummern"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DIM_Produkt
+ref table DateTableTemplate_11dcf089-b90c-43c0-b282-bfc754f60df3
+ref table 'DIM_Datum Beleg'
+ref table DIM_Mandaten
+ref table DIM_Filialen
+ref table FACT_Bestellpositionen
+ref table 'FACT_Lieferanten Bestellungen'
+ref table DIM_Lieferanten
+ref table LocalDateTable_a1e334d8-f271-4ba7-88ee-3ce3d9469f73
+ref table FACT_Wareneingang
+ref table 'DIM_Datum Wareneingang'
+ref table LocalDateTable_e2099a36-07fa-4842-9b1b-42609aa1cc57
+ref table 'DIM_Stunde Wareneingang'
+ref table KPI
+ref table FACT_Stichtagsbestand
+ref table LocalDateTable_238b2219-8c6d-4eeb-a54a-d5315a9fb420
+ref table FACT_Backlog
+ref table 'FACT_Artikel Verkäufe Vormonat'
+ref table 'DIM_Datum Bestellung'
+ref table LocalDateTable_fe18ea95-8d43-4f0e-aa20-443cd0ff119c
+ref table 'FACT_Verfügbarer Bestand'
+ref table FACT_Seriennummern
+ref table LocalDateTable_3a5ecafa-68a9-4dd9-91c9-0110bbd79788
+
+ref cultureInfo de-DE
+

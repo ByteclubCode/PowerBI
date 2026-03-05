@@ -1,0 +1,74 @@
+/// PowerBI vFACT_CalculatedStockHistoryLast7Days
+table FACT_Stichtagsbestand
+	lineageTag: 904ab6a3-061d-4538-b3d6-7dfe5436304b
+
+	column Stichtag
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: ff6f0c3a-7583-496c-a479-6518fe2321d6
+		summarizeBy: none
+		sourceColumn: Stichtag
+
+		variation Variation
+			isDefault
+			relationship: 6786e643-112d-483f-882f-476690844838
+			defaultHierarchy: LocalDateTable_238b2219-8c6d-4eeb-a54a-d5315a9fb420.Datumshierarchie
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ArtikelId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d39abe0b-e655-41c3-8209-8f0aab5c371d
+		summarizeBy: none
+		sourceColumn: ArtikelId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BestandMenge
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 4428a6dd-e7d1-4a84-8211-c6aa8eacbb36
+		summarizeBy: sum
+		sourceColumn: BestandMenge
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bestandswert
+		dataType: decimal
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 41fa26be-092b-4564-9904-4a34aa0d2d57
+		summarizeBy: sum
+		sourceColumn: Bestandswert
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReservierterBestand
+		dataType: double
+		formatString: #,0.00
+		lineageTag: a675cd8b-873e-4da4-aa59-95ab0716aa21
+		summarizeBy: sum
+		sourceColumn: ReservierterBestand
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Stichtagsbestand-2a8d2cf2-1264-4f51-b9ae-9d48c5b7c700 = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vFACT_StockHistoryLast7Days = BYTECLUB_DWH20{[Schema="PowerBI",Item="vFACT_StockHistoryLast7Days"]}[Data]
+				in
+				    PowerBI_vFACT_StockHistoryLast7Days
+
+	annotation PBI_ResultType = Table
+

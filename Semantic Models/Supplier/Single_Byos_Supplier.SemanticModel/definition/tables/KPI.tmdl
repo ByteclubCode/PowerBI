@@ -1,0 +1,79 @@
+/// Enthält alle Erweiterten Berechnungen
+table KPI
+	lineageTag: b80f3be5-b12b-4539-ae61-71e2626a6092
+
+	/// Differenz von Bestellt zu Geliefert
+	measure 'Abweichung Bestellt zu Geliefert' = ```
+			
+			    CALCULATE(SUM(FACT_Bestellpositionen[GelieferteMenge]) - SUM(FACT_Wareneingang[Menge]))
+			
+			
+			```
+		lineageTag: b70fbfc1-8ca3-4b1d-81b7-33f221c79e35
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Gibt die Tage zwischen dem Bestelldatum und des Wareneinganges zurück
+	measure 'Lieferzeit in Tagen' = DATEDIFF(SELECTEDVALUE('DIM_Datum Beleg'[Datum]), SELECTEDVALUE('DIM_Datum Wareneingang'[Datum]), DAY)
+		formatString: 0
+		lineageTag: 9cba4148-c8dd-4028-a73c-1baf25eacc1e
+
+	/// Logo des Mandanten in PNG
+	measure PNGLogoURL = ```
+			
+			VAR BaseURL = "https://conference.comspot.de/BC-Logos/_PNG/" 
+			vAR EndingURL = ".png"
+			VAR DefaultURL = "Logo-BYTECLUB-878x1015"
+			VAR LogoName = IF(HASONEFILTER(DIM_Mandaten[FirmenName]), SELECTEDVALUE(DIM_Mandaten[LogoURL]), DefaultURL) 
+			RETURN 
+			    BaseURL & LogoName & EndingURL
+			```
+		displayFolder: Logos
+		lineageTag: c6f4bee0-4737-49bc-ac68-2ee7a4c9b03e
+		dataCategory: ImageUrl
+
+	/// Logo des Mandanten in JPEG Format
+	measure JPEGLogoURL = ```
+			
+			VAR BaseURL = "https://conference.comspot.de/BC-Logos/_JPG/" 
+			VAR EndingURL = ".jpg"
+			VAR DefaultURL = "Logo-BYTECLUB-878x1015"
+			VAR LogoName = IF(HASONEFILTER(DIM_Mandaten[FirmenName]), SELECTEDVALUE(DIM_Mandaten[LogoURL]), DefaultURL) 
+			RETURN 
+			    BaseURL & LogoName & EndingURL
+			```
+		displayFolder: Logos
+		lineageTag: c9765326-f9d2-44bd-af7d-872869b028c7
+		dataCategory: ImageUrl
+
+	measure 'Slicer Helper' = ```
+			
+			    INT(NOT ISEMPTY('FACT_Lieferanten Bestellungen'))
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: ac7d8ec3-507d-4340-8ae0-9b3c5a04b0e3
+
+	/// Letztes Datum einer Gebuchten Bestellung
+	measure 'Letztes Datum Gebucht' = ```
+			
+			    CALCULATE( MAX('FACT_Lieferanten Bestellungen'[DatumBeleg]),
+			FILTER(ALL('FACT_Lieferanten Bestellungen'), 'FACT_Lieferanten Bestellungen'[BestellStatus] = "Gebucht"))
+			```
+		formatString: dd.mm.yyyy
+		lineageTag: c2ed1efa-76a8-44ab-8a7e-6aa74a9cea3e
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition KPI-b216b4ae-7a3e-4229-9241-741ec19ac1d1 = m
+		mode: import
+		source =
+				let
+				    Quelle = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Spalte ""1""" = _t]),
+				    #"Geänderter Typ" = Table.TransformColumnTypes(Quelle,{{"Spalte ""1""", type text}}),
+				    #"Entfernte Spalten" = Table.RemoveColumns(#"Geänderter Typ",{"Spalte ""1"""})
+				in
+				    #"Entfernte Spalten"
+
+	annotation PBI_ResultType = Table
+

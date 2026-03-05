@@ -1,0 +1,140 @@
+/// PowerBI vFACT_GoodsReceipt
+table FACT_Wareneingang
+	lineageTag: 879300b7-f024-4af9-9c88-6434eb82ae37
+
+	measure 'EK Wareneingang VJ' = ```
+			
+			    CALCULATE( SUM(FACT_Wareneingang[EK Wareneingang]),
+			    DATEADD('DIM_Datum Wareneingang'[Datum], -1, YEAR) 
+			    ) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 3ebde9f8-f829-44bd-a4a5-83845a09168b
+
+	measure 'EK Wareneingang VJ Gesamt' = ```
+			
+			    CALCULATE( SUM(FACT_Wareneingang[EK Wareneingang]), 
+			    PREVIOUSYEAR('DIM_Datum Beleg'[Datum])
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: f967fe08-c0cd-4792-add0-84ff1a7f2d67
+
+	measure 'EK Wareneingang VJ Abweichung' = ```
+			
+			    SUM(FACT_Wareneingang[EK Wareneingang]) - [EK Bestellte Menge VJ]
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 5eab743f-ded7-4716-a897-a052a498f081
+
+	measure 'EK Wareneingang VJ Abweichung%' = ```
+			
+			    DIVIDE([EK Wareneingang VJ Abweichung], SUM(FACT_Wareneingang[EK Wareneingang]) ,0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: a60ed792-4150-42fb-91b7-522156548a90
+
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 2fbb0bbd-7118-4955-8173-b0bafb335c2a
+		summarizeBy: none
+		sourceColumn: Datum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Zeit
+		dataType: dateTime
+		isHidden
+		formatString: Long Time
+		lineageTag: b5163c9e-26de-478b-9c67-29bdf53c1eab
+		summarizeBy: none
+		sourceColumn: Zeit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column ArtikelId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2cbcdc52-a7e4-4b78-953a-95dc7ef4b239
+		summarizeBy: count
+		sourceColumn: ArtikelId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LagerId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5d375084-6eb2-4328-b524-f3f9d36b8351
+		summarizeBy: count
+		sourceColumn: LagerId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Menge
+		dataType: int64
+		formatString: #,0
+		lineageTag: 8a221651-c62c-45b5-9a83-f25e9a1ce937
+		summarizeBy: sum
+		sourceColumn: Menge
+
+		changedProperty = FormatString
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bewegungsart
+		dataType: string
+		lineageTag: c29fa78c-c4e9-41fb-b658-ec0ac06017ad
+		summarizeBy: none
+		sourceColumn: Bewegungsart
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupplierPositionId
+		dataType: string
+		isHidden
+		lineageTag: 31da75c9-584e-4ca1-9047-079f35e65003
+		summarizeBy: none
+		sourceColumn: SupplierPositionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EK Wareneingang'
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 921dab63-cca5-4ae0-8322-e73292b45685
+		summarizeBy: sum
+		sourceColumn: EK Wareneingang
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Wareneingang-c10b9c73-863d-4f86-b259-d9642066f732 = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_GoodsReceipt = Quelle{[Schema="PowerBI",Item="vFACT_GoodsReceipt"]}[Data]
+				in
+				    PowerBI_vFACT_GoodsReceipt
+
+	annotation PBI_ResultType = Table
+

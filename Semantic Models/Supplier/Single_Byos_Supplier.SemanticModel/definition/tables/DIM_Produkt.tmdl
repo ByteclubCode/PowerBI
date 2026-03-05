@@ -1,0 +1,253 @@
+/// View in DB : PowerBi.vDIM_Product 
+/// Enthält alle Produkt relevanten Werte
+table DIM_Produkt
+	lineageTag: c14d7977-ba5e-4594-a73f-5567f8f310cf
+
+	column ArtikelName
+		dataType: string
+		lineageTag: 76bf390b-84c6-4f28-97e2-9a3d119af9e2
+		summarizeBy: none
+		sourceColumn: ArtikelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MPN
+		dataType: string
+		lineageTag: 9d8213a6-9e8d-40f4-b4b7-ebaaf11ed8e7
+		summarizeBy: none
+		sourceColumn: MPN
+
+		annotation SummarizationSetBy = Automatic
+
+	column EAN
+		dataType: string
+		lineageTag: 4145cccf-297a-4b5f-ba6e-f0d22b9aa4b6
+		summarizeBy: none
+		sourceColumn: EAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Handelsware
+		dataType: string
+		lineageTag: 5eeafe78-c13a-457e-b698-63f008ba470d
+		summarizeBy: none
+		sourceColumn: Handelsware
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hersteller
+		dataType: string
+		lineageTag: 718605ef-40cb-4e09-8fa8-6d33664d09fd
+		summarizeBy: none
+		sourceColumn: Hersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie1
+		dataType: string
+		lineageTag: 1b8a3a5a-383b-48c7-b206-ab30a1976e0f
+		summarizeBy: none
+		sourceColumn: Kategorie1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie2
+		dataType: string
+		lineageTag: f729bafb-2001-4798-b9f8-e930416671d0
+		summarizeBy: none
+		sourceColumn: Kategorie2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kategorie3
+		dataType: string
+		lineageTag: b8665a57-3108-4c49-b922-b85680eb46e5
+		summarizeBy: none
+		sourceColumn: Kategorie3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5c72f626-f105-42c7-a6a5-83c42699287b
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HerstellerGruppierung
+		dataType: string
+		lineageTag: 8ff262fa-88cb-4728-ae4c-0d406accbcf5
+		summarizeBy: none
+		sourceColumn: HerstellerGruppierung
+		sortByColumn: GruppierungSortierung
+
+		annotation SummarizationSetBy = Automatic
+
+	column GruppierungSortierung
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9b4e372d-330d-4f3d-9661-74708dfa6c3c
+		summarizeBy: sum
+		sourceColumn: GruppierungSortierung
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Artikelnummer
+		dataType: string
+		lineageTag: 5d0c9cbe-7c47-4b73-be81-2802fdecd834
+		summarizeBy: none
+		sourceColumn: Artikelnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column ArtikelNamePlusNummer
+		dataType: string
+		lineageTag: eaebc2d4-4e39-46bf-8761-d11c7d6f6ff6
+		summarizeBy: none
+		sourceColumn: ArtikelNamePlusNummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBName
+		dataType: string
+		lineageTag: 75d2bb15-9de5-499e-b08d-c095c56afcaa
+		summarizeBy: none
+		sourceColumn: GfdBName
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBKategorie
+		dataType: string
+		lineageTag: 38c000f9-52bb-4a95-bd48-269ec28bc679
+		summarizeBy: none
+		sourceColumn: GfdBKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column CTO
+		dataType: string
+		lineageTag: 63f60577-4298-4698-8048-cb201398eb5d
+		summarizeBy: none
+		sourceColumn: CTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IstHandelsware
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a499b52-be5b-41b2-8a45-1869c5681af6
+		summarizeBy: sum
+		sourceColumn: IstHandelsware
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOB
+		dataType: string
+		lineageTag: cc6c825f-bc0a-4231-975f-14f8ba5a3300
+		summarizeBy: none
+		sourceColumn: LOB
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubLOB
+		dataType: string
+		lineageTag: fb4482ec-0bd0-44b7-a110-3cf92aa72bc2
+		summarizeBy: none
+		sourceColumn: SubLOB
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sortiment
+		dataType: string
+		lineageTag: 8c526edd-b65b-48e0-ac12-92f48863a254
+		summarizeBy: none
+		sourceColumn: Sortiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortimentName
+		dataType: string
+		lineageTag: 61930b0f-4438-4adc-a01b-c589b1098dab
+		summarizeBy: none
+		sourceColumn: SortimentName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ServiceKategorie
+		dataType: string
+		lineageTag: b7c1a9e0-d35e-41e5-9e3c-3ad21359b592
+		summarizeBy: none
+		sourceColumn: ServiceKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Converge
+		dataType: string
+		lineageTag: 8d4ade07-693f-4a48-9773-2af97d9b9a93
+		summarizeBy: none
+		sourceColumn: Converge
+
+		annotation SummarizationSetBy = Automatic
+
+	column SchutzbriefKategorie
+		dataType: string
+		lineageTag: 7391b606-15e7-42fe-974f-51c0916e3554
+		summarizeBy: none
+		sourceColumn: SchutzbriefKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column ArtikelStatus
+		dataType: string
+		lineageTag: 8450795c-8010-4429-bfb7-43a31befc378
+		summarizeBy: none
+		sourceColumn: ArtikelStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ersteller
+		dataType: string
+		lineageTag: b1d534f6-0eda-400e-9851-63dcbd9cd517
+		summarizeBy: none
+		sourceColumn: Ersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	column Erstelldatum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 750f2d61-bdb1-42cb-b85c-0532e5e269fb
+		summarizeBy: none
+		sourceColumn: Erstelldatum
+
+		variation Variation
+			isDefault
+			relationship: 1545c9f9-0381-4326-b98f-c545f24200eb
+			defaultHierarchy: LocalDateTable_3a5ecafa-68a9-4dd9-91c9-0110bbd79788.Datumshierarchie
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition DIM_Produkt-6d78226a-4d1f-4449-ab17-691645787cdd = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Product = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Product"]}[Data]
+				in
+				    PowerBI_vDIM_Product
+
+	annotation PBI_QueryRelationships = {"columnCount":13,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Number,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{ArtikelName,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{KzABC,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{MPN,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{EAN,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Handelsware,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Hersteller,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie1,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie2,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie3,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{HerstellerGruppierung,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{GruppierungSortierung,12}"],"ColumnCount":13,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Number,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{ArtikelName,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{KzABC,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{MPN,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{EAN,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Handelsware,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Hersteller,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie1,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie2,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie3,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{HerstellerGruppierung,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{GruppierungSortierung,12}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

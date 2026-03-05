@@ -1,0 +1,71 @@
+/// PowerBI vFACT_ProductSalesPerMonth
+table 'FACT_Artikel Verkäufe Vormonat'
+	lineageTag: 4fa20674-d685-4be7-b871-df7e016edf88
+
+	column ItemId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a11e0806-e14d-425d-99dc-3204ea9bde3c
+		summarizeBy: none
+		sourceColumn: ItemId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Jahr
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5e406eb1-2510-42a7-84b7-bb7c9681ec81
+		summarizeBy: none
+		sourceColumn: Jahr
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Monat
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aa89902b-f5ee-4ab8-ac88-7a2b3c95af19
+		summarizeBy: none
+		sourceColumn: Monat
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column MengeInklusiveGutschrift
+		dataType: double
+		lineageTag: 04014b95-7008-4b12-88ef-3d8ddd1a5f47
+		summarizeBy: none
+		sourceColumn: MengeInklusiveGutschrift
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MengeExklusivGutschrift
+		dataType: double
+		lineageTag: 023b16c7-4eab-49ea-884f-672c751217b0
+		summarizeBy: none
+		sourceColumn: MengeExklusivGutschrift
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT_Artikel Verkäufe Vormonat-1280aedc-e919-4d1b-93f6-4f79a543aabb' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_ProductSalesPerMonth = Quelle{[Schema="PowerBI",Item="vFACT_ProductSalesPerMonth"]}[Data]
+				in
+				    PowerBI_vFACT_ProductSalesPerMonth
+
+	annotation PBI_ResultType = Table
+

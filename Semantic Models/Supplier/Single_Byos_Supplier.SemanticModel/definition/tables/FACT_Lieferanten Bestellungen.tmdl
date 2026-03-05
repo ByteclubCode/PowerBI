@@ -1,0 +1,170 @@
+table 'FACT_Lieferanten Bestellungen'
+	lineageTag: a268a29a-2264-4e6e-af4f-ee7ce08dc237
+
+	measure 'Anzahl Bestellungen VJ nach Belegdatum' = ```
+			
+			 CALCULATE( COUNT('FACT_Lieferanten Bestellungen'[Bestellnummer]), DATEADD('DIM_Datum Beleg'[Datum], -1, YEAR))
+			```
+		formatString: 0
+		lineageTag: 048093cd-82b5-4861-96f4-2ab48ed0d0d9
+
+	measure 'Anzahl Bestellungen VJ nach Wareneingang' = ```
+			
+			 CALCULATE( COUNT('FACT_Lieferanten Bestellungen'[Bestellnummer]), DATEADD('DIM_Datum Wareneingang'[Datum], -1, YEAR))
+			```
+		formatString: 0
+		lineageTag: 195965f6-239c-4564-9bc7-9be34e07983a
+
+	column OrderId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8c60af8b-b903-4e01-9e1d-6594346eba14
+		summarizeBy: none
+		sourceColumn: OrderId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DatumBeleg
+		dataType: dateTime
+		isHidden
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 3e18ed99-6ff1-42b8-bc60-1280484bdf27
+		summarizeBy: none
+		sourceColumn: DatumBeleg
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bestellnummer
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: e35272d1-ad5a-48b6-af79-4f30b707de75
+		summarizeBy: none
+		sourceColumn: Bestellnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column LieferantenId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 80ee4788-f054-4f07-93de-64cdc7c33b20
+		summarizeBy: none
+		sourceColumn: LieferantenId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BestellStatus
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 43e83487-2da0-48b8-81c9-09490a7dafe4
+		summarizeBy: none
+		sourceColumn: BestellStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column LagerId
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 355c0e33-3b29-4e95-a3c1-5b7833d8eef9
+		summarizeBy: count
+		sourceColumn: LagerId
+
+		annotation SummarizationSetBy = Automatic
+
+	column MandantId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e59e7110-6e4e-446c-b6ae-907bf0dc8aba
+		summarizeBy: none
+		sourceColumn: MandantId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BestellTyp
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 72771989-3bc6-430f-8e9e-97249e688afe
+		summarizeBy: none
+		sourceColumn: BestellTyp
+
+		annotation SummarizationSetBy = Automatic
+
+	column BestellwertNetto
+		dataType: decimal
+		isNullable: false
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		sourceProviderType: money
+		lineageTag: 7cf0023a-6d65-4ec2-8436-6c4c103d68a7
+		summarizeBy: sum
+		sourceColumn: BestellwertNetto
+
+		annotation SummarizationSetBy = Automatic
+
+	column FilialeId
+		dataType: string
+		isHidden
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 797c97da-8ae6-40eb-83ba-df2cfee4852a
+		summarizeBy: none
+		sourceColumn: FilialeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bestelldatum
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: e902529b-e2b7-4fe6-bc0e-540b0b22d109
+		summarizeBy: none
+		sourceColumn: Bestelldatum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quelle
+		dataType: string
+		lineageTag: fd1dd485-7d4c-44e2-9bc6-b835d6a2045c
+		summarizeBy: none
+		sourceColumn: Quelle
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT_Lieferanten Bestellungen-bfdac568-fe47-4b5a-956d-46540ec22d45' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vFACT_SupplierOrder = BYTECLUB_DWH20{[Schema="PowerBI",Item="vFACT_SupplierOrder"]}[Data]
+				in
+				    PowerBI_vFACT_SupplierOrder
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,32 @@
+/// Quelle PowerBI_vFACT_SupplierSerialNumber
+table FACT_Seriennummern
+	lineageTag: 11a93ef1-329d-4900-a5c3-5c2ad8e0c94e
+
+	column OrderItemId
+		dataType: string
+		isHidden
+		lineageTag: 1c53557d-caf9-4736-bdc7-be3c6c4577b5
+		summarizeBy: none
+		sourceColumn: OrderItemId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Seriennummer
+		dataType: string
+		lineageTag: 1ac74099-4f8a-4e35-8ba9-a531bffb6d95
+		summarizeBy: none
+		sourceColumn: Seriennummer
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Seriennummern-59fea16e-3b50-4e09-96eb-5d36782968e5 = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_SupplierSerialNumber = Quelle{[Schema="PowerBI",Item="vFACT_SupplierSerialNumber"]}[Data]
+				in
+				    PowerBI_vFACT_SupplierSerialNumber
+

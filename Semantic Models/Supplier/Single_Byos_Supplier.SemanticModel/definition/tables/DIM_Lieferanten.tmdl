@@ -1,0 +1,41 @@
+/// PowerBI vDIM_Supplier
+table DIM_Lieferanten
+	lineageTag: a620dff0-7c83-4cf7-836b-996d0acad7e8
+
+	column LieferantKurzbezeichnung
+		dataType: string
+		lineageTag: 991543ba-372a-4238-9d89-41d493d90f5e
+		summarizeBy: none
+		sourceColumn: LieferantKurzbezeichnung
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 9cb0b974-572b-4b5d-9e26-5f3b370e2fb3
+		summarizeBy: none
+		sourceColumn: Nummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column LieferantPlusNummer
+		dataType: string
+		lineageTag: 071bd9b7-9f2b-4f20-abdc-f47e6a458c4f
+		summarizeBy: none
+		sourceColumn: LieferantPlusNummer
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Lieferanten-c5ab8285-fca6-49c0-89d1-2cc8fb78058e = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Supplier = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Supplier"]}[Data]
+				in
+				    PowerBI_vDIM_Supplier
+
+	annotation PBI_ResultType = Table
+

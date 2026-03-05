@@ -1,0 +1,52 @@
+/// PowerBI vFACT_BacklogSumOfItems
+table FACT_Backlog
+	lineageTag: a0ecdbb1-82e6-475d-94f0-d6acb6c39090
+
+	measure 'Offene Menge abzüglich Reservierte' = SUM(FACT_Backlog[OffeneMenge])- SUM(FACT_Backlog[ReservierteMenge])
+		lineageTag: ca73b849-3f73-4ce1-a564-8eacd8773145
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ItemId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ddeceb4a-6252-4095-906e-a780ebbc377b
+		summarizeBy: none
+		sourceColumn: ItemId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OffeneMenge
+		dataType: double
+		lineageTag: 1142de80-750e-4a4b-9a3f-934a6a8d5d16
+		summarizeBy: none
+		sourceColumn: OffeneMenge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ReservierteMenge
+		dataType: double
+		lineageTag: 57c2d52f-7b72-428c-a8f5-7fd2ec368285
+		summarizeBy: none
+		sourceColumn: ReservierteMenge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_Backlog-a1c314d0-a90e-44dc-b30d-b985bc25ccec = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_BacklogSumOfItems = Quelle{[Schema="PowerBI",Item="vFACT_BacklogSumOfItems"]}[Data]
+				in
+				    PowerBI_vFACT_BacklogSumOfItems
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,258 @@
+/// PowerBI vDIM_DateVaules
+table 'DIM_Datum Wareneingang'
+	lineageTag: 21f6b8b6-dda2-4309-b875-a0fa7b58c54d
+
+	column Datum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 5582dec1-2fb4-4c26-98aa-e0431b21842c
+		summarizeBy: none
+		sourceColumn: Datum
+
+		variation Variation
+			isDefault
+			relationship: 0b7ea761-8ca2-42c7-98e1-e87ca1b3dfe7
+			defaultHierarchy: LocalDateTable_e2099a36-07fa-4842-9b1b-42609aa1cc57.Datumshierarchie
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Monat_Nr
+		dataType: int64
+		formatString: 0
+		lineageTag: 19a77be5-38fc-49d2-81c9-c5fc470ecf5e
+		summarizeBy: sum
+		sourceColumn: Monat_Nr
+
+		annotation SummarizationSetBy = Automatic
+
+	column Jahr
+		dataType: int64
+		formatString: 0
+		lineageTag: 27db2b5a-9a49-49f1-a40c-c7da5dc4e274
+		summarizeBy: sum
+		sourceColumn: Jahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quartal
+		dataType: int64
+		formatString: 0
+		lineageTag: 92df2e0a-f1cc-4a7a-850e-f9744be8de5e
+		summarizeBy: sum
+		sourceColumn: Quartal
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonatUndJahr2
+		dataType: string
+		lineageTag: 7e861126-b66b-4aaa-8c62-49539de931e3
+		summarizeBy: none
+		sourceColumn: MonatUndJahr2
+
+		annotation SummarizationSetBy = Automatic
+
+	column KalenderWoche
+		dataType: int64
+		formatString: 0
+		lineageTag: 120b2450-4dad-4268-ab7b-760ea8d06436
+		summarizeBy: sum
+		sourceColumn: KalenderWoche
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameWochentag
+		dataType: string
+		lineageTag: b2ea97e1-9a10-41e2-b742-bd38f8731414
+		summarizeBy: none
+		sourceColumn: NameWochentag
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wochentag_Id
+		dataType: int64
+		formatString: 0
+		lineageTag: e2deeba1-87e0-4a8b-82e0-b74572bbcc98
+		summarizeBy: count
+		sourceColumn: Wochentag_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameMonat
+		dataType: string
+		lineageTag: cfcfc6bc-312e-43a8-959b-411562c7f28e
+		summarizeBy: none
+		sourceColumn: NameMonat
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONAT_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d85b013-c44e-4d2d-a61b-550023cc300b
+		summarizeBy: count
+		sourceColumn: MONAT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monat_Jahr
+		dataType: string
+		lineageTag: 76bb310c-1cf1-443e-9338-c22001562d5d
+		summarizeBy: none
+		sourceColumn: Monat_Jahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTAL_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: b762f033-8f01-49c8-9048-58d9bdd83ed5
+		summarizeBy: count
+		sourceColumn: QUARTAL_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTAL_BEZ
+		dataType: string
+		lineageTag: f3ee9f25-16d8-433a-a208-3e07cb1efd42
+		summarizeBy: none
+		sourceColumn: QUARTAL_BEZ
+
+		annotation SummarizationSetBy = Automatic
+
+	column WOCHE_BEZ
+		dataType: string
+		lineageTag: 11b56229-4030-4d40-9be1-66b6ef2c534e
+		summarizeBy: none
+		sourceColumn: WOCHE_BEZ
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vorjahr
+		dataType: int64
+		formatString: 0
+		lineageTag: 24cd7920-4cca-4a21-8049-b53f4c9c1fd6
+		summarizeBy: sum
+		sourceColumn: Vorjahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleWoche
+		dataType: int64
+		formatString: 0
+		lineageTag: f1906339-c014-462e-8d25-0874e5bb83ca
+		summarizeBy: sum
+		sourceColumn: AppleWoche
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleQuartal
+		dataType: int64
+		formatString: 0
+		lineageTag: 24a8a4cb-0c6e-435b-9735-49d795c45d7a
+		summarizeBy: sum
+		sourceColumn: AppleQuartal
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleFiskalJahr
+		dataType: int64
+		formatString: 0
+		lineageTag: c1e72ed6-6818-45de-a4f7-9d3209ce6925
+		summarizeBy: sum
+		sourceColumn: AppleFiskalJahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tag
+		dataType: int64
+		formatString: 0
+		lineageTag: dafeaf7a-5b28-42c3-a7bc-c7e35926b22f
+		summarizeBy: sum
+		sourceColumn: Tag
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameMonatKurz
+		dataType: string
+		lineageTag: 484488b9-0ccd-4025-9172-51f5e090d18d
+		summarizeBy: none
+		sourceColumn: NameMonatKurz
+
+		annotation SummarizationSetBy = Automatic
+
+	column NameDesFeiertags
+		dataType: string
+		lineageTag: c1c00390-fda2-4572-8a57-02797a915049
+		summarizeBy: none
+		sourceColumn: NameDesFeiertags
+
+		annotation SummarizationSetBy = Automatic
+
+	column IstFeiertag
+		dataType: int64
+		formatString: 0
+		lineageTag: 7defbcb7-dd68-4ff4-8721-f72e805ffb06
+		summarizeBy: sum
+		sourceColumn: IstFeiertag
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJMonat
+		dataType: int64
+		formatString: 0
+		lineageTag: 2792b034-bb72-498f-ba9a-78406e7b055c
+		summarizeBy: sum
+		sourceColumn: AbWJMonat
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJJahr
+		dataType: int64
+		formatString: 0
+		lineageTag: c86abfc2-03cb-4fb3-b283-cab5b8e87cb7
+		summarizeBy: sum
+		sourceColumn: AbWJJahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJQuartal
+		dataType: int64
+		formatString: 0
+		lineageTag: e67f6883-fe9c-438d-8e31-0fff941b0b30
+		summarizeBy: sum
+		sourceColumn: AbWJQuartal
+
+		annotation SummarizationSetBy = Automatic
+
+	column AbWJMonatUndJahr
+		dataType: string
+		lineageTag: 71cb3b1f-4211-4a2d-896e-17bcbf74353e
+		summarizeBy: none
+		sourceColumn: AbWJMonatUndJahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortierungJahrMonat
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ee6969e-6fdc-4bd7-8d87-00fdf2ba93a0
+		summarizeBy: sum
+		sourceColumn: SortierungJahrMonat
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_Datum Wareneingang-049d0177-d1f8-4499-8e8a-4b263b2e939e' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_DateVaules = Quelle{[Schema="PowerBI",Item="vDIM_DateValues"]}[Data]
+				in
+				    PowerBI_vDIM_DateVaules
+
+	annotation PBI_ResultType = Table
+
