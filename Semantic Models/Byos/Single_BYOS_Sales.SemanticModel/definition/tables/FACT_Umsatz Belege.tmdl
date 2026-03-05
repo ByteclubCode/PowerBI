@@ -1,0 +1,862 @@
+/// Enthält alle Belege
+table 'FACT_Umsatz Belege'
+	lineageTag: 31c7a857-e8c0-426d-8f67-08e3cccbbe08
+
+	/// Marge in Prozent
+	measure M_Marge% = ```
+			DIVIDE(SUM('FACT_Umsatz Belege'[Marge]), SUM('FACT_Umsatz Belege'[Umsatz]), 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: b568c63d-ee01-454c-b7be-c393aedf1cd4
+
+	/// Umsatz des Vorjahres
+	measure M_Umsatz_VJ = CALCULATE(SUM('FACT_Umsatz Belege'[Umsatz]),DATEADD('DIM_Datum Umsatz'[Datum],-1,YEAR))
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 3d315410-e887-44ea-a1ea-5e4bf9a647fd
+
+	/// Marge des Vorjahres
+	measure M_Marge_VJ = CALCULATE(SUM('FACT_Umsatz Belege'[Marge]),DATEADD('DIM_Datum Umsatz'[Datum],-1,YEAR))
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 421af928-67d2-47b9-b5bc-903edcf409f3
+
+	/// Marge in Prozent des Vorjahres
+	measure M_Marge%_VJ = ```
+			DIVIDE([M_Marge_VJ], [M_Umsatz_VJ], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 85ea4951-be24-4b1f-aa2f-1b4cfb30f497
+
+	/// Prozentualer Anteil der Marge am Umsatz
+	measure 'MargeGesamtKosten %' =
+			
+			DIVIDE(SUM('FACT_Umsatz Belege'[MargeGesamtKosten]), SUM('FACT_Umsatz Belege'[Umsatz]),0)
+		formatString: #,0.00\ %;-#,0.00\ %;#,0.00\ %
+		lineageTag: 0943dd71-fefd-4559-b936-fe68c6f97da5
+
+		changedProperty = FormatString
+
+	/// Erstelldatum des Belegs
+	column DateCreated
+		dataType: dateTime
+		isHidden
+		isNullable: false
+		formatString: Long Date
+		lineageTag: 05c4e042-52c4-463b-9fe5-3dfb4673ad11
+		summarizeBy: none
+		sourceColumn: DateCreated
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Um welche Belegart handelt es sich. 
+	column BelegArt
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 042974ee-648a-4924-8a70-3190749d607a
+		summarizeBy: none
+		sourceColumn: BelegArt
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Belegstatus 
+	column BelegStatus
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 78af3f9d-8607-4fba-a2ec-58332a511899
+		summarizeBy: none
+		sourceColumn: BelegStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Abteilung aus den Beleg 
+	column Abteilung
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: ff0c40e5-d44b-428f-89ad-fe55fc387d3c
+		summarizeBy: none
+		sourceColumn: Abteilung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Mitarbeiter den den Beleg erstellt hat
+	column Mitarbeiter
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 99378b28-8f97-4f08-8959-762df34f1c2a
+		summarizeBy: none
+		sourceColumn: Mitarbeiter
+
+		annotation SummarizationSetBy = Automatic
+
+	/// LagerId aus den Beleg., wird jetzt in den Positionen angegeben
+	column LagerId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 802a9251-728f-463a-8b7d-3df88ca26fb2
+		summarizeBy: none
+		sourceColumn: LagerId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	/// Die Id des Mandanten
+	column MandantId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 033006a2-48c0-478c-a97a-4d5760dedfbc
+		summarizeBy: none
+		sourceColumn: MandantId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum des Lieferscheins
+	column LieferscheinDatum
+		dataType: dateTime
+		formatString: Short Date
+		sourceProviderType: date
+		lineageTag: 92b7a414-057c-400a-9009-4970ed5e366d
+		summarizeBy: none
+		sourceColumn: LieferscheinDatum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Gesamt Brutto des Beleges 
+	column BruttoGesamt
+		dataType: decimal
+		isHidden
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		sourceProviderType: money
+		lineageTag: 801a50cd-6254-411c-af38-a7cd048bd9fd
+		summarizeBy: sum
+		sourceColumn: BruttoGesamt
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Anzahlungsbetrag in Brutto
+	column BruttoAnzahlung
+		dataType: decimal
+		isHidden
+		isNullable: false
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		sourceProviderType: money
+		lineageTag: b5fff9de-afb0-4c6a-b852-2c512278153e
+		summarizeBy: sum
+		sourceColumn: BruttoAnzahlung
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Offener Betrag nach Anzahlung in Brutto
+	column BruttoNachAnzahlung
+		dataType: decimal
+		isHidden
+		isNullable: false
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		sourceProviderType: money
+		lineageTag: ea3ad871-65e1-49a2-81ae-6b1b470a6f14
+		summarizeBy: sum
+		sourceColumn: BruttoNachAnzahlung
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Die Id der Adresse
+	column AdressId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 532ff7c5-93e5-42e3-852b-28d4ed59d2d6
+		summarizeBy: none
+		sourceColumn: AdressId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Rabatte aus Produkten
+	column RabattAusArtikelnGesamt
+		dataType: decimal
+		isHidden
+		lineageTag: a9c54877-ef3e-4659-b6a7-4f5a10425621
+		summarizeBy: sum
+		sourceColumn: RabattAusArtikelnGesamt
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Die KundenId aus den Beleg
+	column KundenId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fef0ade7-42d5-4139-a2cf-12d68df9f91c
+		summarizeBy: none
+		sourceColumn: KundenId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Websubshops
+	column SubshopName
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 0f749e1e-9a1d-4d3d-a7a9-ccd0fba9c0ba
+		summarizeBy: none
+		sourceColumn: SubshopName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die FilialId 
+	column FilialeId
+		dataType: string
+		isHidden
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: cca0e27d-0f29-495d-a680-667442845e59
+		summarizeBy: none
+		sourceColumn: FilialeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Kostenstelle aus den Beleg
+	column Kostenstelle
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 76e863fb-7eb9-424b-87f8-c4f64a19ceb8
+		summarizeBy: none
+		sourceColumn: Kostenstelle
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	/// Referenz zu Kundenzähler
+	column FilialeDateId
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 0569c0ad-8364-4208-9951-e7dd57d8246e
+		summarizeBy: none
+		sourceColumn: FilialeDateId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Belegnummer 
+	column BelegId
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 63659f7f-411d-4db4-8b20-f9e3dc311c6e
+		summarizeBy: none
+		sourceColumn: BelegId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Marge 
+	column Marge
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: e6a0d8d2-824f-46e3-98cf-2362b4f31104
+		summarizeBy: sum
+		sourceColumn: Marge
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Umsatz
+	column Umsatz
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: f896dba1-53b3-4077-a215-e124e7e959f1
+		summarizeBy: sum
+		sourceColumn: Umsatz
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Variable Zahlartkosten
+	column ZahlartKostenVariabel
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 014f48f2-cf39-451b-b2d3-60f471464b82
+		summarizeBy: sum
+		sourceColumn: ZahlartKostenVariabel
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Fixe Zahlartkosten
+	column ZahlartkostenFix
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 33269fa1-3f10-4872-9469-ad7eb5e94e4a
+		summarizeBy: sum
+		sourceColumn: ZahlartkostenFix
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Marge inklusive der Kosten
+	column MargeGesamtKosten
+		dataType: double
+		isNullable: false
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: d3c61aa4-9e1a-4c37-b264-38a7fa38cd97
+		summarizeBy: sum
+		sourceColumn: MargeGesamtKosten
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Id des Websubshops
+	column SubshopId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3403d152-cfc4-4bb2-ae38-4898be59514c
+		summarizeBy: none
+		sourceColumn: SubshopId
+
+		annotation SummarizationSetBy = User
+
+	/// Wenn eine Regel die FilialeId geändert hat, dann wird hier die "Alte" ausgeben, sonst die gleiche wie FilialeId
+	column FilialeId_Old
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: fa011479-ff3d-40c2-b05e-7e853c103f2b
+		summarizeBy: none
+		sourceColumn: FilialeId_Old
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wenn eine Logik greift, wird hier die "Alte" MandantenId angezeigt, sonst die gleiche wie MandantenId
+	column MandantId_Old
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: cba0de22-8b72-476f-93db-4fefbc0885de
+		summarizeBy: none
+		sourceColumn: MandantId_Old
+
+		annotation SummarizationSetBy = User
+
+	column VertragsId
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: cd8c7a57-8c56-46f9-9a80-cdd5bf042ee1
+		summarizeBy: none
+		sourceColumn: VertragsId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Anzahl der Artikel in den Beleg
+	column Artikelanzahl
+		dataType: int64
+		isNullable: false
+		formatString: #,0
+		sourceProviderType: int
+		lineageTag: c381fbcc-5743-4e15-a8c9-4bad7c6baea9
+		summarizeBy: sum
+		sourceColumn: Artikelanzahl
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Laenderkuerzel der Lieferlandes aus den Beleg
+	column LaenderkuerzelLieferland
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 465ea717-8cf0-40db-8fcc-dfb1ce26cf24
+		summarizeBy: none
+		sourceColumn: LaenderkuerzelLieferland
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Lieferart aus dem Beleg
+	column Lieferart
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(100)
+		lineageTag: 6adc7384-4094-4440-b57d-b469f27b782c
+		summarizeBy: none
+		sourceColumn: Lieferart
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Transaktionsnummer aus den Portal, Paypal als Beispiel. 
+	column TransaktionsNummer
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: bd402a90-3116-44c9-a421-336d44aff484
+		summarizeBy: none
+		sourceColumn: TransaktionsNummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Erstelluhrzeit des Belegs
+	column ErstellZeit
+		dataType: dateTime
+		isHidden
+		formatString: Long Time
+		lineageTag: 148b4ad9-f96d-4b7f-96a8-30caf8a76728
+		summarizeBy: none
+		sourceColumn: ErstellZeit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	/// Die Versandart aus dem Beleg
+	column VersandArt
+		dataType: string
+		lineageTag: d9522ea2-ae94-411b-9c65-839d856819ff
+		summarizeBy: none
+		sourceColumn: VersandArt
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Referenz zu Stichtagslagerbestand
+	column FilialeStorageId
+		dataType: string
+		isHidden
+		lineageTag: d47ab29c-040a-44dd-9051-abe203521b2a
+		summarizeBy: none
+		sourceColumn: FilialeStorageId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Es wird die Ursprungskostenstellen vor allen Logiken ausgeben. Wenn keine Logik greift ist es die gleiche Kostenstellen wie
+	column 'Kostenstelle vor Logik'
+		dataType: int64
+		formatString: 0
+		lineageTag: a13373e0-7b4e-4754-962c-9d45f5173712
+		summarizeBy: none
+		sourceColumn: Kostenstelle vor Logik
+
+		annotation SummarizationSetBy = User
+
+	/// Die Id der Belegart
+	column BelegArtId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fd4b45f2-5926-4219-bce9-29d2c85332f7
+		summarizeBy: none
+		sourceColumn: BelegArtId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum des letzten Umsatz des Kunden aus dem Beleg.
+	column DatumLetzterUmsatz
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 515c213a-2143-4e22-ab5d-79accaab9fed
+		summarizeBy: none
+		sourceColumn: DatumLetzterUmsatz
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tage zwischen aktuellen Beleg und den letzten
+	column TageZwischenUmsatz
+		dataType: int64
+		formatString: 0
+		lineageTag: 66d9cfec-0beb-4505-b59e-18ec575a0cdb
+		summarizeBy: none
+		sourceColumn: TageZwischenUmsatz
+
+		annotation SummarizationSetBy = User
+
+	/// Kundennummer des Finanzierungsgebers
+	column Finanzierungskunde
+		dataType: string
+		isHidden
+		lineageTag: 396482c8-1e41-49ec-a96d-4d2c28e8fba0
+		summarizeBy: none
+		sourceColumn: Finanzierungskunde
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kundenart der Finanzierung: Neukunde / Bestandskunde
+	column Finanzierungskundenart
+		dataType: string
+		isHidden
+		lineageTag: 33107d14-33df-46a3-ab89-21913ccb7df9
+		summarizeBy: none
+		sourceColumn: Finanzierungskundenart
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum und Uhrzeit der Erstellung
+	column DatumUhrzeit
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 14cb3ec8-dce7-4cf0-8ece-fe8798c5fe9e
+		summarizeBy: none
+		sourceColumn: DatumUhrzeit
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Um welche Belegart handelt es sich. 
+	column BelegartAnzeige
+		dataType: string
+		lineageTag: 37b77888-dd5d-4f74-be2b-4ec464a10d8c
+		summarizeBy: none
+		sourceColumn: BelegartAnzeige
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Quelle des Belegs, COSY2 oder BYOS
+	column Datenquelle
+		dataType: string
+		lineageTag: dc8414ec-0e75-43db-af6d-13c75fad39a8
+		summarizeBy: none
+		sourceColumn: Datenquelle
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum der Terminierten Auslieferung
+	column Terminauslieferung
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 06f7edbb-2dd8-441a-b193-358ccfdad8a2
+		summarizeBy: none
+		sourceColumn: Terminauslieferung
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// KundenId des Leasingnehmers 
+	column LeasingKundenummer
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d366381c-b545-41af-a0ba-e97edb3f9508
+		summarizeBy: none
+		sourceColumn: LeasingKundenummer
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wie Kooperationspartner
+	column WebShopPartner
+		dataType: string
+		lineageTag: e3c3b770-9ba4-46c8-8ee8-d3c731f24209
+		summarizeBy: none
+		sourceColumn: WebShopPartner
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Intercompany Mandantenbezug in Klarschrift. Beispiel: Comspot GmbH Umsatz an ByteClub GmbH
+	column IntercompanyPartner
+		dataType: string
+		lineageTag: 05dd1392-e5f0-424d-a3f0-190e571f5d0d
+		summarizeBy: none
+		sourceColumn: IntercompanyPartner
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Referenz auf Serviceauftrag, wird nicht mehr verwendet
+	column ServiceOrderId
+		dataType: string
+		lineageTag: 638c1cb9-9925-498f-957d-d3d7ff49cf49
+		summarizeBy: none
+		sourceColumn: ServiceOrderId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ist der Beleg ein Intercompany Umsatz Ja/Nein
+	column Intercompany
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7154483c-0682-4088-a674-ccc60e039012
+		summarizeBy: none
+		sourceColumn: Intercompany
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Kundenberater aus den Beleg
+	column Kundenberater
+		dataType: string
+		lineageTag: 0d00c368-a0cd-4183-ba9a-76a8e6e0a8d0
+		summarizeBy: none
+		sourceColumn: Kundenberater
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Mandantennummer des Intercompany Mandaten
+	column IntercompanyMandant
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fed8b6e-741f-4c14-872a-11a75a9e825e
+		summarizeBy: none
+		sourceColumn: IntercompanyMandant
+
+		annotation SummarizationSetBy = User
+
+	/// Der Kooperationspartner
+	column KooperationPartner
+		dataType: string
+		lineageTag: 12745a74-9043-45fc-8abf-664204ff1835
+		summarizeBy: none
+		sourceColumn: KooperationPartner
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Beleg ist von Zahlungsanbieter C2
+	column C2Beleg
+		dataType: int64
+		formatString: 0
+		lineageTag: b1099e51-f552-4130-8524-c9e2564a9f74
+		summarizeBy: none
+		sourceColumn: C2Beleg
+
+		annotation SummarizationSetBy = User
+
+	/// Online Marktplätze
+	column WebshopMarketplace
+		dataType: string
+		lineageTag: fe70ee41-5e06-4f77-a5d0-f8d4b5c75f1f
+		summarizeBy: none
+		sourceColumn: WebshopMarketplace
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Unterscheidet bei Amazonverkäufen zwischen eCom und Einkauf
+	column AmazonChannel
+		dataType: string
+		lineageTag: 9505ee65-ad7b-44c9-adc5-1401d8bf5e43
+		summarizeBy: none
+		sourceColumn: AmazonChannel
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Id des Datensatzes
+	column Id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c9e46d3-d296-4ed6-890c-d1cd4e00d0f2
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Alle Zahlartkosten 
+	column ZahlartkostenGesamt
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: b8b74a2c-9943-4bcb-b639-bf5fb0e3249d
+		summarizeBy: sum
+		sourceColumn: ZahlartkostenGesamt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Die Id des Erstellers
+	column EmployeeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 08f41faa-d58e-4124-97a5-2294c5cf59a0
+		summarizeBy: none
+		sourceColumn: EmployeeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wenn ein Gutschein verwendet, dann wird die Gutscheinnummer hier ausgeben
+	column Gutscheinnummer
+		dataType: string
+		lineageTag: 5c540456-7a53-4dd9-b4b9-2d35b55bd459
+		summarizeBy: none
+		sourceColumn: Gutscheinnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// MPP Vertragsnummer
+	column MPPVertragsnummer
+		dataType: string
+		lineageTag: 14965fe1-6bad-4e28-abb3-1521d658df13
+		summarizeBy: none
+		sourceColumn: MPPVertragsnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Referenz auf Zielmargen in den APR/APP
+	column Branch_Margin_Ref
+		dataType: string
+		isHidden
+		lineageTag: d49cc5ea-e148-449e-b87c-824d95e6a99b
+		summarizeBy: none
+		sourceColumn: Branch_Margin_Ref
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Das Erstelldatum des Belegs
+	column Erstelldatum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e790bf5c-1a17-440b-a76b-496ec0f0e0b9
+		summarizeBy: none
+		sourceColumn: Erstelldatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Das Buchungsdatum des Belegs
+	column Buchungsdatum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c05d0c6e-1f86-4996-ab31-bf34cd40a9aa
+		summarizeBy: none
+		sourceColumn: Buchungsdatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column InterneProjektnummer
+		dataType: string
+		lineageTag: f9c864f2-7ee6-424e-8678-f2ded9e6a11e
+		summarizeBy: none
+		sourceColumn: InterneProjektnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExterneBestellnummer
+		dataType: string
+		lineageTag: bce0aead-94e2-4154-acce-db3a1d5c7df8
+		summarizeBy: none
+		sourceColumn: ExterneBestellnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vorgangsnummer
+		dataType: string
+		lineageTag: 51af3c6f-13f7-4f51-99f8-2daf55690109
+		summarizeBy: none
+		sourceColumn: Vorgangsnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column BudgetPlanId
+		dataType: string
+		isHidden
+		lineageTag: aab3998a-214f-4bbd-8797-850248a5d3be
+		summarizeBy: none
+		sourceColumn: BudgetPlanId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LeasingGeberId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 74aa3d46-892d-4a61-89b5-bca5ce68eb2c
+		summarizeBy: none
+		sourceColumn: LeasingGeberId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Marktplatz
+		dataType: string
+		lineageTag: f01522b1-6670-45a0-87e4-c5d6a0a80cd3
+		summarizeBy: none
+		sourceColumn: Marktplatz
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT_Umsatz Belege-89eaf4ad-733b-4724-a970-0883faf0b87b' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vFACT_Sales = BYTECLUB_DWH20{[Schema="PowerBI",Item="vFACT_Sales"]}[Data],
+				    #"Umbenannte Spalten" = Table.RenameColumns(PowerBI_vFACT_Sales,{{"Kostenstelle_Old", "Kostenstelle vor Logik"}})
+				in
+				    #"Umbenannte Spalten"
+
+	annotation PBI_QueryRelationships = {"columnCount":25,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{DateCreated,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BelegArt,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BelegStatus,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{Abteilung,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BestellTyp,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{Mitarbeiter,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{MitarbeiterKostenstelle,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{FilialeId,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{LagerId,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{MandantId,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{LieferscheinDatum,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BruttoGesamt,12}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BruttoAnzahlung,13}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BruttoNachAnzahlung,14}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{AdressId,15}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{NettoMarge,16}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{NettoGesamt,17}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{RabattAusArtikelnGesamt,18}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{KostenAusZahlart,19}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{KostenAusBeleg,20}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{InterCompanyUmsatz,21}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{MargeBeleg,22}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{KundenId,23}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{SubshopName,24}"],"ColumnCount":25,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{DateCreated,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BelegArt,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BelegStatus,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{Abteilung,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BestellTyp,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{Mitarbeiter,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{MitarbeiterKostenstelle,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{FilialeId,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{LagerId,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{MandantId,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{LieferscheinDatum,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BruttoGesamt,12}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BruttoAnzahlung,13}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{BruttoNachAnzahlung,14}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{AdressId,15}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{NettoMarge,16}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{NettoGesamt,17}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{RabattAusArtikelnGesamt,18}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{KostenAusZahlart,19}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{KostenAusBeleg,20}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{InterCompanyUmsatz,21}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{MargeBeleg,22}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{KundenId,23}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_Sales.{SubshopName,24}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

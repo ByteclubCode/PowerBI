@@ -1,0 +1,9 @@
+role '210 Desk7'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 210
+
+	tablePermission DIM_Mandaten = [Id] == 210
+
+	annotation PBI_Id = 923daf5917a647fa9867fdee720cbf28
+

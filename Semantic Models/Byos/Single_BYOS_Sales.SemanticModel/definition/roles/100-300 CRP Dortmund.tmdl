@@ -1,0 +1,11 @@
+role '100-300 CRP Dortmund'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-300"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-300"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = a1ded44c923b44f0908f996cc4848d6e
+

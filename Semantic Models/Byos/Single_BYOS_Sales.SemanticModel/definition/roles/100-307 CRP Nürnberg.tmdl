@@ -1,0 +1,11 @@
+role '100-307 CRP Nürnberg'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-307"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-307"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = ef9317f4a9054a6984d3423247a3fae7
+

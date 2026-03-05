@@ -1,0 +1,9 @@
+role '310 DEQSTER'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 310
+
+	tablePermission DIM_Mandaten = [Id] == 310
+
+	annotation PBI_Id = e008a68ee3ff4a3587f4428be9a743ad
+

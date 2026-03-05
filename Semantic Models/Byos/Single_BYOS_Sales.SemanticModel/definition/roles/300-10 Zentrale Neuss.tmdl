@@ -1,0 +1,11 @@
+role '300-10 Zentrale Neuss'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "300-10"
+
+	tablePermission DIM_Filialen = [FilialeId] == "300-10"
+
+	tablePermission DIM_Mandaten = [Id] == 300
+
+	annotation PBI_Id = 285ad580bbce4599b59e4b695b1bb3bb
+

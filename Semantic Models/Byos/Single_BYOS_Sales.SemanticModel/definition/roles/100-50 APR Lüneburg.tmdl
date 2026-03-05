@@ -1,0 +1,11 @@
+role '100-50 APR Lüneburg'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-50"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-50"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = eb89800aff0d46e3919f6aa28a9a27ba
+

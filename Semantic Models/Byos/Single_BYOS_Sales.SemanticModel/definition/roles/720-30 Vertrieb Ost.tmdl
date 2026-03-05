@@ -1,0 +1,11 @@
+role '720-30 Vertrieb Ost'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "720-30"
+
+	tablePermission DIM_Filialen = [FilialeId] == "720-30"
+
+	tablePermission DIM_Mandaten = [Id] == 720
+
+	annotation PBI_Id = a9430657e2f94ad494dda28905cbaf33
+

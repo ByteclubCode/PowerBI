@@ -1,0 +1,43 @@
+/// Hilfstabelle für die Auswahl des Vergleichszeitraumes. Nur in der Kombination mit KPIs/Vergleichszeitraum verwendbar. Im Visual muss das Measure mit 1 gefiltert werden.
+table HLP_Vergleichszeitraum
+	lineageTag: f69a22b1-379c-452b-b762-3881b3e1cc26
+
+	/// Der Vergleichszeitraum: Vortag, Vorwoche, Vormonat, Vorjahr
+	column Zeitraum
+		dataType: string
+		lineageTag: 420279f4-ceaa-41a4-96d2-2cccab64e453
+		summarizeBy: none
+		sourceColumn: Zeitraum
+		sortByColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Id des Datensatzes
+	column Id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 48e9db79-41fc-44ae-93d3-2559334729e4
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition HLP_Vergleichszeitraum-fe4afc80-22ee-41d5-b05d-00cfc0ae3508 = m
+		mode: import
+		source =
+				let
+				    Quelle = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCssvKklMV4rVATPL85MzUmGc3Py8xBIYp7A0EagwB8bNSswoUoqNBQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Zeitraum = _t]),
+				    #"Geänderter Typ" = Table.TransformColumnTypes(Quelle,{{"Zeitraum", type text}}),
+				    #"Duplizierte Spalte" = Table.DuplicateColumn(#"Geänderter Typ", "Zeitraum", "Zeitraum - Kopie"),
+				    #"Umbenannte Spalten" = Table.RenameColumns(#"Duplizierte Spalte",{{"Zeitraum - Kopie", "Id"}}),
+				    #"Entfernte Spalten" = Table.RemoveColumns(#"Umbenannte Spalten",{"Id"}),
+				    #"Hinzugefügte bedingte Spalte" = Table.AddColumn(#"Entfernte Spalten", "Id", each if [Zeitraum] = "Vortag" then 1 else if [Zeitraum] = "Vorwoche" then 2 else if [Zeitraum] = "Vormonat" then 3 else if [Zeitraum] = "Vorquartal" then 4 else if [Zeitraum] = "Vorjahr" then 5 else null, type number),
+				    #"Geänderter Typ1" = Table.TransformColumnTypes(#"Hinzugefügte bedingte Spalte",{{"Id", Int64.Type}})
+				in
+				    #"Geänderter Typ1"
+
+	annotation PBI_ResultType = Table
+

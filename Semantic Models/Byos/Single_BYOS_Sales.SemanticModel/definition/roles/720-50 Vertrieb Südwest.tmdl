@@ -1,0 +1,11 @@
+role '720-50 Vertrieb Südwest'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "720-50"
+
+	tablePermission DIM_Filialen = [FilialeId] == "720-50"
+
+	tablePermission DIM_Mandaten = [Id] == 720
+
+	annotation PBI_Id = 1a36cf706dca465d9cf3ac8709142b19
+

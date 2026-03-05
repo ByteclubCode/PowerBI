@@ -1,0 +1,11 @@
+role '600-110 CRP Berlin Ku’damm'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "600-110"
+
+	tablePermission DIM_Filialen = [FilialeId] == "600-110"
+
+	tablePermission DIM_Mandaten = [Id] == 600
+
+	annotation PBI_Id = c6552d5a7e0f4b349a5caa87cde4aa81
+

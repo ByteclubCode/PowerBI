@@ -1,0 +1,7 @@
+EVALUATE
+{
+    ("Currency (1)", FORMAT (1234.567, "€# K" )),
+     ("Currency (1)", FORMAT (1000000, "€#,, M" )),
+      ("Currency (1)", FORMAT (1000000000, "€#0,, M" )),
+       ("Currency (1)", FORMAT (5820539764.5545, "€#,, B" ))
+}

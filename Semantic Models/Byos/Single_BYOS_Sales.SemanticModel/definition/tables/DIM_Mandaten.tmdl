@@ -1,0 +1,91 @@
+/// Enthält die Mandanten
+table DIM_Mandaten
+	lineageTag: 0f79639f-68ab-4981-9fee-8d4da3bb07c8
+
+	/// Mandantennummer 
+	column Id
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 4ec9eb01-5b9f-428b-ace5-5247421efc7c
+		summarizeBy: none
+		sourceColumn: Id
+		sortByColumn: Sortierung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Mandanten
+	column FirmenName
+		dataType: string
+		lineageTag: 42b50307-4fd0-43f4-ad0f-14c9922d5a2a
+		summarizeBy: none
+		sourceColumn: FirmenName
+		sortByColumn: Sortierung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die URL zum Firmenlogo
+	column LogoURL
+		dataType: string
+		lineageTag: 003ce4c6-1c31-4ec3-8c84-52e4aa7e925e
+		summarizeBy: none
+		sourceColumn: LogoURL
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gibt die BildUrl des Mandanten zurück, Ausgabe in JPG
+	column LogoInJpg
+		dataType: string
+		lineageTag: 02272f18-489b-4158-866c-4a8ba73a5366
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: LogoInJpg
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gibt die BildUrl des Mandanten zurück, Ausgaben in PNG
+	column LogoInPng
+		dataType: string
+		lineageTag: 372bbc2b-b8ee-4845-b37c-b4008d5b3a84
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: LogoInPng
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Sortierung der Mandanten
+	column Sortierung
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cf0b6005-9d40-4ad2-8a83-43ed63141083
+		summarizeBy: none
+		sourceColumn: Sortierung
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Firmenverbund BC oder Felix
+	column Firmenverbund
+		dataType: string
+		lineageTag: 546d3045-de61-4b21-8396-aeb41efd8fc9
+		summarizeBy: none
+		sourceColumn: Firmenverbund
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Mandaten-2d69edaa-e9c3-46d3-aa00-3bc4f138284a = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Client = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Client"]}[Data]
+				in
+				    PowerBI_vDIM_Client
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{FirmenName,1}"],"ColumnCount":2,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Client.{FirmenName,1}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

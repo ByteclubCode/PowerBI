@@ -1,0 +1,11 @@
+role '725-10 IfmB Zentrale'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "720-10"
+
+	tablePermission DIM_Filialen = [FilialeId] == "725-10"
+
+	tablePermission DIM_Mandaten = [Id] == 725
+
+	annotation PBI_Id = cd6b8201039247278adc42e0e83d2aa7
+

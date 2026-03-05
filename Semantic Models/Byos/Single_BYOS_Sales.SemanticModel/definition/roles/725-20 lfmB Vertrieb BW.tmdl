@@ -1,0 +1,11 @@
+role '725-20 lfmB Vertrieb BW'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "725-20"
+
+	tablePermission DIM_Filialen = [FilialeId] == "725-20"
+
+	tablePermission DIM_Mandaten = [Id] == 725
+
+	annotation PBI_Id = be05be63607d43d99c19e1cd067d6fb0
+

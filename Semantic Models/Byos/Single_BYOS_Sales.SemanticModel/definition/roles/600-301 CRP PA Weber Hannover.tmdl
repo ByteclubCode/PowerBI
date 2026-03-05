@@ -1,0 +1,11 @@
+role '600-301 CRP PA Weber Hannover'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "600-301"
+
+	tablePermission DIM_Filialen = [FilialeId] == "600-301"
+
+	tablePermission DIM_Mandaten = [Id] == 600
+
+	annotation PBI_Id = 9e8a42c453324fd8a6da8e640ef60ca6
+

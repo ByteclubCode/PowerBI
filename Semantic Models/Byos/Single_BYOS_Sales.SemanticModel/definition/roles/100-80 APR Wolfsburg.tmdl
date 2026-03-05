@@ -1,0 +1,11 @@
+role '100-80 APR Wolfsburg'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-80"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-80"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = db750113cf9b465f8f4f5f3a89fcbff2
+

@@ -1,0 +1,942 @@
+/// Enthält alle KPI / Measures des DS, diese sind Komplexe Berechnungen die sich nicht mit den einfachen Datenfelder auswerten lassen.
+/// 
+table KPIs
+	lineageTag: e656182f-6618-4ab2-a673-04c1cda07ea0
+
+	/// Gibt das Datum des ersten Umsatzes eines Kunden zurück.
+	measure 'Kunde Erster Umsatz' = ```
+			
+			    CALCULATE( MIN('FACT_Umsatz Belege'[DateCreated]), 
+			    FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArtId] = 300)
+			    )
+			```
+		formatString: dd.mm.yyyy
+		lineageTag: c2bfc75a-2ef3-4a0e-8e9d-8a1b98584160
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	/// Gibt die Anzahl der Rechnungen des Kunden zurück.
+	measure 'Kunde Anzahl Rechnung' = ```
+			
+			    CALCULATE( COUNT('FACT_Umsatz Belege'[BelegId]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArtId] = 300)
+			    )
+			```
+		formatString: #,0
+		lineageTag: dd2d035b-1da0-4126-ae4f-92ec5a9f0b79
+
+	/// Gibt die Anzahl der Gutschriften zurück.
+	measure 'Anzahl Gutschriften' = ```
+			
+			    CALCULATE( COUNT('FACT_Umsatz Belege'[BelegId]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArtId] = 500)
+			    )
+			```
+		formatString: #,0
+		lineageTag: 6f8a572f-27ea-4921-b085-ab81f132d195
+
+	/// Gibt die Anzahl der Rechnungen zurück.
+	measure 'Anzahl Rechnungen' = ```
+			
+			    CALCULATE( COUNT('FACT_Umsatz Belege'[BelegId]), 
+			    FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArtId] = 300) 
+			    )
+			```
+		formatString: #,0
+		lineageTag: 5bfdaa06-bfaf-4efd-8d0b-da9b640d2631
+
+	/// Gibt an ob der Kunden zur Zeitpunkt des Rechnungsdatums Neukunde war.
+	measure 'Ist Neukunde' = ```
+			
+			    IF(SELECTEDVALUE(DIM_Kunde[ErsterVerkauf]) >= MIN('DIM_Datum Umsatz'[Datum]) && SELECTEDVALUE(DIM_Kunde[ErsterVerkauf]) <= MAX('DIM_Datum Umsatz'[Datum]), "Ja", "Nein" )
+			```
+		lineageTag: 766482be-0dde-4999-8a56-f8bef81fbe7a
+
+	/// Gibt zurück ob der Kunde ein Bestandskunde oder Neukunden ist.
+	measure 'C2 Kundenart' = ```
+			
+			    SELECTEDVALUE('FACT_Umsatz Belege'[Finanzierungskundenart])
+			   
+			```
+		displayFolder: C2 Finanzierung
+		lineageTag: 5ff2a1cf-afb2-4484-b3ab-773cc8b43118
+
+	/// Gibt die Anzahl der Neukunden aus der C2 Finanzierung zurück. 
+	measure 'Anzahl C2 Neukunden' = ```
+			
+			    CALCULATE( DISTINCTCOUNT('DIM_Leasing Kunden'[KundenId]) ,
+			        FILTER('FACT_Umsatz Belege', [Finanzierungskundenart] = "Neukunde"))
+			```
+		formatString: 0
+		displayFolder: C2 Finanzierung
+		lineageTag: 6cf6d4ff-ca5c-474d-958a-ddc15d193e4e
+
+	/// Gibt die Bestandskunden aus der C2 Finanzierung zurück. 
+	measure 'Anzahl C2 Bestandskunden' = ```
+			
+			    CALCULATE( DISTINCTCOUNT('DIM_Leasing Kunden'[KundenId]), 
+			    FILTER('FACT_Umsatz Belege', [Finanzierungskundenart] = "Bestandskunde"))
+			```
+		formatString: 0
+		displayFolder: C2 Finanzierung
+		lineageTag: e0672e83-3488-4662-a434-dfbcfe8606ec
+
+	/// Gibt Prozentual die Anzahl der Neukunden aus der C2 Finanzierung zurück.
+	measure '% C2 Neukunden' = ```
+			
+			    DIVIDE( [Anzahl C2 Neukunden],[Anzahl C2 Bestandskunden] + [Anzahl C2 Neukunden], 0)
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: C2 Finanzierung
+		lineageTag: 131f8ca2-68b2-44b4-87bd-d7c59ce59eee
+
+	/// Gibt in Abhängigkeit des Mandanten den Link zum Logo zurück.
+	measure 'Ausgewähltes Logo JPG' = ```
+			
+			VAR BaseURL = "https://conference.comspot.de/BC-Logos/_JPG/" 
+			VAR EndingURL = ".jpg"
+			VAR DefaultURL = "Logo-BYTECLUB-878x1015"
+			VAR FullPath =  BaseURL & DefaultURL & EndingURL
+			VAR LogoName = IF(HASONEFILTER(DIM_Mandaten[FirmenName]), SELECTEDVALUE(DIM_Mandaten[LogoInJpg]), FullPath) 
+			RETURN 
+			    LogoName
+			```
+		displayFolder: Mandanten
+		lineageTag: da4b4bf1-4191-47f6-8212-8796c7936cc1
+		dataCategory: ImageUrl
+
+	/// Gibt in Abhängigkeit des Mandanten den Link zum Logo zurück.
+	measure 'Ausgewähltes Logo PNG' = ```
+			
+			VAR BaseURL = "https://conference.comspot.de/BC-Logos/_PNG/" 
+			VAR EndingURL = ".png"
+			VAR DefaultURL = "Logo-BYTECLUB-878x1015"
+			VAR FullPath =   BaseURL & DefaultURL & EndingURL
+			VAR LogoName = IF(HASONEFILTER(DIM_Mandaten[FirmenName]), SELECTEDVALUE(DIM_Mandaten[LogoInPng]), FullPath) 
+			RETURN 
+			   LogoName
+			```
+		displayFolder: Mandanten
+		lineageTag: 5a643a47-4d8d-4a7f-a68a-51b3063a7853
+		dataCategory: ImageUrl
+
+	/// Basiered auf der Filterung wird eine 0 oder 1 ausgeben. Hier kann eine Abhängigkeit der Slicer erreicht werden. Bitte nur für Slicer verwenden.
+	measure 'Slicer Helper' = ```
+			
+			    INT(NOT ISEMPTY('FACT_Umsatz Belege'))
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: 8fabd4be-c745-4aca-bd62-495695559e25
+
+	/// Gibt die Backlog Menge zurück. Es werden nur Aufträge  die Endgültig sind berücksichtigt
+	/// 
+	measure 'Backlog Menge' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[BacklogMenge]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArt] ="Auftrag" && 'FACT_Umsatz Belege'[BelegStatus] = "endgültig")
+			    )
+			```
+		formatString: #,0
+		displayFolder: Backlog
+		lineageTag: 7ba8c62d-4be9-4c0d-8869-e4e9f36cd268
+
+	/// Kann zum Filtern des Backlogs genutzt werden. Es werden nur Aufträge  die Endgültig sind berücksichtigt
+	measure 'Ist Backlog' = IF(SELECTEDVALUE('FACT_Umsatz Belege'[BelegArt]) ="Auftrag" && SELECTEDVALUE('FACT_Umsatz Belege'[BelegStatus]) ="endgültig", true, false)
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Backlog
+		lineageTag: 609a94a1-9240-4da4-bee7-43d3d79efe9d
+
+	/// Gibt den Backlog VK zurück. Es werden nur Aufträge  die Endgültig sind berücksichtigt
+	measure 'Backlog VK' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[BacklogVkPreis]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArt] ="Auftrag" && 'FACT_Umsatz Belege'[BelegStatus] = "endgültig")
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Backlog
+		lineageTag: ec64e259-43bd-45b9-bed5-2ac18cf3bfaf
+
+	/// Gibt die Backlog MargeOhneKosten zurück. Es werden nur Aufträge  die Endgültig sind berücksichtigt
+	measure 'Backlog MargeOhneKosten' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[BacklogMargeOhneKosten]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArt] ="Auftrag" && 'FACT_Umsatz Belege'[BelegStatus] = "endgültig")
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Backlog
+		lineageTag: 5000b794-f1be-475c-9007-40b8acbaadeb
+
+	/// Gibt die Backlog Marge Variable Kosten zurück. Es werden nur Aufträge  die Endgültig sind berücksichtigt
+	measure 'Backlog MargeVariableKosten' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[BacklogMargeVariablekosten]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArt] ="Auftrag" && 'FACT_Umsatz Belege'[BelegStatus] = "endgültig")
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Backlog
+		lineageTag: f69afd73-49a3-4d79-a304-09d1dbaec7ca
+
+	/// Gibt die Backlog Gesamt Marge zurück. Es werden nur Aufträge  die Endgültig sind berücksichtigt
+	measure 'Backlog MargeGesamtkosten' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[BacklogMargeGesamtkosten]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArt] ="Auftrag" && 'FACT_Umsatz Belege'[BelegStatus] = "endgültig")
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Backlog
+		lineageTag: 58e96f65-8043-4122-8a73-e3bfb36c3fdd
+
+	/// Gibt den Ausgewählten Vergleichszeitraum zurück. Kann genutzt werden um ein Anzeige zu erstellen.
+	measure Label = ```
+			
+			VAR Selected = SELECTEDVALUE(HLP_Vergleichszeitraum[Id])
+			    RETURN
+			        SWITCH(Selected , 1, "Vortag", 2, "Vorwoche", 3, "Vormonat", 4, "Vorquartal", 5, "Vorjahr", "Keine Auswahl")
+			  
+			```
+		displayFolder: Vergleichszeitraum
+		lineageTag: 91945b7f-cab0-461c-882b-78cf6177784d
+
+	/// Gibt den Umsatz des Vortages zurück.
+	measure 'Umsatz Vortag' = ```
+			
+			VAR SDate = [Max Datum] - 1
+			VAR Calc = CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) ,
+			                        FILTER( ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Datum] = SDate)
+			                    )
+			    RETURN
+			        IF(Calc = BLANK(), 0, Calc)
+			
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Vergleichszeitraum
+		lineageTag: 9d289051-c09b-42f1-91b5-bc3a7a8cc624
+
+	/// Gibt den Umsatz des Vorwoche zurück.
+	measure 'Umsatz Vorwoche' = ```
+			
+			VAR WeekId = [Max Kalenderwoche] - 1
+			VAR YearId = IF(WeekId = 53, [Max Jahr] - 1, [Max Jahr])
+			VAR Calc =  CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			                    FILTER(ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[KalenderWoche] = WeekId && 'DIM_Datum Umsatz'[Jahr] = YearId )
+			                )
+			    RETURN 
+			        IF(Calc = BLANK(), 0, Calc)
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Vergleichszeitraum
+		lineageTag: ed463d3f-7970-45bd-a0af-af43118648c4
+
+	/// Gibt den Umsatz des Vormonats zurück.
+	measure 'Umsatz Vormonat' = ```
+			
+			VAR _monthid = [Max Monat] - 1
+			VAR YearId = IF( _monthid = 12, [Max Jahr] -1 , [Max Jahr])
+			VAR Calc =  CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			    FILTER( ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Monat_Nr] = _monthid && 'DIM_Datum Umsatz'[Jahr] = YearId)
+			    )
+			    RETURN 
+			        IF(Calc = BLANK(), 0, Calc)
+			   
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Vergleichszeitraum
+		lineageTag: 529be8eb-c79f-4d1d-8416-abe84a69776b
+
+	/// Gibt den Umsatz des Vorquartals zurück.
+	measure 'Umsatz Vorquartal' = ```
+			
+			VAR QuartalId = [Max Quartal] -1
+			VAR YearId = IF(QuartalId = 4, [Max Jahr] -1, [Max Jahr])
+			VAR Calc = CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			    FILTER( ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Quartal] = QuartalId && 'DIM_Datum Umsatz'[Jahr] = YearId)
+			    )
+			    RETURN 
+			        IF(Calc = BLANK(), 0, Calc)
+			    
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Vergleichszeitraum
+		lineageTag: e67d4fee-a6de-4ade-bd1d-56ec032fa064
+
+	/// Gibt den Umsatz des Vorjahres zurück.
+	measure 'Umsatz Vorjahr' = ```
+			
+			VAR YearId = [Max Jahr] - 1
+			VAR Calc = CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) ,
+			        FILTER( ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Jahr] = YearId) 
+			    )
+			    RETURN 
+			        IF(Calc = BLANK(), 0, Calc)
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Vergleichszeitraum
+		lineageTag: d4b0ba31-ca4e-4928-9709-67a183356ad7
+
+	/// Gibt den Vergleichszeitraum nach Auswahl zurück. 
+	measure 'Umsatz Switchauswertung' = ```
+			
+			SWITCH(SELECTEDVALUE(HLP_Vergleichszeitraum[Id]) , 
+			                        1, [Umsatz Vortag], 
+			                        2, [Umsatz Vorwoche],
+			                        3, [Umsatz Vormonat],
+			                        4, [Umsatz Vorquartal],
+			                        5, [Umsatz Vorjahr],
+			                        0)
+			
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Vergleichszeitraum
+		lineageTag: 230d97ee-eb61-462a-bdc6-89d98240dfca
+
+	/// Gibt die Woche des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Max Kalenderwoche' = ```
+			
+			VAR SDate = [Max Datum]
+			    RETURN
+			        CALCULATE(SELECTEDVALUE('DIM_Datum Umsatz'[KalenderWoche]) , 
+			                        FILTER('DIM_Datum Umsatz', 'DIM_Datum Umsatz'[Datum] = SDate)
+			                        )
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: 2e4b9240-2dee-4b68-bd9a-c4c876004a8a
+
+	/// Gibt das Jahr des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Max Jahr' = ```
+			
+			VAR SDate = [Max Datum]
+			    RETURN
+			        CALCULATE(SELECTEDVALUE('DIM_Datum Umsatz'[Jahr]) , 
+			                        FILTER('DIM_Datum Umsatz', 'DIM_Datum Umsatz'[Datum] = SDate)
+			                        )
+			
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: 488cab44-9c30-4716-bb26-b5842583e84e
+
+	/// Gibt den Monat des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Max Monat' = ```
+			
+			VAR SDate = [Max Datum]
+			    RETURN
+			        CALCULATE( SELECTEDVALUE('DIM_Datum Umsatz'[Monat_Nr]), 
+			                            FILTER( ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Datum] = SDate)
+			                    )
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: 9a8e46dc-6a50-4e5d-ad77-bb1dd281595e
+
+	/// Gibt das Quartal des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Max Quartal' = ```
+			
+			VAR SDate = [Max Datum]
+			    RETURN
+			        CALCULATE( SELECTEDVALUE('DIM_Datum Umsatz'[Quartal]), 
+			                            FILTER('DIM_Datum Umsatz', 'DIM_Datum Umsatz'[Datum] = SDate)
+			                        )
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: 350dfef0-ed8c-42e6-b267-d4259a01b905
+
+	/// Gibt das Jahr des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Min Jahr' = ```
+			
+			VAR SDate = [Min Datum]
+			    RETURN
+			        CALCULATE( SELECTEDVALUE('DIM_Datum Umsatz'[Jahr]), 
+			                        FILTER('DIM_Datum Umsatz', 'DIM_Datum Umsatz'[Datum] = SDate)
+			            )
+			    
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: b04152a4-b927-418b-b763-9f8d81d180aa
+
+	/// Gibt die Kalenderwoche des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Min Kalenderwoche' = ```
+			
+			VAR SDate = [Min Datum]
+			    RETURN
+			        CALCULATE( SELECTEDVALUE('DIM_Datum Umsatz'[KalenderWoche]), 
+			                        FILTER('DIM_Datum Umsatz', 'DIM_Datum Umsatz'[Datum] = SDate)
+			            )
+			    
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: a049bad0-340e-4012-8187-01b50341bd26
+
+	/// Gibt den Monat des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Min Monat' = ```
+			
+			VAR SDate = [Min Datum]
+			    RETURN
+			        CALCULATE(SELECTEDVALUE('DIM_Datum Umsatz'[Monat_Nr]), 
+			                        FILTER('DIM_Datum Umsatz', 'DIM_Datum Umsatz'[Datum] = SDate)
+			                    )
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: 521c6438-dbc9-4bdd-8727-d95d7478f166
+
+	/// Gibt das Datum des kleinsten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Min Datum' = ```
+			MIN('DIM_Datum Umsatz'[Datum]) 
+			```
+		formatString: dd.mm.yyyy
+		displayFolder: Helper
+		lineageTag: 47160ae5-fbab-4e2f-b982-c1b554f73c42
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	/// Gibt das Datum des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Max Datum' = ```
+			MAX('DIM_Datum Umsatz'[Datum]) 
+			```
+		formatString: dd.mm.yyyy
+		displayFolder: Helper
+		lineageTag: a6647641-3222-4a38-a505-8def1b4130a9
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	/// Gibt das Quartal des größten Wert des Datumsbereiches aus, bezieht sich auf DIM_Datum Umsatz
+	measure 'Min Quartal' = ```
+			
+			VAR SDate = [Min Datum]
+			    RETURN
+			        CALCULATE(SELECTEDVALUE('DIM_Datum Umsatz'[Quartal]), 
+			                        FILTER('DIM_Datum Umsatz', 'DIM_Datum Umsatz'[Datum] = SDate) 
+			                    )
+			```
+		formatString: 0
+		displayFolder: Helper
+		lineageTag: b8e0e861-b19b-4eff-91d3-21bef75e582f
+
+	measure 'Anzahl Rechnungen VJ' = ```
+			
+			    CALCULATE(COUNT('FACT_Umsatz Belege'[BelegId]), 
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: 0
+		lineageTag: 85740996-ba45-4ba9-9228-6f8287eb078d
+
+	/// Errechnet den durchschnittlichen Umsatz des Vorjahres
+	measure 'Ø Umsatz VJ' = ```
+			
+			    CALCULATE( AVERAGE('FACT_Umsatz Belege'[Umsatz]) ,
+			    DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: f645122d-7a3d-43e9-88aa-d5a7c90761ba
+
+	/// An Hand der Auswahl des Jahr vs. Jahr aus der Hilfstabelle wird ein 0 oder 1 zurückgeliefert das zum Filtern der Ergebnisse genutzt werden kann. 
+	measure 'Jahr Vs. Jahr Filter' = ```
+			
+			VAR Jahr1 = SELECTEDVALUE(HLP_JahrZuJahrVergleich[Jahr1]) 
+			VAR Jahr2 = SELECTEDVALUE(HLP_JahrZuJahrVergleich[Jahr2]) 
+			VAR SelectedJahr = SELECTEDVALUE('DIM_Datum Umsatz'[Jahr])
+			RETURN 
+			    //Gibt einen Wert von 1 zurück wenn Eine Auswahl getroffen wurde, oder keine Auswahl getroffen wurde
+			    IF( (SelectedJahr = Jahr1 || SelectedJahr = Jahr2) || BLANK() = Jahr1 && BLANK() = Jahr2, 
+			    1,
+			    0)
+			```
+		formatString: 0
+		displayFolder: Filter
+		lineageTag: 90bbe607-cb11-4eb7-b8a7-7c0056a26a0c
+
+	/// Gibt den EK des Backlogs zurück. Es werden nur Aufträge  die Endgültig sind berücksichtigt
+	measure 'Backlog EK' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[BacklogEK]), 
+			        FILTER('FACT_Umsatz Belege', 'FACT_Umsatz Belege'[BelegArt] ="Auftrag" && 'FACT_Umsatz Belege'[BelegStatus] = "endgültig")
+			    )
+			```
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: Backlog
+		lineageTag: 140c6400-4a54-412b-9302-38d263f76d7d
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Verhältnis von Schutzbriefen zu Verkauften Produkten in der Kategorie 
+	measure '% Schutzbrief' = ```
+			
+			    DIVIDE([Schutzbriefe], [Verkaufte Artikel], 0)
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Schutzbrief
+		lineageTag: 697c4017-9681-46f4-8909-ec2cef56912d
+
+		changedProperty = FormatString
+
+	/// Verkaufte Artikel zu der Kategorie des Schutzbriefes. Ist keine Kategorie ausgewählt wird die Summe ausgeben.
+	measure 'Verkaufte Artikel' = ```
+			CALCULATE( SUM('FACT_Umsatz Produkt'[Menge]), 
+			                    FILTER( DIM_Produkt,DIM_Produkt[IstSchutzbrief] = FALSE())
+			                )
+			```
+		formatString: 0
+		displayFolder: Schutzbrief
+		lineageTag: a8fa2c16-c624-42ed-9657-d840839a9428
+
+		changedProperty = FormatString
+
+	/// Bezieht sich auf KD_Kunde und gibt die Anzahl der Neukunden nach gewählten Zeitraum zurück
+	measure 'Neukunden Nach Umsatz' = ```
+			
+			var Neukunde =  CALCULATE( DISTINCTCOUNT('DIM_Kunde'[KundenId]), 
+			        FILTER(DIM_Kunde, DIM_Kunde[AnzahlRechnungen] = 1)
+			        )
+			RETURN
+			IF(ISBLANK(Neukunde),0, Neukunde) 
+			```
+		formatString: #,0
+		displayFolder: Umsatzkunden
+		lineageTag: 245b5814-8d74-41ea-a1ef-bd890a805306
+
+	/// Bezieht sich auf DIM_Kunde und gibt die Anzahl an Umsatzkunden zurück
+	measure 'Kunden mit Umsatz Gesamt' = ```
+			DISTINCTCOUNT('DIM_Kunde'[KundenId]) 
+			```
+		formatString: #,0
+		displayFolder: Umsatzkunden
+		lineageTag: c2c62c5c-ebf4-430c-a2bd-ea5673070107
+
+	/// Neukunden in Prozent
+	measure 'Neukunden in %' = ```
+			DIVIDE([Neukunden Nach Umsatz], [Kunden mit Umsatz Gesamt], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Umsatzkunden
+		lineageTag: c4334940-49cd-41bc-914f-92c122589c68
+
+	/// Berechnet den Durchschnitt der letzten 4 Jahre zum gegeben Intervall 
+	measure Forecast = ```
+			
+			/*
+			    Für die Berechung nehmen wir die letzten 4 Jahre 
+			*/
+			VAR sum4Years = CALCULATE([Actuals], DATEADD('DIM_Datum Umsatz'[Datum],-4, YEAR)) 
+			VAR sum3Years = CALCULATE([Actuals], DATEADD('DIM_Datum Umsatz'[Datum],-3, YEAR)) 
+			VAR sum2Years = CALCULATE([Actuals], DATEADD('DIM_Datum Umsatz'[Datum],-2, YEAR)) 
+			VAR sum1Years = CALCULATE([Actuals], DATEADD('DIM_Datum Umsatz'[Datum],-1, YEAR)) 
+			
+			VAR MyAverage = (sum4Years + sum3Years + sum2Years + sum1Years) / 4
+			
+			RETURN 
+			    MyAverage
+			```
+		displayFolder: Forecast
+		lineageTag: 4ef40178-e949-402d-8d12-ec4da466b4c7
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	/// Abweichung zwischen Berechneter Forcast und den Actuals 
+	measure 'Abweichung zum Forecast' = ```
+			
+			    [Forecast] - [Actuals]  
+			```
+		displayFolder: Forecast
+		lineageTag: 6b657876-a5ab-46a5-9696-87da2608bf33
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	/// Umsatz des Vorjahres basierend auf den Ausgewählten Jahr. 
+	measure 'Gesamt Umsatz VJ' = ```
+			
+			VAR selectedYear = SELECTEDVALUE('DIM_Datum Umsatz'[Jahr]) 
+			VAR salesVJ = CALCULATE(SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			                        ALL('DIM_Datum Umsatz') , 'DIM_Datum Umsatz'[Jahr] = selectedYear - 1)
+			RETURN
+			    salesVJ 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: 0549ecdc-7cd2-4f32-8b7d-ac6708473381
+
+	/// Erfüllungsquote zum Vorjahr
+	measure 'Quote Umsatz zum VJ' = ```
+			DIVIDE(SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), [Gesamt Umsatz VJ], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Vorjahresvergleich
+		lineageTag: b636bc14-3f6c-452e-9bb3-3f5c70c96b19
+
+	/// Umsatz des Vorjahres bis zum gleichen Tag wie im Ausgewählten Jahr
+	measure 'Umsatz VJ YTD' = ```
+			
+			VAR selectedYear = CONVERT(SELECTEDVALUE('DIM_Datum Umsatz'[Jahr]), INTEGER) -1
+			VAR dateToday = TODAY()
+			VAR endDate = DATE(selectedYear, MONTH(dateToday), DAY(dateToday))
+			VAR salesVJ = CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) , 
+			                    FILTER(
+			                        ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Jahr] = selectedYear && 'DIM_Datum Umsatz'[Datum] <= endDate
+			                        )
+			                    )
+			                        
+			                    
+			RETURN 
+			    IF(selectedYear + 1 <> YEAR(TODAY()), BLANK(), salesVJ)
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: e71354c3-f8be-43fd-8ced-061a4f5de06f
+
+	/// Erfüllungsquote zum Vorjahr
+	measure 'Quote Umsatz YOY VJ' = ```
+			DIVIDE(SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), [Umsatz VJ YTD], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Vorjahresvergleich
+		lineageTag: 1abc1006-e753-4744-8a88-2a0c4705d3ca
+
+	/// Marge des Vorjahres
+	measure 'Marge VJ' = ```
+			
+			VAR mindate = MIN('DIM_Datum Umsatz'[Datum]) 
+			VAR maxdate = MAX('DIM_Datum Umsatz'[Datum])
+			VAR margin = CALCULATE( 
+			                SUM('FACT_Umsatz Produkt'[MargeOhneKosten]) ,
+			                 
+			                FILTER(ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Datum] >= DATE(YEAR(mindate)-1, MONTH(mindate), day(mindate)) && 'DIM_Datum Umsatz'[Datum] <= DATE(YEAR(maxdate) -1, MONTH(maxdate), DAY(maxdate)))
+			                )
+			RETURN
+			    margin
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: 04c7d70f-1695-4f0f-9428-b116bf5b582a
+
+	/// Menge des Vorjahres 
+	measure 'Menge VJ' = ```
+			
+			VAR mindate = MIN('DIM_Datum Umsatz'[Datum]) 
+			VAR maxdate = MAX('DIM_Datum Umsatz'[Datum])
+			VAR qty = CALCULATE( 
+			                SUM('FACT_Umsatz Produkt'[Menge]) ,
+			                 
+			                FILTER(ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Datum] >= DATE(YEAR(mindate)-1, MONTH(mindate), day(mindate)) && 'DIM_Datum Umsatz'[Datum] <= DATE(YEAR(maxdate) -1, MONTH(maxdate), DAY(maxdate)))
+			                )
+			RETURN
+			    qty
+			```
+		formatString: #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: 480decb7-8945-4343-b487-56257545bcb0
+
+	/// Marge in Prozent von VJ
+	measure '% Marge VJ' = ```
+			DIVIDE([Marge VJ], [Umsatz VJ], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Vorjahresvergleich
+		lineageTag: 886fb207-ee47-428e-9c49-2a3e6105d776
+
+	/// Marge des Vorjahres bis zum Heutigen Tag
+	measure 'Marge VJ YTD' = ```
+			
+			VAR selectedYear = CONVERT(SELECTEDVALUE('DIM_Datum Umsatz'[Jahr]), INTEGER) -1
+			VAR dateToday = TODAY()
+			VAR endDate = DATE(selectedYear, MONTH(dateToday), DAY(dateToday))
+			VAR marginVJ = CALCULATE( SUM('FACT_Umsatz Produkt'[MargeOhneKosten]) , 
+			                    FILTER(
+			                        ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Jahr] = selectedYear && 'DIM_Datum Umsatz'[Datum] <= endDate)
+			                    )
+			                    
+			RETURN 
+			    IF(selectedYear + 1 <> YEAR(TODAY()), BLANK(), marginVJ)
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: a0f42017-a0ed-4495-8ace-af52ec0736f7
+
+	/// Erfüllungsquote zum Vorjahr im Jahresvergleich
+	measure 'Quote Marge YOY VJ' = ```
+			DIVIDE(SUM('FACT_Umsatz Produkt'[MargeOhneKosten]), [Marge VJ YTD], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Vorjahresvergleich
+		lineageTag: 8b2136d5-fa8a-483f-9aeb-35414e08dc1b
+
+	/// Erfüllungsquote zum Vorjahr
+	measure 'Quote Marge zum VJ' = ```
+			DIVIDE(SUM('FACT_Umsatz Produkt'[MargeOhneKosten]), [Marge VJ], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Vorjahresvergleich
+		lineageTag: 7b63e47b-466a-4877-bf4e-8dbfcb1a3997
+
+	/// Umsatz Vorjahr
+	measure 'Umsatz VJ' = ```
+			
+			VAR mindate = MIN('DIM_Datum Umsatz'[Datum]) 
+			VAR maxdate = MAX('DIM_Datum Umsatz'[Datum])
+			VAR sales = CALCULATE( 
+			                SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) ,
+			                 
+			                FILTER(ALL('DIM_Datum Umsatz'), 'DIM_Datum Umsatz'[Datum] >= DATE(YEAR(mindate)-1, MONTH(mindate), day(mindate)) && 'DIM_Datum Umsatz'[Datum] <= DATE(YEAR(maxdate) -1, MONTH(maxdate), DAY(maxdate)))
+			                )
+			RETURN
+			    sales
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: a9b65489-615c-4078-91fa-523d5f3f6f12
+
+	/// Aktueller Umsatz
+	measure 'Actual Umsatz' = ```
+			
+			VAR _sales = SUM('FACT_Umsatz Produkt'[VKPreisGesamt])
+			RETURN 
+			    IF(ISBLANK(_sales), 0 , _sales)
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: 3592351a-90c8-45ca-b813-c3ab272ad5f6
+
+	/// Aktuelle Marge 
+	measure 'Actual Marge' = ```
+			
+			VAR margin = SUM('FACT_Umsatz Produkt'[MargeOhneKosten]) 
+			RETURN
+			    IF(ISBLANK(margin), 0, margin)
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: d4e1eed5-09ea-4dcb-8096-41c98d722547
+
+	/// Aktuelle Menge 
+	measure 'Actual Menge' = ```
+			
+			VAR _qty = SUM('FACT_Umsatz Produkt'[Menge])
+			RETURN
+			    IF(ISBLANK(_qty), 0, _qty) 
+			```
+		formatString: #,0
+		displayFolder: Vorjahresvergleich
+		lineageTag: ba2e2b10-6b89-45bb-8f29-71ebcb9962d2
+
+	/// Marge in Prozent des Vorjahres
+	measure '% Marge' = DIVIDE([Actual Marge], [Actual Umsatz],0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Vorjahresvergleich
+		lineageTag: b49a81ee-6c7c-4389-81d7-faa71014cc32
+
+	/// Umsatz aus Targoverkäufen
+	measure 'Umsatz TargoLeasing' = ```
+			
+			VAR umsatz = CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), DIM_Kunde[KundenId] IN {5168222, 5140903})
+			RETURN 
+			IF(ISBLANK(umsatz),0, umsatz)
+			    
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: TargoLeasing
+		lineageTag: 7aa1cbe7-f476-42b4-8a42-203292ea3505
+
+	/// Umsatz ohne Targo
+	measure 'Umsatz ohne TargoLeasing' =
+			
+			VAR umsatz = CALCULATE(SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), NOT(DIM_Kunde[KundenId] IN {5168222, 5140903}))
+			RETURN
+			    IF(ISBLANK(umsatz),0,umsatz)
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: TargoLeasing
+		lineageTag: 52649c83-173e-43ba-bd24-9ec0df34bc6f
+
+	/// Prozentuales Verhältnis zwischen Umsatz und Targoumsatz 
+	measure '% Verhältnis Umsatz zu Targo' = ```
+			
+			    DIVIDE([Umsatz TargoLeasing],SUM('FACT_Umsatz Produkt'[VKPreisStueck]), 1)
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: TargoLeasing
+		lineageTag: c6dc8273-d3df-4a70-8d1e-452c75fd6890
+
+	/// Die Abweichung zwischen Schutzbriefen und Verkauften Artikeln
+	measure Abweichung = [Verkaufte Artikel] - [Schutzbriefe]
+		formatString: #,0
+		displayFolder: Schutzbrief
+		lineageTag: 9f7cc8ec-0052-49c2-bdf1-e470bd86ac52
+
+	/// Schutzbriefe und AppleCare Produkte
+	measure Schutzbriefe = CALCULATE( SUM('FACT_Umsatz Produkt'[Menge]), FILTER( DIM_Produkt, DIM_Produkt[IstSchutzbrief] = TRUE()))
+		formatString: 0
+		displayFolder: Schutzbrief
+		lineageTag: f290083b-9169-4ea5-8ec1-72341cbec1b6
+
+	measure 'Actuals or Forecast' = ```
+			
+			    IF(ISBLANK([Actuals]), [Forecast], [Actuals])
+			```
+		displayFolder: Forecast
+		lineageTag: f6b7ef0e-60f1-4192-add7-2c0db09f4d25
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	measure 'Marge Täglicher Ø' = ```
+			
+			    DIVIDE(SUM('FACT_Umsatz Produkt'[MargeOhneKosten]), [Tage mit Marge], 0) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Durchschnitt
+		lineageTag: 84bf6cde-57e0-48db-be11-a38d0dd374cb
+
+	measure 'Umsatz Täglicher Ø' = ```
+			
+			    DIVIDE(SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), [Tage mit Marge] ,0) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Durchschnitt
+		lineageTag: 9cd98319-ecd3-44ab-80c6-7f6d68416898
+
+	measure 'Umsatz TargoLeasing AY YTD' = TOTALYTD([Umsatz TargoLeasing],'DIM_Datum Umsatz'[Datum])
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: TargoLeasing
+		lineageTag: 3996e030-5c32-4acf-9c90-bd7a5b4b4da1
+
+	measure 'Umsatz TargoLeasing PY FULL' =
+			CALCULATE( [Umsatz TargoLeasing],
+			                                            PREVIOUSYEAR('DIM_Datum Umsatz'[Datum])
+			                                            )
+		formatString: "€"\ #,0.0;-"€"\ #,0.0;"€"\ #,0.0
+		displayFolder: TargoLeasing
+		lineageTag: 039421d8-f67c-4bb7-b257-2083b5b70ac5
+
+	measure 'Umsatz TargoLeasing PY YTD' = TOTALYTD([Umsatz TargoLeasing],SAMEPERIODLASTYEAR('DIM_Datum Umsatz'[Datum]))
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		displayFolder: TargoLeasing
+		lineageTag: 3820328e-eea7-4d42-936e-6618eab0a834
+
+	measure '% YOY' = DIVIDE(([Umsatz TargoLeasing AY YTD] - [Umsatz TargoLeasing PY YTD]),[Umsatz TargoLeasing PY YTD],0)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: TargoLeasing
+		lineageTag: ab3d80eb-0c4b-4abe-a404-68e30ab57975
+
+	/// Summe des VK Preis Gesamt geteilt durch Anzahl Belege.
+	measure 'Ø Umsatz' = ```
+			
+			    DIVIDE( 
+			        SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			        DISTINCTCOUNT('FACT_Umsatz Belege'[BelegId]),
+			        0
+			    ) 
+			```
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Durchschnitt
+		lineageTag: e99001d0-8746-4156-9e78-cde4a6f26d7c
+
+	/// Zeigt die Tage mit Marge an. 
+	measure 'Tage mit Marge' = ```
+			
+			    CALCULATE(DISTINCTCOUNT('FACT_Umsatz Belege'[DateCreated]), 'FACT_Umsatz Produkt'[MargeOhneKosten] > 0) 
+			```
+		formatString: 0
+		displayFolder: Durchschnitt
+		lineageTag: 2d93f6b7-50a1-40c4-97ce-0d1e194bf47f
+
+	measure 'Current Value' = ```
+			
+			VAR lastSales = MAX('DIM_Datum Umsatz'[Datum]) 
+			RETURN
+			    SWITCH(
+			            TRUE(),
+			            ISBLANK([Actuals]), [Forecast],
+			            [Actuals] > [Forecast], [Actuals],
+			            MAX('DIM_Datum Umsatz'[Datum]) > lastSales, [Actuals],
+			            [Actuals] < [Forecast], ([Forecast] - [Actuals]) + [Actuals],
+			            [Forecast]
+			            )
+			```
+		displayFolder: Forecast
+		lineageTag: ab71d867-53bc-4c13-90c5-529812f2a21d
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	measure Actuals = ```
+			SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) 
+			```
+		displayFolder: Forecast
+		lineageTag: 8991f1a5-daf2-4248-9cc5-ac9b985b2d6d
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	measure 'Actuals Qty' = SUM('FACT_Umsatz Produkt'[Menge])
+		displayFolder: Forecast
+		lineageTag: 1f15e10b-c7f7-4376-986a-eb32aea4627c
+
+		formatStringDefinition = bpi.Formating.Qty()
+
+	measure 'Forecast Qty' = ```
+			
+			/*
+			    Für die Berechung nehmen wir die letzten 4 Jahre 
+			*/
+			VAR sum4Years = CALCULATE([Actuals Qty], DATEADD('DIM_Datum Umsatz'[Datum],-4, YEAR)) 
+			VAR sum3Years = CALCULATE([Actuals Qty], DATEADD('DIM_Datum Umsatz'[Datum],-3, YEAR)) 
+			VAR sum2Years = CALCULATE([Actuals Qty], DATEADD('DIM_Datum Umsatz'[Datum],-2, YEAR)) 
+			VAR sum1Years = CALCULATE([Actuals Qty], DATEADD('DIM_Datum Umsatz'[Datum],-1, YEAR)) 
+			
+			VAR MyAverage = (sum4Years + sum3Years + sum2Years + sum1Years) / 4
+			
+			RETURN 
+			    MyAverage
+			```
+		displayFolder: Forecast
+		lineageTag: 4c462c52-8131-4f41-8659-fa9a6058ed3a
+
+		formatStringDefinition = bpi.Formating.Qty()
+
+	measure 'Current Value Qty' = ```
+			
+			VAR lastSales = MAX('DIM_Datum Umsatz'[Datum]) 
+			RETURN
+			    SWITCH(
+			            TRUE(),
+			            ISBLANK([Actuals Qty]), [Forecast Qty],
+			            [Actuals Qty] > [Forecast Qty], [Actuals Qty],
+			            MAX('DIM_Datum Umsatz'[Datum]) > lastSales, [Actuals Qty],
+			            [Actuals Qty] < [Forecast Qty], ([Forecast Qty] - [Actuals Qty]) + [Actuals Qty],
+			            [Forecast Qty]
+			            )
+			```
+		displayFolder: Forecast
+		lineageTag: 5d78434f-a4ce-48dc-afc3-d76f54018b04
+
+		formatStringDefinition = bpi.Formating.Qty()
+
+	measure 'Abweichung zum Forecast Qty' = [Forecast Qty] - [Actuals Qty]
+		displayFolder: Forecast
+		lineageTag: fc0743ac-7f26-40e8-8a72-4dcb6ebaeb44
+
+		formatStringDefinition = bpi.Formating.Qty()
+
+	measure 'Average Netsales' = DIVIDE([Current Value], [Current Value Qty], BLANK())
+		displayFolder: Forecast
+		lineageTag: 11d52aca-557f-42b3-a517-64ca1bf1614e
+
+		formatStringDefinition = bpi.Formating.Currency()
+
+	partition KPIs-04893a3f-dddf-47c5-b16a-adfe5cf77d8c = m
+		mode: import
+		source =
+				let
+				    Quelle = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Spalte ""1""" = _t]),
+				    #"Geänderter Typ" = Table.TransformColumnTypes(Quelle,{{"Spalte ""1""", type text}}),
+				    #"Entfernte Spalten" = Table.RemoveColumns(#"Geänderter Typ",{"Spalte ""1"""})
+				in
+				    #"Entfernte Spalten"
+
+	annotation PBI_ResultType = Table
+

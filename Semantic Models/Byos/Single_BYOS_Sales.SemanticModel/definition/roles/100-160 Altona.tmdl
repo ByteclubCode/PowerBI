@@ -1,0 +1,11 @@
+role '100-160 Altona'
+	modelPermission: read
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-160"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-160"
+
+	annotation PBI_Id = a0ca04a9a5384e45b81036a997ea5140
+

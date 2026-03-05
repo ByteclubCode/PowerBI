@@ -1,0 +1,51 @@
+/// Hilfstabelle zum Filter eines Vergleiches zwischen den Jahren. Nur in der Verwendung mit dem Filter Measure Jahr vs. Jahr verwenden.
+table HLP_JahrZuJahrVergleich
+	lineageTag: 346bd469-2fb0-4997-a72f-ef7708cdec33
+
+	/// Jahr1 für die Evaluierung des  Measures Jahr Vs. Jahr Filter
+	column Jahr1
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 53043e99-3783-42b7-a414-e77950543499
+		summarizeBy: none
+		sourceColumn: Jahr1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	/// Jahr2 für die Evaluierung des  Measures Jahr Vs. Jahr Filter
+	column Jahr2
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 75f74edf-756f-4376-b37c-edabde368419
+		summarizeBy: none
+		sourceColumn: Jahr2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	/// Auswahlfeld 
+	column 'Jahr Vs. Jahr'
+		dataType: string
+		lineageTag: 99d5f8ae-380a-414a-9615-5df49c2aacb1
+		summarizeBy: none
+		sourceColumn: Jahr Vs. Jahr
+
+		annotation SummarizationSetBy = Automatic
+
+	partition HLP_JahrZuJahrVergleich-5479c273-b2d0-4ed7-b6c9-9134369fb58a = m
+		mode: import
+		source =
+				let
+				    Quelle = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMjIwtFTSAVJGBmDK0FKhrFhPAcyP1UGWN0STN4TKQzVC5Y0M4PIKMAWGyBYAxUm0ACZvhCZvhOYAIzQHGKHZb4RmP1A+FgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Jahr1 = _t, Jahr2 = _t, VS = _t]),
+				    #"Geänderter Typ" = Table.TransformColumnTypes(Quelle,{{"Jahr1", Int64.Type}, {"Jahr2", Int64.Type}, {"VS", type text}}),
+				    #"Umbenannte Spalten" = Table.RenameColumns(#"Geänderter Typ",{{"VS", "Jahr Vs. Jahr"}})
+				in
+				    #"Umbenannte Spalten"
+
+	annotation PBI_ResultType = Table
+

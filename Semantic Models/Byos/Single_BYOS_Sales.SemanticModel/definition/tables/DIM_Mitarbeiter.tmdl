@@ -1,0 +1,82 @@
+/// Enthält Informationen zu Mitarbeitern
+table DIM_Mitarbeiter
+	lineageTag: 7b79c3da-b263-4beb-b914-fffc01306fe2
+
+	/// Die Id des Mitarbeiters
+	column EmployeeId
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 2c05b350-59f7-43db-9e95-c350244f1bb1
+		summarizeBy: none
+		sourceColumn: EmployeeId
+
+		annotation SummarizationSetBy = User
+
+	/// Vorname des Mitarbeiters
+	column Vorname
+		dataType: string
+		lineageTag: 29c8c23f-8642-4d0f-9f97-5a4e79184d92
+		summarizeBy: none
+		sourceColumn: Vorname
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Nachname des Mitarbeiters 
+	column Nachname
+		dataType: string
+		lineageTag: 8f745d8b-fa7a-4af3-be1b-648872981ab3
+		summarizeBy: none
+		sourceColumn: Nachname
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Zeigt an ob der Mitarbeiter aktiv ist
+	column IstAktiv
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d611aa9f-9e04-4ad5-befe-2bf141f95538
+		summarizeBy: none
+		sourceColumn: IstAktiv
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Position in Unternehmen
+	column Position
+		dataType: string
+		lineageTag: 095f6b98-cf57-4dde-ba82-ff4af598ccab
+		summarizeBy: none
+		sourceColumn: Position
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Zeigt an ob der Mitarbeiter ein Abteilungsleiter ist
+	column IsAbteilungsleiter
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 35730ecf-36c2-4c64-9cdc-eeb13d95cd2d
+		summarizeBy: none
+		sourceColumn: IsAbteilungsleiter
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Vor und Nachname des Mitarbeiters
+	column NameVorname
+		dataType: string
+		lineageTag: 4dbe6cdb-016f-48a4-a9b5-50a9b819773d
+		summarizeBy: none
+		sourceColumn: NameVorname
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Mitarbeiter = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Employee_New = Quelle{[Schema="PowerBI",Item="vDIM_Employee_New"]}[Data]
+				in
+				    PowerBI_vDIM_Employee_New
+
+	annotation PBI_ResultType = Table
+

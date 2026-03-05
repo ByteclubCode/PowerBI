@@ -1,0 +1,67 @@
+/// Enthält die Lagerorte
+table DIM_Lagerorte
+	lineageTag: de1b1508-7460-464c-b4e7-208daa36d7f5
+
+	/// Id des Lagerortes
+	column Id
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 5bdbc3ee-5655-4e07-ac36-aad683fae7b5
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Lagers
+	column LagerName
+		dataType: string
+		lineageTag: b78c660c-6131-4324-bad6-1ea91ffb51d6
+		summarizeBy: none
+		sourceColumn: LagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lagerortnummer 
+	column LagerId
+		dataType: int64
+		formatString: 0
+		lineageTag: 037df665-9a3e-4681-8cf6-a42e93188584
+		summarizeBy: none
+		sourceColumn: LagerId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Lagername plus Lagernummer
+	column NamePlusId
+		dataType: string
+		lineageTag: 055a70f8-3aa4-497d-a874-d49dc6700e50
+		summarizeBy: none
+		sourceColumn: NamePlusId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Mandantennummer 
+	column MandantId
+		dataType: int64
+		formatString: 0
+		lineageTag: 12898184-818f-4ec2-9969-957878ea864d
+		summarizeBy: none
+		sourceColumn: MandantId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Lagerorte-7d0db5a1-ab60-450e-851d-ed01927a8560 = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Storage = Quelle{[Schema="PowerBI",Item="vDIM_Storage"]}[Data]
+				in
+				    PowerBI_vDIM_Storage
+
+	annotation PBI_ResultType = Table
+

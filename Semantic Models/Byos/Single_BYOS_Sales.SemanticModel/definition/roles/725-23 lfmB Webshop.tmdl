@@ -1,0 +1,11 @@
+role '725-23 lfmB Webshop'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "725-23"
+
+	tablePermission DIM_Filialen = [FilialeId] == "725-23"
+
+	tablePermission DIM_Mandaten = [Id] == 725
+
+	annotation PBI_Id = 5793d8a355c44fa298321d3247eac7c6
+

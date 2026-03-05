@@ -1,0 +1,11 @@
+role '100-70 APR Celle'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-70"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-70"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = 42f14a28f43647e0a3098e736a8bd40a
+

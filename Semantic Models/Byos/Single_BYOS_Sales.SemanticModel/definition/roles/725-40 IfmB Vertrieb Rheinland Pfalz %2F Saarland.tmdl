@@ -1,0 +1,11 @@
+role '725-40 IfmB Vertrieb Rheinland Pfalz / Saarland'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "725-40"
+
+	tablePermission DIM_Filialen = [FilialeId] == "725-40"
+
+	tablePermission DIM_Mandaten = [Id] == 725
+
+	annotation PBI_Id = fb70c6741f29459a8c54c69cea0db19a
+

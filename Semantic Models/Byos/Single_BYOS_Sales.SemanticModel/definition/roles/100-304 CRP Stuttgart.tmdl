@@ -1,0 +1,11 @@
+role '100-304 CRP Stuttgart'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-304"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-304"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = 9da1d96243534973bba6e389ca82aabb
+

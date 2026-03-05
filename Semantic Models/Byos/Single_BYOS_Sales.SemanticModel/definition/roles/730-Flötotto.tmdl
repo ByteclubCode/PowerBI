@@ -1,0 +1,9 @@
+role 730-Flötotto
+	modelPermission: read
+
+	tablePermission DIM_Mandaten = [Id] == 730
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 730
+
+	annotation PBI_Id = 1da928a64ba147c68d50d828e94a6f5a
+

@@ -1,0 +1,9 @@
+role '720 Gfdb'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 720
+
+	tablePermission DIM_Mandaten = [Id] == 720
+
+	annotation PBI_Id = 6e7c580b1fda4c7d8f738e9f2329d006
+

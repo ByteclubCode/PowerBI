@@ -1,0 +1,9 @@
+role '900 Byteclub HQ'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 900
+
+	tablePermission DIM_Mandaten = [Id] == 900
+
+	annotation PBI_Id = fff7cc7344ba43d9803b6e36369fd2ba
+

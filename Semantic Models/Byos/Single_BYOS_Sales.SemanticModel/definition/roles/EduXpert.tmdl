@@ -1,0 +1,9 @@
+role EduXpert
+	modelPermission: read
+
+	tablePermission DIM_Mandaten = [Id] == 780
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 780
+
+	annotation PBI_Id = 4fcabaa3b11249c9a38b9d1c5992a78f
+

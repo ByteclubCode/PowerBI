@@ -1,0 +1,343 @@
+/// Enthält alle Produkt relevanten Werte
+table DIM_Produkt
+	lineageTag: e5f83b02-193e-4ad1-a734-14dd569d86e1
+
+	/// Name des Produktes
+	column ArtikelName
+		dataType: string
+		lineageTag: 407e79aa-188e-4e75-92c2-6e76bb28e297
+		summarizeBy: none
+		sourceColumn: ArtikelName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Manufacturer Part Number
+	column MPN
+		dataType: string
+		lineageTag: 439099ce-f019-447e-b495-836d3123459e
+		summarizeBy: none
+		sourceColumn: MPN
+
+		annotation SummarizationSetBy = Automatic
+
+	/// EAN, kurz für European Article Number 
+	column EAN
+		dataType: string
+		lineageTag: 184b430f-352f-4cce-a464-47e52f9a2763
+		summarizeBy: none
+		sourceColumn: EAN
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Handelsware oder Sonstiges
+	column Handelsware
+		dataType: string
+		lineageTag: efd241a9-a721-4331-ad03-6469a00e20b0
+		summarizeBy: none
+		sourceColumn: Handelsware
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hersteller des Artikels
+	column Hersteller
+		dataType: string
+		lineageTag: e62a3a02-7c20-4a9a-b361-33fd622dfd95
+		summarizeBy: none
+		sourceColumn: Hersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kategorie 1 des Artikels
+	column Kategorie1
+		dataType: string
+		lineageTag: 4343a629-4cb0-4430-b48c-e5f1ef16c3b4
+		summarizeBy: none
+		sourceColumn: Kategorie1
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kategorie 2 des Artikels
+	column Kategorie2
+		dataType: string
+		lineageTag: b0cdc10f-35b6-4ac6-8ecd-0fbca819d029
+		summarizeBy: none
+		sourceColumn: Kategorie2
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kategorie 3 des Artikels
+	column Kategorie3
+		dataType: string
+		lineageTag: e24a5bc6-bc1c-4c5b-acbf-57438eb61361
+		summarizeBy: none
+		sourceColumn: Kategorie3
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Id des Artikels
+	column Id
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 17bbe496-2d7b-4762-b651-660af0d6820f
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gruppierung nach Apple, Sonstige, andere Hersteller
+	column HerstellerGruppierung
+		dataType: string
+		lineageTag: 7e65e256-e5a6-43ce-b95f-2ce512f35aa6
+		summarizeBy: none
+		sourceColumn: HerstellerGruppierung
+		sortByColumn: GruppierungSortierung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sortierschluessel für Herstellergruppierung
+	column GruppierungSortierung
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5635f4ef-5d9b-4b19-9c2c-d260610b3439
+		summarizeBy: none
+		sourceColumn: GruppierungSortierung
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Artikelnummer
+	column Artikelnummer
+		dataType: string
+		lineageTag: 6126fb5d-2545-44f8-98cf-72683331e511
+		summarizeBy: none
+		sourceColumn: Artikelnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Artikelname und Artikelnummer
+	column ArtikelNamePlusNummer
+		dataType: string
+		lineageTag: f2b71652-d2dd-4377-ab85-6ba0d901aebf
+		summarizeBy: none
+		sourceColumn: ArtikelNamePlusNummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBName
+		dataType: string
+		lineageTag: 885a51b4-7202-4d84-bba3-c44159e02fa0
+		summarizeBy: none
+		sourceColumn: GfdBName
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBKategorie
+		dataType: string
+		lineageTag: 7b40ea4f-d58a-462d-a229-ad0c8bf917ca
+		summarizeBy: none
+		sourceColumn: GfdBKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Configure to Order : Markiert CTO Produkte
+	column CTO
+		dataType: string
+		lineageTag: 5c257348-afa4-497d-a077-d8250fe71e43
+		summarizeBy: none
+		sourceColumn: CTO
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Handelsware Ja/Nein
+	column IstHandelsware
+		dataType: int64
+		formatString: 0
+		lineageTag: 5207c0ac-0feb-4f04-8230-24799ec6c010
+		summarizeBy: none
+		sourceColumn: IstHandelsware
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Line of Business
+	column LOB
+		dataType: string
+		lineageTag: 13dd4182-5059-4032-af09-7065b03edaf8
+		summarizeBy: none
+		sourceColumn: LOB
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sub Line of Business
+	column SubLOB
+		dataType: string
+		lineageTag: 2826bb00-7acb-45ef-b1c5-7fb58aba6862
+		summarizeBy: none
+		sourceColumn: SubLOB
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sortimentkennzeichen ähnlich ABC 
+	column Sortiment
+		dataType: string
+		lineageTag: bfcf8ec8-54d8-4118-a803-f031a4ab6190
+		summarizeBy: none
+		sourceColumn: Sortiment
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sortimentname 
+	column SortimentName
+		dataType: string
+		lineageTag: 561d75ad-074d-42cd-ad04-4d3590ca74bf
+		summarizeBy: none
+		sourceColumn: SortimentName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Converge
+		dataType: string
+		lineageTag: 60d9f0e4-4952-4331-8d74-a807709b33d9
+		summarizeBy: none
+		sourceColumn: Converge
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Spezifische Schutzbriefkategorie
+	column ServiceKategorie
+		dataType: string
+		lineageTag: fbb7d325-9d16-4450-b342-704466df1d87
+		summarizeBy: none
+		sourceColumn: ServiceKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Artikelstatus aus BYOS
+	column ArtikelStatus
+		dataType: string
+		lineageTag: 88390b35-b832-4133-a799-6c279825d897
+		summarizeBy: none
+		sourceColumn: ArtikelStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ersteller des Artikels
+	column Ersteller
+		dataType: string
+		lineageTag: d1f19e1d-d492-42ac-a2f2-5bcc22be581c
+		summarizeBy: none
+		sourceColumn: Ersteller
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Erstelldatum aus BYOS
+	column Erstelldatum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f741f688-a105-49b1-a7ab-d80c1ba90bd8
+		summarizeBy: none
+		sourceColumn: Erstelldatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// UVP in Netto
+	column UVP_Netto
+		dataType: decimal
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 4c1b72cd-082c-456d-8cdd-c08848bd8137
+		summarizeBy: none
+		sourceColumn: UVP_Netto
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+	/// UVP in Brutto
+	column UVP_Brutto
+		dataType: decimal
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: d4122514-2171-40d9-8e04-d43d8eeac64c
+		summarizeBy: none
+		sourceColumn: UVP_Brutto
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+	/// Zolltarifnummer
+	column Zolltarifnummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 5422e0e4-a76f-4231-9f7c-a3b8ede55b4d
+		summarizeBy: none
+		sourceColumn: Zolltarifnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Zugewiesen Schutzbriefkategorie
+	column SchutzbriefKategorie
+		dataType: string
+		lineageTag: 2c228a1b-7fad-4536-b3d3-7ed67b5b9dbc
+		summarizeBy: none
+		sourceColumn: SchutzbriefKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Schutzbrief oder AppleCare
+	column SchutzbriefTyp
+		dataType: string
+		lineageTag: 95e235f8-fb44-46e9-b0e7-2507c139893c
+		summarizeBy: none
+		sourceColumn: SchutzbriefTyp
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Artikel ist Schutzbrief Ja/Nein
+	column IstSchutzbrief
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e797e077-b2d4-4e25-899f-24e88148ddd0
+		summarizeBy: none
+		sourceColumn: IstSchutzbrief
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleReport
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 88e23cd6-7f0e-46a0-97ab-6e7c4d18607a
+		summarizeBy: none
+		sourceColumn: AppleReport
+
+		annotation SummarizationSetBy = Automatic
+
+	column IstAppleCarePlusAbo
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b1212524-14d2-4ea8-ac4e-5ba6ab089616
+		summarizeBy: none
+		sourceColumn: IstAppleCarePlusAbo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Produkt-6d78226a-4d1f-4449-ab17-691645787cdd = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Product = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Product"]}[Data]
+				in
+				    PowerBI_vDIM_Product
+
+	annotation PBI_QueryRelationships = {"columnCount":13,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Number,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{ArtikelName,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{KzABC,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{MPN,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{EAN,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Handelsware,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Hersteller,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie1,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie2,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie3,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{HerstellerGruppierung,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{GruppierungSortierung,12}"],"ColumnCount":13,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Number,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{ArtikelName,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{KzABC,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{MPN,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{EAN,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Handelsware,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Hersteller,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie1,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie2,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{Kategorie3,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{HerstellerGruppierung,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Product.{GruppierungSortierung,12}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

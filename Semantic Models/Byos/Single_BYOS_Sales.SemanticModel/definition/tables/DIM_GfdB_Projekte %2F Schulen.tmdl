@@ -1,0 +1,101 @@
+/// Zusätzliche Informationen zu Projekten und Schulen der GfdB
+/// 
+/// PowerBI vDIM_GfdBDistribution
+/// 
+table 'DIM_GfdB_Projekte / Schulen'
+	lineageTag: 8c93dcd9-ada1-4a5c-a35f-8807354e89ef
+
+	column Schule
+		dataType: string
+		lineageTag: c5e58b50-7a98-4d97-8f82-1c96999f27f4
+		summarizeBy: none
+		sourceColumn: Schule
+
+		annotation SummarizationSetBy = Automatic
+
+	column Schulart
+		dataType: string
+		lineageTag: 4291e996-42c6-408d-9333-7e6ed177da81
+		summarizeBy: none
+		sourceColumn: Schulart
+
+		annotation SummarizationSetBy = Automatic
+
+	column Land
+		dataType: string
+		lineageTag: 817313b1-2351-4c97-8c94-4661cf416602
+		summarizeBy: none
+		sourceColumn: Land
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bundesland
+		dataType: string
+		lineageTag: 671e4704-9943-4008-8e53-46db48a99341
+		summarizeBy: none
+		sourceColumn: Bundesland
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kreis
+		dataType: string
+		lineageTag: abe9863d-2d55-4daf-9885-774fda0a9db6
+		summarizeBy: none
+		sourceColumn: Kreis
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stadt
+		dataType: string
+		lineageTag: 07180199-0e0f-4698-9aaa-73581424b757
+		summarizeBy: none
+		sourceColumn: Stadt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Postleitzahl
+		dataType: string
+		lineageTag: 7d0b1162-9194-40a6-bdaa-9665fc05221a
+		summarizeBy: none
+		sourceColumn: Postleitzahl
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProjektName
+		dataType: string
+		lineageTag: 33e6b0f6-5049-48d4-8517-a2df71e825e9
+		summarizeBy: none
+		sourceColumn: ProjektName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Number
+		dataType: string
+		isHidden
+		lineageTag: 6ba46256-9b77-419a-92e4-2575bdadf97e
+		summarizeBy: none
+		sourceColumn: Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vertriebsregion
+		dataType: string
+		lineageTag: d662129f-27dc-4da1-a708-c0696d4822d9
+		summarizeBy: none
+		sourceColumn: Vertriebsregion
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_GfdB_Projekte / Schulen-0c1af434-8ba5-4fcd-a8ad-9fe51214d018' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_GfdBDistribution = Quelle{[Schema="PowerBI",Item="vDIM_GfdBDistribution"]}[Data]
+				in
+				    PowerBI_vDIM_GfdBDistribution
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,83 @@
+/// Enthält den Bestandswert zum Stichtag
+/// 
+table 'FACT_Bestandswert Stichtag'
+	lineageTag: b368f069-599c-421a-bd4b-df1345ef52e9
+
+	/// Datum der Erfassung
+	column Datum
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: e48286a7-da90-4202-ad45-ce13608a52fb
+		summarizeBy: none
+		sourceColumn: Datum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Die Id des Lagers 
+	column LagerId
+		dataType: int64
+		formatString: 0
+		lineageTag: 60598857-e9e6-444f-b4fe-8dc1becf1a47
+		summarizeBy: none
+		sourceColumn: LagerId
+
+		annotation SummarizationSetBy = User
+
+	/// Der Name des Lagers
+	column LagerName
+		dataType: string
+		lineageTag: 56d13927-23a6-4796-bcd2-c21ca5d40d13
+		summarizeBy: none
+		sourceColumn: LagerName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Lagerwert
+	column Lagerwert
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 29339982-ae65-4442-8627-e7b3902f728e
+		summarizeBy: sum
+		sourceColumn: Lagerwert
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Id des Datensatzes
+	column Id
+		dataType: string
+		isHidden
+		lineageTag: d8eb5b5a-a524-4a13-961a-d3de16cc3638
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FilialId 
+	column FilialId
+		dataType: string
+		lineageTag: 152a349f-e81d-4d9d-b463-fcfd6bcc6927
+		summarizeBy: none
+		sourceColumn: FilialId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT_Bestandswert Stichtag-0893e1dc-8a42-4805-850c-26d9235621ee' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_HistoryStock = Quelle{[Schema="PowerBI",Item="vFACT_HistoryStock"]}[Data]
+				in
+				    PowerBI_vFACT_HistoryStock
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,11 @@
+role '150-10 CPN'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "150-10" || [Intercompany] == true()
+
+	tablePermission DIM_Filialen = [FilialeId] == "150-10"
+
+	tablePermission DIM_Mandaten = [Id] == 150
+
+	annotation PBI_Id = b4a75d60c68a466397c89a905c008e50
+

@@ -1,0 +1,11 @@
+role '100-220 Einkauf'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-220"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-220"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = 86ab3c2f54074e8fb8906de87e9fa40f
+

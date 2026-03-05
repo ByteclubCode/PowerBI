@@ -1,0 +1,410 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 75.641025641025635
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 346.05897435897447
+          },
+          "nodeIndex": "KPIs",
+          "nodeLineageTag": "e656182f-6618-4ab2-a673-04c1cda07ea0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1651.2,
+            "y": 110.8
+          },
+          "nodeIndex": "DIM_Adressen aus Umsatz",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 1430.7,
+            "y": 1317
+          },
+          "nodeIndex": "DIM_Datum Lieferung",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 1441.6,
+            "y": 588.4
+          },
+          "nodeIndex": "DIM_Datum Umsatz",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 27
+        },
+        {
+          "location": {
+            "x": 1083,
+            "y": 1257.3
+          },
+          "nodeIndex": "DIM_Filialen",
+          "size": {
+            "height": 256,
+            "width": 234
+          },
+          "zIndex": 24
+        },
+        {
+          "location": {
+            "x": 411.6,
+            "y": 1131.5
+          },
+          "nodeIndex": "DIM_GfdB_Projekte / Schulen",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1812.5144579770044,
+            "y": 517.67190077619068
+          },
+          "nodeIndex": "DIM_Kostenstellen",
+          "nodeLineageTag": "c6d7bd3f-d742-4421-bc0e-87f2775ef3ff",
+          "size": {
+            "height": 160,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 925.6,
+            "y": 318.1
+          },
+          "nodeIndex": "DIM_Kunde",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 20
+        },
+        {
+          "location": {
+            "x": 2201.2,
+            "y": 1043.1
+          },
+          "nodeIndex": "DIM_KundengruppeAusPosition",
+          "size": {
+            "height": 160,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 890.1,
+            "y": 737.6
+          },
+          "nodeIndex": "DIM_Lagerorte",
+          "size": {
+            "height": 208,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1461.5544740973312,
+            "y": 1054.7672946101516
+          },
+          "nodeIndex": "DIM_Mandaten",
+          "nodeLineageTag": "0f79639f-68ab-4981-9fee-8d4da3bb07c8",
+          "size": {
+            "height": 219.18367346938771,
+            "width": 235.0204081632653
+          },
+          "zIndex": 23
+        },
+        {
+          "location": {
+            "x": 2201.2,
+            "y": 466.2
+          },
+          "nodeIndex": "DIM_Produkt",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 22
+        },
+        {
+          "location": {
+            "x": 1308.5,
+            "y": 1690.9
+          },
+          "nodeIndex": "DIM_Stunde",
+          "size": {
+            "height": 136,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 616.37777777777785,
+            "y": 566
+          },
+          "nodeIndex": "DIM_Zahlarten",
+          "nodeLineageTag": "e27a57a4-a3c1-4505-a7f0-58993a73a288",
+          "size": {
+            "height": 136,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 762.51111111111106,
+            "y": 1331.6666666666667
+          },
+          "nodeIndex": "FACT_Bestandswert Stichtag",
+          "nodeLineageTag": "b368f069-599c-421a-bd4b-df1345ef52e9",
+          "size": {
+            "height": 232,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 2162.9780982103216,
+            "y": 854.25991731349222
+          },
+          "nodeIndex": "FACT_Seriennummern",
+          "nodeLineageTag": "689da805-6d10-4e5f-9b72-78d0404685ee",
+          "size": {
+            "height": 136,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1157.5,
+            "y": 849.5
+          },
+          "nodeIndex": "FACT_Umsatz Belege",
+          "nodeLineageTag": "31c7a857-e8c0-426d-8f67-08e3cccbbe08",
+          "size": {
+            "height": 300,
+            "width": 240.66666666666652
+          },
+          "zIndex": 29
+        },
+        {
+          "location": {
+            "x": 1789.6,
+            "y": 787
+          },
+          "nodeIndex": "FACT_Umsatz Produkt",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 30
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "HLP_Vergleichszeitraum",
+          "nodeLineageTag": "f69a22b1-379c-452b-b762-3881b3e1cc26",
+          "size": {
+            "height": 145.78440607012033,
+            "width": 234
+          },
+          "zIndex": 21
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 162.53270538984825
+          },
+          "nodeIndex": "HLP_JahrZuJahrVergleich",
+          "nodeLineageTag": "346bd469-2fb0-4997-a72f-ef7708cdec33",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 764.18900408162972,
+            "y": 1104.5140520408174
+          },
+          "nodeIndex": "DIM_Belegarten",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 446.2586721831799,
+            "y": 781.68345926304983
+          },
+          "nodeIndex": "FACT_GfdB_IUDaten",
+          "size": {
+            "height": 212.23181808968297,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1921.796297349932,
+            "y": 115.64628012063858
+          },
+          "nodeIndex": "DIM_Leasing Kunden",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 2472.7512514459818,
+            "y": 467.03305433334805
+          },
+          "nodeIndex": "DIM_Produkt Varianten",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 535.27777777777783,
+            "y": 75.227777777777874
+          },
+          "nodeIndex": "DIM_Mitarbeiter",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 263.33333333333331,
+            "y": 416.11666666666662
+          },
+          "nodeIndex": "TARGET_Filialen",
+          "nodeLineageTag": "ab7fc8c8-6737-42f9-8058-53e84fe18b77",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 1830.8333333333339,
+            "y": 1256.1166666666668
+          },
+          "nodeIndex": "FACT_Kundenzähler ",
+          "nodeLineageTag": "71f30b3f-842d-479a-851f-86f339f5d98c",
+          "size": {
+            "height": 405.77777777777783,
+            "width": 234
+          },
+          "zIndex": 25
+        },
+        {
+          "location": {
+            "x": 2160.1846153846154,
+            "y": 1269.8602564102564
+          },
+          "nodeIndex": "FACT_AppleCareAbo",
+          "nodeLineageTag": "2cdf3a9a-83d8-48e0-83a0-1979e7609e6e",
+          "size": {
+            "height": 458.97435897435889,
+            "width": 234
+          },
+          "zIndex": 26
+        },
+        {
+          "location": {
+            "x": 1347.3641025641023,
+            "y": 289.19358974358983
+          },
+          "nodeIndex": "FACT_Budget ",
+          "nodeLineageTag": "961cfbab-d759-4f98-a2f4-b22595220962",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1338.802533497264,
+            "y": 60.885897435897505
+          },
+          "nodeIndex": "DIM_Leasinggeber",
+          "nodeLineageTag": "df554cdc-54d9-46dc-9b8d-995e7d2d230b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 28
+        }
+      ],
+      "name": "Alle Tabellen",
+      "zoomValue": 78,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [],
+      "name": "Kundendetails",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Alle Tabellen",
+  "defaultDiagram": "Alle Tabellen"
+}

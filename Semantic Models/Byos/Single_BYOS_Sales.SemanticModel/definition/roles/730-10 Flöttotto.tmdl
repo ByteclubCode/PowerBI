@@ -1,0 +1,9 @@
+role '730-10 Flöttotto'
+	modelPermission: read
+
+	tablePermission DIM_Filialen = [FilialeId] == "730-10"
+
+	tablePermission DIM_Mandaten = [Id] == 730
+
+	annotation PBI_Id = 239ea8fd0a9447c094b19fd25727a164
+

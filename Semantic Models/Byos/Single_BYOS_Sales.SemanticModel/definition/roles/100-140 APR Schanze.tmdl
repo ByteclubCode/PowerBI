@@ -1,0 +1,11 @@
+role '100-140 APR Schanze'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-140"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-140"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = 8c007495016b459294cd3cf777c0ae8b
+

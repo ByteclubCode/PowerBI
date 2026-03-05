@@ -1,0 +1,11 @@
+role '100-120 APR Neuss'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-120"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-120"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = 691a905041834add9e9ea86802e36d7c
+

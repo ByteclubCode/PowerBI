@@ -1,0 +1,375 @@
+table DIM_Leasinggeber
+	lineageTag: df554cdc-54d9-46dc-9b8d-995e7d2d230b
+
+	column KundenId
+		formatString: 0
+		lineageTag: 2b4b01c7-b560-4092-82ab-bddd40745268
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[KundenId]
+
+		annotation SummarizationSetBy = User
+
+	column Anrede
+		lineageTag: 587b1102-017a-4648-b7b3-e6ef643d708c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Anrede]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Land
+		lineageTag: 80a0bf16-c47d-425d-bf6b-462876ff7e4f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Land]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLZ
+		lineageTag: 25c8ee6d-4ad3-469f-8d99-9240b5ce23ef
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[PLZ]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		lineageTag: d14d1714-40b9-4741-8a93-5512441309d7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nachname
+		lineageTag: 256678ba-3b2b-4f6d-8dcf-0fe3f9bd2157
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Nachname]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Straße
+		lineageTag: 01d6870f-6855-4de1-9a1e-33179f98de91
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Straße]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rechtform
+		lineageTag: c247d8c4-5ef5-45bd-85f3-b6a5084c2abf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Rechtform]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Schulform
+		lineageTag: e1adaf0d-1623-460e-841e-3ce5ed9193a6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Schulform]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Funktion
+		lineageTag: 741802b4-dc91-4617-b5ba-7622abf4f01f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Funktion]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnzeigeName
+		lineageTag: afbf8394-f48d-4b4f-9234-97d798938375
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[AnzeigeName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branche
+		lineageTag: aa9ffcf0-0877-445a-a015-e789c998faba
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Branche]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bearbeiter
+		lineageTag: cd2cce9b-7faa-4bdb-bb76-919fa3c5da7a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Bearbeiter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kreditlimit
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 1acd3837-295e-471a-afde-a5d9a50ff772
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Kreditlimit]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column Preisgruppe
+		lineageTag: 3abfd1fe-3b95-47ec-a518-0894d3cbb69b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Preisgruppe]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dachnummer
+		lineageTag: 5aaafba8-4a77-46a4-8775-e466666b010f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Dachnummer]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IntercompanyMerkmal
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c05b8f8d-bcb3-49cf-92c5-ddc6cbc9e1eb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[IntercompanyMerkmal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zahlbedingung
+		lineageTag: b8a338c7-e94b-4579-b9ae-74e3e03dcc77
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Zahlbedingung]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lieferbedingung
+		lineageTag: ed8cb4e5-a048-43d6-b5a8-e7133b78c57c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Lieferbedingung]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Laenderkuerzel
+		lineageTag: 39588505-c2aa-40a6-b783-11e1c9e4f910
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Laenderkuerzel]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vertriebskanal
+		lineageTag: b3eee751-2f69-40cf-9d1e-17703db9f22f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Vertriebskanal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column RechtsformGruppe
+		lineageTag: 1b56f1ab-e8f1-44ac-8cf3-089ccf7845bc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[RechtsformGruppe]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBVertriebsbereich
+		lineageTag: 7d3661be-6cff-4b7e-9034-d0e3f9b65ef0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[GfdBVertriebsbereich]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleSegment
+		lineageTag: 35182b0c-5d6d-4c42-a36b-87ec67d1cca8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[AppleSegment]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kundengruppe
+		lineageTag: 5cd049cc-f67c-49d4-8140-096c4f770247
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Kundengruppe]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kundenberater
+		lineageTag: 94473651-77bc-4871-9ba2-b48b7fe0ee3a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Kundenberater]
+
+		annotation SummarizationSetBy = Automatic
+
+	column KundenNamePlusNummer
+		lineageTag: 5481b1c0-8c7c-4303-af0d-a08a31aadc26
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[KundenNamePlusNummer]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude
+		lineageTag: f7f01ffe-1bfe-47cb-8c30-4579431f6ad9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Latitude]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitude
+		lineageTag: 9f93df2c-1859-4ade-9bd2-0335c31186fb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Longitude]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Erstelldatum
+		formatString: General Date
+		lineageTag: 2dd79768-e699-40e7-891d-1d0594983d06
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Erstelldatum]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kundenvertriebsweg
+		lineageTag: 69737e7c-e2e9-4518-862f-d1d357541a20
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Kundenvertriebsweg]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ursprung
+		lineageTag: 6957232d-cd6a-4675-bc24-d23310bf633d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Ursprung]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnzahlRechnungen
+		formatString: 0
+		lineageTag: fc1f7a9f-be57-4768-832d-99efe5b8c2fd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[AnzahlRechnungen]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Klassifizierung
+		lineageTag: 89e1aef6-c70c-40c8-8fa0-f310d2203318
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Klassifizierung]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLZ3Stellen
+		lineageTag: 68811e36-4724-4585-915e-eee368cbe380
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[PLZ3Stellen]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bundesland
+		lineageTag: 92c9c36d-68c0-44ec-b0e3-14aab59ac109
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Bundesland]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kreis
+		lineageTag: 19d6b7d4-6ab8-46aa-addb-6b52663360ca
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Kreis]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Typ
+		lineageTag: 7bee1b59-d0e9-432c-b4a1-c208490ad8cb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[Typ]
+
+		annotation SummarizationSetBy = Automatic
+
+	column marker
+		lineageTag: 2f3812b7-ff58-42ea-b78b-9876c54ae503
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[marker]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EDUKategorie
+		lineageTag: f545cf9f-7287-4ef9-8e37-dbfa612b1440
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[EDUKategorie]
+
+		annotation SummarizationSetBy = Automatic
+
+	column UStId
+		lineageTag: 3793114e-fa93-4032-a957-066be2a63bc6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[UStId]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ErsterVerkauf
+		formatString: General Date
+		lineageTag: 154901c3-fae9-4489-8161-4478c745f8ba
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[ErsterVerkauf]
+
+		annotation SummarizationSetBy = Automatic
+
+	column LetzerVerkauf
+		formatString: General Date
+		lineageTag: 194f3b95-1480-4b11-8977-9b26377beca8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[LetzerVerkauf]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnzahlGutschriften
+		formatString: 0
+		lineageTag: 231c5b98-ef92-4aa1-9811-dd6726e05eed
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Kunde[AnzahlGutschriften]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Leasinggeber = calculated
+		mode: import
+		source = DIM_Kunde
+
+	annotation PBI_Id = bd7e1df8b9fd4aeaa2f23c3af862c73b
+

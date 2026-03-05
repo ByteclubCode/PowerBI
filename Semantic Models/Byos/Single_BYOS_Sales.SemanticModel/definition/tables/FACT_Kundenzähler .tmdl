@@ -1,0 +1,160 @@
+/// Enthält Daten der Kameras innerhalb der Stores. Es werden die Eingetroffenen und die Kunden die das Geschäft verlassen gezählt. 
+table 'FACT_Kundenzähler '
+	lineageTag: 71f30b3f-842d-479a-851f-86f339f5d98c
+
+	/// Verhältnis aus Rechnungen und Besucher
+	measure 'Conversion Rate Kunden' = DIVIDE([Anzahl Rechnungen],[Eingetroffen Öffnungszeiten],0)
+		formatString: #,0.00\ %;-#,0.00\ %;#,0.00\ %
+		lineageTag: 6e1f9fab-67df-4eb7-8e0e-186304019bd3
+
+	/// Besucher zu Öffnungszeiten der Stores zwischen 08:00:00 und 20:00:00
+	measure 'Eingetroffen Öffungszeiten VJ' = ```
+			
+			    CALCULATE([Eingetroffen Öffnungszeiten],
+			    DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR)
+			    )
+			```
+		formatString: #,0
+		lineageTag: bf2ca4f5-56fc-443b-a489-cf6a51478097
+
+	/// Verhältnis aus Rechnungen VJ und Kunden VJ 
+	measure 'Conversion Rate Kunden VJ' = DIVIDE([Anzahl Rechnungen VJ],[Eingetroffen Öffungszeiten VJ], 0)
+		lineageTag: 85c4ce91-7f35-4721-a5a4-67ef6ebf4459
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Besucher zu Store Öffnungszeiten 08:00:00 und 20:00:00
+	measure 'Eingetroffen Öffnungszeiten' = ```
+			
+			    CALCULATE( SUM('FACT_Kundenzähler '[Eingetroffen]), 
+			            FILTER('FACT_Kundenzähler ', 'FACT_Kundenzähler '[Uhrzeit] >= TIMEVALUE("07:59:00") && 'FACT_Kundenzähler '[Uhrzeit] <= TIMEVALUE("20:01:00")
+			        )
+			    )
+			```
+		formatString: #,0
+		lineageTag: c7d9a2da-08cd-4700-8f90-2cfdd97cd0dd
+
+	/// Besucher die den Store Verlassen zwischen 08:00:00 und 20:00:00
+	measure 'Verlassen Öffnungszeiten' = ```
+			
+			    CALCULATE( SUM('FACT_Kundenzähler '[Verlassen]), 
+			            FILTER('FACT_Kundenzähler ', 'FACT_Kundenzähler '[Uhrzeit] >= TIMEVALUE("07:59:00") && 'FACT_Kundenzähler '[Uhrzeit] <= TIMEVALUE("20:01:00")
+			        )
+			    )
+			```
+		formatString: #,0
+		lineageTag: 10adc24e-8bb1-4631-87ee-3f2423f4adc7
+
+	/// Besucher die den Store Verlassen zwischen 08:00:00 und 20:00:00 aus dem VJ
+	measure 'Verlassen Öffnungszeiten VJ' = ```
+			
+			    CALCULATE([Verlassen Öffnungszeiten],
+			    DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR)
+			    )
+			```
+		formatString: 0
+		lineageTag: dbd7b64a-cc10-41ea-ae12-3079fda1fece
+
+	/// Kombination aus FilialeId und Datum als Zahl, dient der Verknüpfung zu den Umsatzdaten
+	column BrancheDateId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3f695c06-cf42-4ab1-82dd-3e5d6aba5c25
+		summarizeBy: none
+		sourceColumn: BrancheDateId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Anzahl der Eingetroffen Kunden
+	column Eingetroffen
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 11af80a3-6a49-476e-96a3-106f17e1c10a
+		summarizeBy: sum
+		sourceColumn: Eingetroffen
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Anzahl der Kunden die den Laden verlassen haben
+	column Verlassen
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 5042b5c3-a819-4dd5-8975-9a008bcd33d4
+		summarizeBy: sum
+		sourceColumn: Verlassen
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Mac Adresse der Kamera
+	column Kamera
+		dataType: string
+		lineageTag: 9601507a-fdf6-4d27-8ceb-bba48341a75d
+		summarizeBy: none
+		sourceColumn: Kamera
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Das Datum der Erfassung
+	column Datum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 9751317e-4abe-4bc3-9855-610345175478
+		summarizeBy: none
+		sourceColumn: Datum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Die Uhrzeit der Erfassung
+	column Uhrzeit
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 71686b19-5c0e-4410-a122-a304df29dfdd
+		summarizeBy: none
+		sourceColumn: Uhrzeit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	/// Erfassungsjahr der Daten
+	column Jahr
+		dataType: int64
+		formatString: 0
+		lineageTag: c09ec01e-afab-42e7-ac3a-a77d71d3272c
+		summarizeBy: none
+		sourceColumn: Jahr
+
+		annotation SummarizationSetBy = User
+
+	/// Erfassungsmonat der Daten
+	column Monat
+		dataType: int64
+		formatString: 0
+		lineageTag: c2941d92-d2fb-4f7a-b461-db2305ff0241
+		summarizeBy: none
+		sourceColumn: Monat
+
+		annotation SummarizationSetBy = User
+
+	partition 'FACT_Kundenzähler ' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_PeopleCount_Branche = Quelle{[Schema="PowerBI",Item="vFACT_PeopleCount_Branche"]}[Data]
+				in
+				    PowerBI_vFACT_PeopleCount_Branche
+
+	annotation PBI_ResultType = Table
+

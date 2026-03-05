@@ -1,0 +1,7 @@
+role Felix
+	modelPermission: read
+
+	tablePermission DIM_Mandaten = [Firmenverbund] == "Felix"
+
+	annotation PBI_Id = e5206662d6b24dd0a4b86bc3f9eaf7c8
+

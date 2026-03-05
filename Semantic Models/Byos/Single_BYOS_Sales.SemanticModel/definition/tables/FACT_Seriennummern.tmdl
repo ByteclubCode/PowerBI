@@ -1,0 +1,65 @@
+/// Enthält die Produkt Seriennummer der Belege
+table FACT_Seriennummern
+	lineageTag: 689da805-6d10-4e5f-9b72-78d0404685ee
+
+	/// Die Id der Position
+	column PosId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2113dc89-70b3-46fa-83ac-f4ce5134a928
+		summarizeBy: none
+		sourceColumn: PosId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Seriennummer
+	column Seriennummer
+		dataType: string
+		lineageTag: 08388d68-2e4f-4e28-ba39-f223d12099f2
+		summarizeBy: none
+		sourceColumn: Seriennummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wenn ein Lieferant ermittelt werden kann, dann steht hier die Ursprungsbestellnummer
+	column Lieferantenbestellnummer
+		dataType: string
+		lineageTag: a1f21d45-3a4a-459b-ac9c-6ee77a20211e
+		summarizeBy: none
+		sourceColumn: Lieferantenbestellnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wenn ein Lieferant ermittelt werden, dann wird hier der Name ausgeben. 
+	column LieferantenName
+		dataType: string
+		lineageTag: a7388a95-93d7-434b-9e3d-da2df0a651ce
+		summarizeBy: none
+		sourceColumn: LieferantenName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wenn ein Lieferant ermittelt werden kann, dann wird hier die Lieferantennummer ausgeben
+	column LieferantenNummer
+		dataType: int64
+		formatString: 0
+		lineageTag: f9056390-4d31-4395-aaf1-ad742386e306
+		summarizeBy: none
+		sourceColumn: LieferantenNummer
+
+		annotation SummarizationSetBy = User
+
+	partition FACT_Seriennummern-bc427773-3252-4f5c-a4b8-61b94efe94bb = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_SeriesNumbers = Quelle{[Schema="PowerBI",Item="vFACT_SerialNumbers"]}[Data]
+				in
+				    PowerBI_vFACT_SeriesNumbers
+
+	annotation PBI_ResultType = Table
+

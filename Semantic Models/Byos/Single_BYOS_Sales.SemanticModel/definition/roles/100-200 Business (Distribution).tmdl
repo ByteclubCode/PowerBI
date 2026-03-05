@@ -1,0 +1,11 @@
+role '100-200 Business (Distribution)'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-200"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-200"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = 80fb4b805aa540bf946619dd1913b6b6
+

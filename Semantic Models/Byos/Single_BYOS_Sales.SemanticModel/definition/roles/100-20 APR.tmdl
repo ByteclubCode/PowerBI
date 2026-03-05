@@ -1,0 +1,11 @@
+role '100-20 APR'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-20"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-20"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = d523c5f6923a4e0ba51c0a1bff4f1ad6
+

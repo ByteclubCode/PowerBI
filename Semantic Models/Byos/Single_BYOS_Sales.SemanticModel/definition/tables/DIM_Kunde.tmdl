@@ -1,0 +1,493 @@
+/// Enthält die Kunden
+table DIM_Kunde
+	lineageTag: 918d1dfd-24a2-4ccd-ab73-4b328f15ee76
+
+	/// Die Id des Kontos
+	column KundenId
+		dataType: int64
+		isKey
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 26257edd-9e3d-4bef-82ed-a1f7ec7a2491
+		summarizeBy: none
+		sourceColumn: KundenId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Anrede des Kunden
+	column Anrede
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 453cf89e-8980-4bfe-b626-41239a6c44f2
+		summarizeBy: none
+		sourceColumn: Anrede
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Land des Kunden
+	column Land
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 3384d02d-1c6f-4126-954a-9d5e2cfffa2f
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Land
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Postleitzahl des Kunden
+	column PLZ
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: ea21ca11-1612-4188-8295-d4aa5340aba5
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: PLZ
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Kunden
+	column Name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(150)
+		lineageTag: fd62ba1a-7d5c-4ce4-a6ad-6da7f0d9d4d6
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Nachname des Kunden
+	column Nachname
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(150)
+		lineageTag: babb6e48-331c-4929-9fe5-9f98a7a9a05f
+		summarizeBy: none
+		sourceColumn: Nachname
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Straße der Adresse
+	column Straße
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(150)
+		lineageTag: 84ac3afc-e52b-4bea-9966-5a752286c1fe
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: Straße
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Rechtsform des Kunden
+	column Rechtform
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 7b722524-b265-411a-a899-264482b38c3a
+		summarizeBy: none
+		sourceColumn: Rechtform
+
+		annotation SummarizationSetBy = Automatic
+
+	column Schulform
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 87768b25-afb4-4eaa-8e12-201b77ddb87c
+		summarizeBy: none
+		sourceColumn: Schulform
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Funktion des Kunden innerhalb seines Unternehmens 
+	column Funktion
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 1843d0ea-384c-4ad4-93f0-f85034c7dcd3
+		summarizeBy: none
+		sourceColumn: Funktion
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Kunden
+	column AnzeigeName
+		dataType: string
+		sourceProviderType: nvarchar(301)
+		lineageTag: 729f59c9-2139-4427-bb22-f04172637efd
+		summarizeBy: none
+		sourceColumn: AnzeigeName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Branche des Kunden
+	column Branche
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 91d5c413-be81-4391-a580-c498dc239172
+		summarizeBy: none
+		sourceColumn: Branche
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Sachbearbeiter aus dem Kundenkonto
+	column Bearbeiter
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(150)
+		lineageTag: fab1ca45-6fac-4bae-ba57-03665d75b559
+		summarizeBy: none
+		sourceColumn: Bearbeiter
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Das Kreditlimit des Kunden
+	column Kreditlimit
+		dataType: decimal
+		isNullable: false
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		sourceProviderType: money
+		lineageTag: f149ac72-c929-48bc-9d17-ddb06048cee7
+		summarizeBy: none
+		sourceColumn: Kreditlimit
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Die Preisgruppe des Kunden
+	column Preisgruppe
+		dataType: string
+		isNullable: false
+		lineageTag: 6bdb9366-c83a-49d3-8f2b-0c019b9139dd
+		summarizeBy: none
+		sourceColumn: Preisgruppe
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Marker aus der Abteilung B2B
+	column Dachnummer
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 3828b8a4-19e5-46de-a47c-8d011778f8bd
+		summarizeBy: none
+		sourceColumn: Dachnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Konto ist Intercompany Ja/Nein
+	column IntercompanyMerkmal
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: b344372f-2f95-459a-a1b9-b37c298c7b0d
+		summarizeBy: none
+		sourceColumn: IntercompanyMerkmal
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Standardzahlart aus den Konto
+	column Zahlbedingung
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(150)
+		lineageTag: 4762784d-b849-4dfa-814f-7b77897506fb
+		summarizeBy: none
+		sourceColumn: Zahlbedingung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Standardlieferart 
+	column Lieferbedingung
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(150)
+		lineageTag: 0d942902-3c07-4cd5-a310-d30099976a76
+		summarizeBy: none
+		sourceColumn: Lieferbedingung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Laenderkuerzel 
+	column Laenderkuerzel
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 6982aa0c-a7b4-4f84-abbb-1b9a44535615
+		summarizeBy: none
+		sourceColumn: Laenderkuerzel
+
+		annotation SummarizationSetBy = Automatic
+
+	/// K/A
+	column Vertriebskanal
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 442a6d0b-52b5-42bd-99a3-b54213482b9b
+		summarizeBy: none
+		sourceColumn: Vertriebskanal
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gruppierung nach B2B, B2C oder (leer)
+	column RechtsformGruppe
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(3)
+		lineageTag: d1a3c585-3acb-4244-a5b6-d91c516e7fa1
+		summarizeBy: none
+		sourceColumn: RechtsformGruppe
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBVertriebsbereich
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 5694bc87-6ca6-4077-b5f7-cdd317cf935b
+		summarizeBy: none
+		sourceColumn: GfdBVertriebsbereich
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kundensegmentierung nach Apple
+	column AppleSegment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: 098f1f68-8431-4da8-ab0d-d4cfdcbdc9fa
+		summarizeBy: none
+		sourceColumn: AppleSegment
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wie EDUKategorie
+	column Kundengruppe
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(515)
+		lineageTag: b2d48f6f-3fae-4598-a56d-1097325ba7be
+		summarizeBy: none
+		sourceColumn: Kundengruppe
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kundenberater aus den Konto
+	column Kundenberater
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(50)
+		lineageTag: b80a9037-6899-417d-837e-a5d5b022b815
+		summarizeBy: none
+		sourceColumn: Kundenberater
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kundenname plus Id im Format (id) Name
+	column KundenNamePlusNummer
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(316)
+		lineageTag: 7db5192f-1eba-44ab-aea9-67f99d9e755a
+		summarizeBy: none
+		sourceColumn: KundenNamePlusNummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Längengrade der Adresse
+	column Latitude
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 7)
+		lineageTag: 4cc9d1af-7d4d-47df-80a4-1b4806de359b
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: Latitude
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Breitengrad der Adresse
+	column Longitude
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 7)
+		lineageTag: cd778ac8-6158-468d-bb4b-063f575e9178
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: Longitude
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Datum der Kontoerstellung
+	column Erstelldatum
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 88e7a4cd-1ba7-4795-809a-a13a7e5ab7af
+		summarizeBy: none
+		sourceColumn: Erstelldatum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Vertriebsweg, Online oder Offline
+	column Kundenvertriebsweg
+		dataType: string
+		lineageTag: 562049e7-22e1-4603-bedb-39fa0cf02850
+		summarizeBy: none
+		sourceColumn: Kundenvertriebsweg
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ursprung des Kunden. Online oder Offline
+	column Ursprung
+		dataType: string
+		lineageTag: 1506e402-3e67-4cf8-9c64-3062651b7e39
+		summarizeBy: none
+		sourceColumn: Ursprung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Anzahl der Rechnungen aus den Kundenkonto
+	column AnzahlRechnungen
+		dataType: int64
+		formatString: 0
+		lineageTag: 447845f8-a5a5-458c-b539-8418a4ac85f8
+		summarizeBy: none
+		sourceColumn: AnzahlRechnungen
+
+		annotation SummarizationSetBy = User
+
+	/// Beschreibt den Ursprung des Kunden. Mögliche Werte sind: 
+	/// Keine Klassifizierung : Keine Umsätze 
+	/// Sales : Nur Käufe 
+	/// Repair : Nur Reparaturen
+	/// Sales zu Repair : Erst Kauf, dann Reparatur 
+	/// Repair zu Sales : Erst Reparatur, dann Kauf
+	column Klassifizierung
+		dataType: string
+		lineageTag: e733aa90-e1ba-4d19-8345-a958a18b5459
+		summarizeBy: none
+		sourceColumn: Klassifizierung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die ersten 3 Stellen der Postleitzahl
+	column PLZ3Stellen
+		dataType: string
+		lineageTag: 1a56206d-71d5-47c8-b845-4a1d03b014b1
+		summarizeBy: none
+		sourceColumn: PLZ3Stellen
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Bundesland des Kunden
+	column Bundesland
+		dataType: string
+		lineageTag: a15c730e-82f7-4c86-b02c-b32c38637ba8
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Bundesland
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wie Landkreis
+	column Kreis
+		dataType: string
+		lineageTag: ebfe1229-eaee-4ae1-bb98-566d98d5ae33
+		dataCategory: County
+		summarizeBy: none
+		sourceColumn: Kreis
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Bezieht sich auf Kreis und gibt an ob Stadt oder Kreis. 
+	column Typ
+		dataType: string
+		lineageTag: 21490fc0-279b-4363-975c-7867952793d6
+		summarizeBy: none
+		sourceColumn: Typ
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hat einen MKT Marker
+	column marker
+		dataType: string
+		lineageTag: f48db89c-f6f9-41ee-af7f-be64196e8801
+		summarizeBy: none
+		sourceColumn: marker
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Educationkategorie nach Apple
+	column EDUKategorie
+		dataType: string
+		lineageTag: 5182fcef-14e1-4251-868e-b80bf7439014
+		summarizeBy: none
+		sourceColumn: EDUKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die UmsatzsteuerId des Kunden
+	column UStId
+		dataType: string
+		lineageTag: 6bb2b176-3ee1-4df8-bc4e-746861abc008
+		summarizeBy: none
+		sourceColumn: UStId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum des ersten Umsatzes
+	column ErsterVerkauf
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b6341d77-9f8d-4f04-8d15-acae36b19f5d
+		summarizeBy: none
+		sourceColumn: ErsterVerkauf
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum des Letzten Kaufes
+	column LetzerVerkauf
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f3cd0f0f-f10b-42b3-9c74-7b1c140af358
+		summarizeBy: none
+		sourceColumn: LetzerVerkauf
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Anzahl der Gutschriften aus dem Kundenkonto
+	column AnzahlGutschriften
+		dataType: int64
+		formatString: 0
+		lineageTag: 36d1e870-98fe-44f5-98da-08dd5aaf0a05
+		summarizeBy: none
+		sourceColumn: AnzahlGutschriften
+
+		annotation SummarizationSetBy = User
+
+	partition DIM_Kunde-06ff9bc2-7ad9-43d3-87c3-477d189d5653 = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Customer = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Customer"]}[Data]
+				in
+				    PowerBI_vDIM_Customer
+
+	annotation PBI_QueryRelationships = {"columnCount":21,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{KundenId,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Anrede,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Land,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Iso2,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{PLZ,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Name,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Nachname,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Straße,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Rechtform,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Schulform,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Funktion,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{AnzeigeName,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Herkunft,12}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Branche,13}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Bearbeiter,14}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Kreditlimit,15}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Preisgruppe,16}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Dachnummer,17}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{IntercompanyMerkmal,18}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Zahlbedingung,19}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Lieferbedingung,20}"],"ColumnCount":21,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{KundenId,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Anrede,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Land,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Iso2,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{PLZ,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Name,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Nachname,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Straße,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Rechtform,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Schulform,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Funktion,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{AnzeigeName,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Herkunft,12}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Branche,13}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Bearbeiter,14}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Kreditlimit,15}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Preisgruppe,16}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Dachnummer,17}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{IntercompanyMerkmal,18}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Zahlbedingung,19}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Customer.{Lieferbedingung,20}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

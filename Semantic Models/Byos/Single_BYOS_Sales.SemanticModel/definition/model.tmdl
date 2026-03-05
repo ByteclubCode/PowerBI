@@ -1,0 +1,144 @@
+model Model
+	culture: de-DE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: de-DE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DIM_Produkt","FACT_Umsatz Produkt","DIM_Datum Umsatz","FACT_Umsatz Belege","DIM_Datum Lieferung","DIM_Mandaten","DIM_Filialen","DIM_Kunde","DIM_Adressen aus Umsatz","DIM_Kostenstellen","DIM_Zahlarten","DIM_KundengruppeAusPosition","DIM_Stunde","FACT_Bestandswert Stichtag","KPIs","DIM_Lagerorte","FACT_Seriennummern","DIM_GfdB_Projekte / Schulen","HLP_Vergleichszeitraum","HLP_JahrZuJahrVergleich","DIM_Belegarten","FACT_GfdB_IUDaten","DIM_Leasing Kunden","DIM_Produkt Varianten","DIM_Mitarbeiter","TARGET_Filialen","FACT_Kundenzähler ","FACT_AppleCareAbo","FACT_Budget "]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","TMDLView_Desktop","DevMode"]
+
+ref table DIM_Produkt
+ref table 'FACT_Umsatz Produkt'
+ref table 'DIM_Datum Umsatz'
+ref table 'FACT_Umsatz Belege'
+ref table 'DIM_Datum Lieferung'
+ref table DIM_Mandaten
+ref table DIM_Filialen
+ref table DIM_Kunde
+ref table 'DIM_Adressen aus Umsatz'
+ref table DIM_Kostenstellen
+ref table DIM_Zahlarten
+ref table DIM_KundengruppeAusPosition
+ref table DIM_Stunde
+ref table 'FACT_Bestandswert Stichtag'
+ref table KPIs
+ref table DIM_Lagerorte
+ref table FACT_Seriennummern
+ref table 'DIM_GfdB_Projekte / Schulen'
+ref table HLP_Vergleichszeitraum
+ref table HLP_JahrZuJahrVergleich
+ref table DIM_Belegarten
+ref table FACT_GfdB_IUDaten
+ref table 'DIM_Leasing Kunden'
+ref table 'DIM_Produkt Varianten'
+ref table DIM_Mitarbeiter
+ref table TARGET_Filialen
+ref table 'FACT_Kundenzähler '
+ref table FACT_AppleCareAbo
+ref table 'FACT_Budget '
+ref table DIM_Leasinggeber
+
+ref role '100-10 APR Hoheluft'
+ref role '000-00 Management'
+ref role '100-110 APR Berlin'
+ref role '100-120 APR Neuss'
+ref role '100-130 APR Darmstadt'
+ref role '100-140 APR Schanze'
+ref role '100-20 APR'
+ref role '100-200 Business (Distribution)'
+ref role '100-210 Comspot.de'
+ref role '100-220 Einkauf'
+ref role '100-30 Comspot HQ'
+ref role '100-40 APR Eimsbüttel'
+ref role '100-60 APR Bremen'
+ref role '100-50 APR Lüneburg'
+ref role '100-70 APR Celle'
+ref role '600-100 CS Repair'
+ref role '720-10 Zentrale'
+ref role '720-20 Vertrieb Nordwest'
+ref role '720-23 Webshop GfdB'
+ref role '720-30 Vertrieb Ost'
+ref role '720-40 Vertrieb West I'
+ref role '720-50 Vertrieb Südwest'
+ref role '720-60 Vertrieb West II'
+ref role '720-70 Vertrieb Nord'
+ref role '720-80 Vertrieb Süd'
+ref role '900-10 Byteclub HQ'
+ref role '900-20 Shifter'
+ref role '900-30 Byteclub - Desk 7'
+ref role '100-80 APR Wolfsburg'
+ref role '100-90 APR Bad Homburg'
+ref role '150-10 CPN'
+ref role '600-101 CS Repair'
+ref role '600-102 CS Repair'
+ref role '600-103 CS Repair'
+ref role '600-104 CS Repair'
+ref role '600-105 CS Repair'
+ref role '600-106 CS Repair'
+ref role '600-107 CS Repair'
+ref role '600-108 CS Repair'
+ref role '600-201 CS Repair'
+ref role '600-202 CS Repair'
+ref role '600-203 CS Repair'
+ref role '600-204 CS Repair'
+ref role '600-205 CS Repair'
+ref role '600-206 CS Repair'
+ref role '600-207 CS Repair'
+ref role '600-208 CS Repair'
+ref role '600-209 CS Repair'
+ref role '600-210 CS Repair'
+ref role '600-211 CS Repair'
+ref role '600-999 CS Repair'
+ref role '725-10 IfmB Zentrale'
+ref role '725-20 lfmB Vertrieb BW'
+ref role '725-23 lfmB Webshop'
+ref role '725-30 IfmB Vertrieb Bayern (Tutzing)'
+ref role '725-40 IfmB Vertrieb Rheinland Pfalz / Saarland'
+ref role '100-100 Telcoland Zentrale'
+ref role '100-301 CRP Berlin'
+ref role '100-300 CRP Dortmund'
+ref role '100-302 CRP Frankfurt'
+ref role '100-303 CRP Köln'
+ref role '100-304 CRP Stuttgart'
+ref role '100-305 CRP Hamburg'
+ref role '100-306 CRP München'
+ref role '100-307 CRP Nürnberg'
+ref role '200-10 Zentrale Berlin'
+ref role '210-10 DESK7'
+ref role '300-10 Zentrale Neuss'
+ref role '310-10 DEQSTER'
+ref role '400-10 Zentrale Darmstadt'
+ref role '500-10 Zentrale Schanze'
+ref role '600-109 CRP Düsseldorf'
+ref role '600-110 CRP Berlin Ku’damm'
+ref role '600-301 CRP PA Weber Hannover'
+ref role '600-998 Zentralwerkstatt Kollau'
+ref role '600-130 CRP'
+ref role '600-120 CRP'
+ref role '600-302 CRP'
+ref role '600-170 CRP'
+ref role '600-150 CRP'
+ref role '600-180 CRP'
+ref role '730-40 Flöttotto'
+ref role '730-10 Flöttotto'
+ref role 730-Flötotto
+ref role '720 Gfdb'
+ref role '100 APR'
+ref role '210 Desk7'
+ref role '310 DEQSTER'
+ref role '600 Repair'
+ref role '725 IfmB'
+ref role '900 Byteclub HQ'
+ref role Felix
+ref role BC
+ref role '100-190 APP Oldenburg'
+ref role '100-160 Altona'
+ref role EduXpert
+
+ref cultureInfo de-DE
+

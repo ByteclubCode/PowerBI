@@ -1,0 +1,9 @@
+role '100 APR'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 100
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = e9d2e39c52c14948ab59fb7658407fd2
+

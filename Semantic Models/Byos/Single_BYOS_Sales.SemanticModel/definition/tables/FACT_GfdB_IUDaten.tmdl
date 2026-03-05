@@ -1,0 +1,87 @@
+/// PowerBI vFACT_GfdBIUAddtionalInfo
+table FACT_GfdB_IUDaten
+	lineageTag: 30f8c17f-266e-4441-8192-7779680feec7
+
+	column AssetId
+		dataType: string
+		lineageTag: 339951b0-bb0a-4b84-a54f-bfffc45c5039
+		summarizeBy: none
+		sourceColumn: AssetId
+
+		annotation SummarizationSetBy = Automatic
+
+	column BelegId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: de7ce26a-eddc-4193-90a5-a78f932b83ed
+		summarizeBy: count
+		sourceColumn: BelegId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column StudienStartDatum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 54792a73-1cfa-4489-9215-ce3d6cbcaa99
+		summarizeBy: none
+		sourceColumn: StudienStartDatum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IUDatenÜbergabe
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ce29ca89-7270-4d43-bff3-019f57972c07
+		summarizeBy: none
+		sourceColumn: IUDatenÜbergabe
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Versanddatum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 08604d22-8975-4c18-8200-44d1160265ff
+		summarizeBy: none
+		sourceColumn: Versanddatum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ÜbergabeHansen
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d1be7242-00a2-4827-9e06-4498cf26c916
+		summarizeBy: none
+		sourceColumn: ÜbergabeHansen
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition FACT_GfdB_IUDaten-946cca81-01ba-4cf5-95c4-f6ef8d0a7bca = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("Aletheia", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_GfdBIUAddtionalInfo = Quelle{[Schema="PowerBI",Item="vFACT_GfdBIUAddtionalInfo"]}[Data]
+				in
+				    PowerBI_vFACT_GfdBIUAddtionalInfo
+
+	annotation PBI_ResultType = Table
+

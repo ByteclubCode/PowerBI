@@ -1,0 +1,111 @@
+relationship aa02c9aa-0bf0-4f5f-a775-0c0c2c8bb299
+	fromColumn: 'FACT_Umsatz Produkt'.ArtikelId
+	toColumn: DIM_Produkt.Id
+
+relationship 62330be4-c90a-472f-aede-53a833aba633
+	fromColumn: 'FACT_Umsatz Belege'.DateCreated
+	toColumn: 'DIM_Datum Umsatz'.Datum
+
+relationship 81c54004-1244-4ca1-b33b-43c366509e00
+	fromColumn: 'FACT_Umsatz Belege'.LieferscheinDatum
+	toColumn: 'DIM_Datum Lieferung'.Datum
+
+relationship 836389bc-8c3d-4190-90b5-4438474d8c17
+	fromColumn: 'FACT_Umsatz Belege'.MandantId
+	toColumn: DIM_Mandaten.Id
+
+relationship 6bc22010-e31f-48ec-ad67-e8cbc2a03483
+	fromColumn: 'FACT_Umsatz Belege'.AdressId
+	toColumn: 'DIM_Adressen aus Umsatz'.Id
+
+relationship b9a42bf4-994d-4174-b841-c539faa2d03e
+	fromColumn: 'FACT_Umsatz Belege'.FilialeId
+	toColumn: DIM_Filialen.FilialeId
+
+relationship 24ce513e-0d15-4c45-b53e-74dbb88753d8
+	fromColumn: 'FACT_Umsatz Produkt'.KundengruppeId
+	toColumn: DIM_KundengruppeAusPosition.Id
+
+relationship c36a806a-a444-42cd-a983-34c2d379185a
+	fromColumn: 'FACT_Umsatz Belege'.ErstellZeit
+	toColumn: DIM_Stunde.id
+
+relationship 09a889ad-0a6e-4833-9b22-ba706aa4065f
+	fromColumn: 'FACT_Umsatz Belege'.LagerId
+	toColumn: DIM_Lagerorte.Id
+
+relationship dfb09206-9db4-4208-bef6-9cc6bcae9573
+	fromColumn: FACT_Seriennummern.PosId
+	toColumn: 'FACT_Umsatz Produkt'.PositionsId
+
+relationship b7e79be7-c143-457c-86d8-59684e5492c1
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_Umsatz Belege'.KundenId
+	toColumn: DIM_Kunde.KundenId
+
+relationship 9071fa3d-f102-49fd-882f-8ba414eed3bf
+	fromColumn: 'FACT_Umsatz Belege'.VertragsId
+	toColumn: 'DIM_GfdB_Projekte / Schulen'.Number
+
+relationship 39f8c6a3-04ad-4258-bf5c-d1abb3734858
+	fromColumn: 'FACT_Umsatz Belege'.BelegArtId
+	toColumn: DIM_Belegarten.Id
+
+relationship 76d14e5a-fa74-43a9-a16d-5522c61ab9a8
+	fromColumn: 'FACT_Umsatz Belege'.LeasingKundenummer
+	toColumn: 'DIM_Leasing Kunden'.KundenId
+
+relationship 38041386-34db-44d5-ba4b-0d134b075292
+	fromColumn: 'FACT_Umsatz Produkt'.StockVariantId
+	toColumn: 'DIM_Produkt Varianten'.VariantId
+
+relationship 15956512-07dd-4d1b-84fe-49047c5ef034
+	fromColumn: 'FACT_Umsatz Produkt'.CostCenterId
+	toColumn: DIM_Kostenstellen.Kostenstelle
+
+relationship 5061611b-3f6f-4fdd-8e7a-90659f0a1e02
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_Umsatz Produkt'.SalesDataId
+	toColumn: 'FACT_Umsatz Belege'.Id
+
+relationship cc69e471-4180-4e30-a72d-80d194e27728
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_Umsatz Belege'.EmployeeId
+	toColumn: DIM_Mitarbeiter.EmployeeId
+
+relationship e270719e-d507-4153-bfbf-7fed454a6876
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'FACT_Umsatz Belege'.Id
+	toColumn: DIM_Zahlarten.Id
+
+relationship 2859dce1-c3ce-414b-86b9-b1bef5d85635
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT_Umsatz Belege'.Branch_Margin_Ref
+	toColumn: TARGET_Filialen.Branch_Margin_Key
+
+relationship 6af4a36c-7c23-e745-02f9-3102a84cbe1c
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'FACT_Umsatz Belege'.FilialeDateId
+	toColumn: 'FACT_Kundenzähler '.BrancheDateId
+
+relationship 74020640-b115-1665-b265-d85aaa25d644
+	toCardinality: many
+	fromColumn: 'FACT_Bestandswert Stichtag'.Id
+	toColumn: 'FACT_Umsatz Belege'.FilialeStorageId
+
+relationship a70836e5-b7aa-0317-5a00-14a1aaf32fb8
+	fromColumn: FACT_AppleCareAbo.ProductId
+	toColumn: 'FACT_Umsatz Produkt'.PositionsId
+
+relationship 665d13c0-1eff-b397-1596-4ad9a331a6b1
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'FACT_Umsatz Belege'.BudgetPlanId
+	toColumn: 'FACT_Budget '.Id
+
+relationship aa6f82e8-74bd-44a4-6167-517028e84ffd
+	fromColumn: 'FACT_Umsatz Belege'.LeasingGeberId
+	toColumn: DIM_Leasinggeber.KundenId
+

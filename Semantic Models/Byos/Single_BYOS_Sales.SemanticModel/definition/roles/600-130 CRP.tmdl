@@ -1,0 +1,9 @@
+role '600-130 CRP'
+	modelPermission: read
+
+	tablePermission DIM_Filialen = [FilialeId] == "600-130"
+
+	tablePermission DIM_Mandaten = [Id] == 600
+
+	annotation PBI_Id = a2bc23f42d5644c4930afa04508efeb2
+

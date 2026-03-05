@@ -1,0 +1,11 @@
+role '720-23 Webshop GfdB'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "720-23"
+
+	tablePermission DIM_Filialen = [FilialeId] == "720-23"
+
+	tablePermission DIM_Mandaten = [Id] == 720
+
+	annotation PBI_Id = 4fe549cac771455f99e025c02513724a
+

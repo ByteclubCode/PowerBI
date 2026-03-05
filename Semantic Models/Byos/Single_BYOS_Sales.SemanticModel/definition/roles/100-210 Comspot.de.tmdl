@@ -1,0 +1,11 @@
+role '100-210 Comspot.de'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-210"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-210"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = 1ab31f48a7fc4dc681461b3158e1e81b
+

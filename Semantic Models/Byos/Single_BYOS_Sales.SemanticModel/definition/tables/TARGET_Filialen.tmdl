@@ -1,0 +1,87 @@
+/// Enthält Ziele für die Filialen
+table TARGET_Filialen
+	lineageTag: ab7fc8c8-6737-42f9-8058-53e84fe18b77
+
+	measure TargetMargin = SUMX(TARGET_Filialen, TARGET_Filialen[Marge_TARGET])
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 1ac30115-56f6-4199-b02f-5a8780ab2f2d
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Gibt die Abweichung zur Zielmarge aus
+	measure 'Target Marge Abweichung' = SUM('FACT_Umsatz Produkt'[MargeOhneKosten]) - TARGET_Filialen[TargetMargin]
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: c5521c72-e20e-4e45-8517-1cd3d3141120
+
+	/// Gibt die Abweichung zur Zielmarge in Prozent aus
+	measure 'Target Marge Abweichung %' = ```
+			
+			    DIVIDE(TARGET_Filialen[Target Marge Abweichung],TARGET_Filialen[TargetMargin], 0)
+			```
+		formatString: #,0.00\ %;-#,0.00\ %;#,0.00\ %
+		lineageTag: 5ef99f69-0748-4e7c-bffd-308390d768dc
+
+	/// Zielmarge 
+	column Marge_TARGET
+		dataType: decimal
+		isHidden
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: f932a22e-2e01-44bf-8386-910908ad24c3
+		summarizeBy: none
+		sourceColumn: Marge_TARGET
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	/// Provision 0
+	column PROV_0
+		dataType: double
+		formatString: 0.00
+		lineageTag: 16099991-e1bd-48f6-bccb-0c50f5fd5393
+		summarizeBy: none
+		sourceColumn: PROV_0
+
+		annotation SummarizationSetBy = User
+
+	/// Provision 1
+	column PROV_1
+		dataType: double
+		formatString: 0.00
+		lineageTag: 880b1413-de9f-4975-a759-d9e2edc0dd9b
+		summarizeBy: none
+		sourceColumn: PROV_1
+
+		annotation SummarizationSetBy = User
+
+	/// Provision 2
+	column PROV_2
+		dataType: double
+		formatString: 0.00
+		lineageTag: 02d3cf12-0ae2-47ed-8f1d-56a0f2c7c381
+		summarizeBy: none
+		sourceColumn: PROV_2
+
+		annotation SummarizationSetBy = User
+
+	/// Referenz zu DIM_Umsatz Belege
+	column Branch_Margin_Key
+		dataType: string
+		isHidden
+		lineageTag: 05c6abaa-d36c-4b82-bb7c-bd4cd88861f0
+		summarizeBy: none
+		sourceColumn: Branch_Margin_Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TARGET_Filialen = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vTARGET_Branche_Margin = Quelle{[Schema="PowerBI",Item="vTARGET_Branche_Margin"]}[Data]
+				in
+				    PowerBI_vTARGET_Branche_Margin
+

@@ -1,0 +1,9 @@
+role '600 Repair'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 600
+
+	tablePermission DIM_Mandaten = [Id] == 600
+
+	annotation PBI_Id = ce3179e29c7d4e32b6eb2dc5b4c5e4e4
+

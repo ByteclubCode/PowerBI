@@ -1,0 +1,11 @@
+role '100-10 APR Hoheluft'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-10"
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-10"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	annotation PBI_Id = c98c2fbaf00e40ed8c0dfd49daa6770b
+

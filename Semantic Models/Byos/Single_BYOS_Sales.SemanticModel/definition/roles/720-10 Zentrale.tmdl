@@ -1,0 +1,11 @@
+role '720-10 Zentrale'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "720-10"
+
+	tablePermission DIM_Filialen = [FilialeId] == "720-10"
+
+	tablePermission DIM_Mandaten = [Id] == 720
+
+	annotation PBI_Id = 2e67c7ebb8474a4eaf5bcbcc7e4d14f7
+

@@ -1,0 +1,9 @@
+role '725 IfmB'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [MandantId] == 725
+
+	tablePermission DIM_Mandaten = [Id] == 725
+
+	annotation PBI_Id = ac937672b1b64936b173f81d554e3e0f
+

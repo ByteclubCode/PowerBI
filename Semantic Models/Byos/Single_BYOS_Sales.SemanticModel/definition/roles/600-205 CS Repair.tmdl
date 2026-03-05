@@ -1,0 +1,11 @@
+role '600-205 CS Repair'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "600-205"
+
+	tablePermission DIM_Filialen = [FilialeId] == "600-205"
+
+	tablePermission DIM_Mandaten = [Id] == 600
+
+	annotation PBI_Id = 1131a138ac8f4708b0db151d3cbe1b3a
+

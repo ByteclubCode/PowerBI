@@ -1,0 +1,126 @@
+table FACT_AppleCareAbo
+	lineageTag: 2cdf3a9a-83d8-48e0-83a0-1979e7609e6e
+
+	column ProductId
+		dataType: int64
+		formatString: 0
+		lineageTag: 1da420c1-21e5-4c44-a4eb-243a06deae89
+		summarizeBy: none
+		sourceColumn: ProductId
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppleCareName
+		dataType: string
+		lineageTag: 8b3a1d72-28c5-460a-92db-39ee54f5350b
+		summarizeBy: none
+		sourceColumn: AppleCareName
+
+		annotation SummarizationSetBy = Automatic
+
+	column VK
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 176f41d7-f8e3-4dc8-9b60-a68439348d93
+		summarizeBy: sum
+		sourceColumn: VK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	column Menge
+		dataType: double
+		lineageTag: 016a3513-02f5-4759-a51d-42f3792a1e17
+		summarizeBy: none
+		sourceColumn: Menge
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AboTyp
+		dataType: string
+		lineageTag: cff16c1d-8785-46b3-b743-2820a62c933f
+		summarizeBy: none
+		sourceColumn: AboTyp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Belegdatum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6e4fc692-d15e-48c0-bc2d-84c242209dc3
+		summarizeBy: none
+		sourceColumn: Belegdatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column BelegMonat
+		dataType: int64
+		formatString: 0
+		lineageTag: 826e3f60-0aab-432d-bf66-44a71962bffa
+		summarizeBy: none
+		sourceColumn: BelegMonat
+
+		annotation SummarizationSetBy = User
+
+	column BelegJahr
+		dataType: int64
+		formatString: 0
+		lineageTag: ca65f49f-5a9c-492d-b6ab-e21f18baef1b
+		summarizeBy: none
+		sourceColumn: BelegJahr
+
+		annotation SummarizationSetBy = User
+
+	column AboEnddatum
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d8aeeb11-549c-41b1-b4c8-e438e14c99d6
+		summarizeBy: none
+		sourceColumn: AboEnddatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Belegnummer
+		dataType: string
+		lineageTag: 810455c1-7c01-4c7e-9028-137bb36cb36f
+		summarizeBy: none
+		sourceColumn: Belegnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kaufdatum
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3b2aeb3f-f6cd-49eb-8d1e-08db97ed2847
+		summarizeBy: none
+		sourceColumn: Kaufdatum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Aktivert
+		dataType: double
+		formatString: #,0
+		lineageTag: 435d604b-28f9-4aa1-97f9-6b90758315de
+		summarizeBy: sum
+		sourceColumn: Aktivert
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_AppleCareAbo = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("172.20.20.156", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_AppleCareAbo = Quelle{[Schema="PowerBI",Item="vFACT_AppleCareAbo"]}[Data]
+				in
+				    PowerBI_vFACT_AppleCareAbo
+

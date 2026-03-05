@@ -1,0 +1,11 @@
+role '900-20 Shifter'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "900-20"
+
+	tablePermission DIM_Filialen = [FilialeId] == "900-20"
+
+	tablePermission DIM_Mandaten = [Id] == 900
+
+	annotation PBI_Id = 7c8d5df06c69415ca17154d16664635b
+

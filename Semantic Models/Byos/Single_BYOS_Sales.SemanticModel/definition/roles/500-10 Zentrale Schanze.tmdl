@@ -1,0 +1,11 @@
+role '500-10 Zentrale Schanze'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "500-10"
+
+	tablePermission DIM_Filialen = [FilialeId] == "500-10"
+
+	tablePermission DIM_Mandaten = [Id] == 500
+
+	annotation PBI_Id = 872c15cddd4b4c25a29a50357e1ebced
+

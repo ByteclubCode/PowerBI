@@ -1,0 +1,11 @@
+role '100-190 APP Oldenburg'
+	modelPermission: read
+
+	tablePermission DIM_Filialen = [FilialeId] == "100-190"
+
+	tablePermission DIM_Mandaten = [Id] == 100
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "100-190"
+
+	annotation PBI_Id = a9aa7935886d4113b7ed1ac42c827fb2
+

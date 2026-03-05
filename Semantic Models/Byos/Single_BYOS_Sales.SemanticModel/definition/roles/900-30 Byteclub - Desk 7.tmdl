@@ -1,0 +1,11 @@
+role '900-30 Byteclub - Desk 7'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "900-30"
+
+	tablePermission DIM_Filialen = [FilialeId] == "900-30"
+
+	tablePermission DIM_Mandaten = [Id] == 900
+
+	annotation PBI_Id = 67b65f15e24240a69af1fb5cae1f94b8
+

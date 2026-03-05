@@ -1,0 +1,292 @@
+/// Enthält die Datumswerte die Lieferung des Beleges
+table 'DIM_Datum Lieferung'
+	lineageTag: e11de881-5448-4b59-9de8-b89d44617796
+
+	/// Das Datum der Lieferung
+	column Datum
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 3a920e0c-486a-43f3-abfc-e194bdb3bb45
+		summarizeBy: none
+		sourceColumn: Datum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Jahr des Datums
+	column Jahr
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a7c96ae-44d2-431f-9944-84eba69b161b
+		summarizeBy: none
+		sourceColumn: Jahr
+
+		annotation SummarizationSetBy = User
+
+	/// Das Quartal
+	column Quartal
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d728dcc-c5c6-4f67-80b6-deba00d5cc55
+		summarizeBy: none
+		sourceColumn: Quartal
+
+		annotation SummarizationSetBy = User
+
+	/// Monat als Text und Jahr als Zahl. Beispiel Jan 2024 
+	column MonatUndJahr2
+		dataType: string
+		lineageTag: f6a8586d-c8fe-4902-a57f-488b9e264cd9
+		summarizeBy: none
+		sourceColumn: MonatUndJahr2
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Wochentages
+	column NameWochentag
+		dataType: string
+		lineageTag: f5d102c1-1178-4fdf-91a6-851ee790a442
+		summarizeBy: none
+		sourceColumn: NameWochentag
+		sortByColumn: Wochentag_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Monats
+	column NameMonat
+		dataType: string
+		lineageTag: 1f23f4aa-d124-4ccd-b7a9-a335b1e8d88c
+		summarizeBy: none
+		sourceColumn: NameMonat
+		sortByColumn: Monat_Nr
+
+		annotation SummarizationSetBy = Automatic
+
+	/// ID im Format YYYYMM
+	column MONAT_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: cd4972cc-10a0-4846-aa03-01513111b9e7
+		summarizeBy: none
+		sourceColumn: MONAT_ID
+
+		annotation SummarizationSetBy = User
+
+	/// Quartalid im Format YYYYQ 
+	column QUARTAL_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: f48de41e-cb45-4ab7-9130-3f38f6f34faf
+		summarizeBy: none
+		sourceColumn: QUARTAL_ID
+
+		annotation SummarizationSetBy = User
+
+	/// Quartalbezeichnung im Format QQ/YYYY
+	column QUARTAL_BEZ
+		dataType: string
+		lineageTag: ef1172ff-5f3a-4524-b1a8-da9644d4759f
+		summarizeBy: none
+		sourceColumn: QUARTAL_BEZ
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wochen im Format KWKW/YYYY
+	column WOCHE_BEZ
+		dataType: string
+		lineageTag: 02f3c44c-0cbe-4cda-8b1e-068f09a1e172
+		summarizeBy: none
+		sourceColumn: WOCHE_BEZ
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Das Vorjahr
+	column Vorjahr
+		dataType: int64
+		formatString: 0
+		lineageTag: 97628b05-9a1b-47f6-a404-c69091913199
+		summarizeBy: none
+		sourceColumn: Vorjahr
+
+		annotation SummarizationSetBy = User
+
+	/// Monat als Zahl 1-12 
+	column Monat_Nr
+		dataType: int64
+		formatString: 0
+		lineageTag: 858a26cb-d067-4c2f-9350-8b427869055b
+		summarizeBy: none
+		sourceColumn: Monat_Nr
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kalenderwoche
+	column KalenderWoche
+		dataType: int64
+		formatString: 0
+		lineageTag: fb44c83f-0d3e-4b62-96c6-4cdb827abe50
+		summarizeBy: none
+		sourceColumn: KalenderWoche
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Monat und Jahr im Format MM/YYYY 
+	column Monat_Jahr
+		dataType: string
+		lineageTag: 76c9d3ca-326b-4e0d-9d03-7c4ee2ab9d77
+		summarizeBy: none
+		sourceColumn: Monat_Jahr
+		sortByColumn: MONAT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wochenid als Zahl
+	column Wochentag_Id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a6ba8aab-31e6-4915-b44d-b86cc3c22cd9
+		summarizeBy: none
+		sourceColumn: Wochentag_Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Woche des Applegeschäftsjahr
+	column AppleWoche
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ef6caed-6fcb-4e17-a208-1c42a5016628
+		summarizeBy: none
+		sourceColumn: AppleWoche
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Quartal des Applegeschäftsjahr 
+	column AppleQuartal
+		dataType: int64
+		formatString: 0
+		lineageTag: 2cd50caa-f06f-4299-aca2-1371d35a5cbe
+		summarizeBy: none
+		sourceColumn: AppleQuartal
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Tag des Monats
+	column Tag
+		dataType: int64
+		formatString: 0
+		lineageTag: 427d9301-5611-44d0-9796-a299a3c8831d
+		summarizeBy: none
+		sourceColumn: Tag
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Monats in Kurzform, Beispiel Jan
+	column NameMonatKurz
+		dataType: string
+		lineageTag: bbe642f4-7a59-42c7-9ef1-1aa2b66bcad2
+		summarizeBy: none
+		sourceColumn: NameMonatKurz
+		sortByColumn: Monat_Nr
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Das Applegeschäftsjahr
+	column AppleFiskalJahr
+		dataType: int64
+		formatString: 0
+		lineageTag: c5b82d22-dd39-4fd2-8373-d8dfd739b985
+		summarizeBy: none
+		sourceColumn: AppleFiskalJahr
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Feiertages
+	column NameDesFeiertags
+		dataType: string
+		lineageTag: 6246fcf6-4478-46b0-8b39-a9fb91313111
+		summarizeBy: none
+		sourceColumn: NameDesFeiertags
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ja wenn der Tag ein Feiertag ist
+	column IstFeiertag
+		dataType: int64
+		formatString: 0
+		lineageTag: 070b4ca0-13e1-4cd8-a57d-685d7c1dba74
+		summarizeBy: none
+		sourceColumn: IstFeiertag
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Monat des Abweichenden Wirtschaftsjahr
+	column AbWJMonat
+		dataType: int64
+		formatString: 0
+		lineageTag: 1dd68a11-b893-4184-b940-73b357d4253f
+		summarizeBy: none
+		sourceColumn: AbWJMonat
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Abweichendes Wirtschaftsjahr 
+	column AbWJJahr
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f06bd76-d762-49e5-83a4-0ea79af9a65b
+		summarizeBy: none
+		sourceColumn: AbWJJahr
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Quartal des Abweichenden Wirtschaftsjahres
+	column AbWJQuartal
+		dataType: int64
+		formatString: 0
+		lineageTag: f952b805-9a8b-456e-baa5-70395fa2d4fb
+		summarizeBy: none
+		sourceColumn: AbWJQuartal
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Monat und Jahr des Abweichenden Wirtschaftsjahres
+	column AbWJMonatUndJahr
+		dataType: string
+		lineageTag: 2622eb2a-44f7-4a47-a651-acd392ca2dc6
+		summarizeBy: none
+		sourceColumn: AbWJMonatUndJahr
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sortierschlüssel 
+	column SortierungJahrMonat
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 37854417-be14-474b-9335-9b818cb3d188
+		summarizeBy: none
+		sourceColumn: SortierungJahrMonat
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_Datum Lieferung-37183b6a-70be-47c8-b6c7-28f3db0d9e7c' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_DateVaules = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_DateValues"]}[Data]
+				in
+				    PowerBI_vDIM_DateVaules
+
+	annotation PBI_QueryRelationships = {"columnCount":20,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Datum,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Monat,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Jahr,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Quartal,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MonatUndJahr,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MonatUndJahr2,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Woche,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{NameWochentag,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{NameMonat,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MONAT_ID,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MONAT_BEZ,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{QUARTAL_ID,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{QUARTAL_BEZ,12}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{WOCHE_BEZ,13}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Vorjahr,14}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{VORMONAT_1,15}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{VORMONAT_2,16}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{VORMONAT_3,17}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MonatIndex,18}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{JahresIndex,19}"],"ColumnCount":20,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Datum,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Monat,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Jahr,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Quartal,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MonatUndJahr,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MonatUndJahr2,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Woche,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{NameWochentag,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{NameMonat,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MONAT_ID,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MONAT_BEZ,10}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{QUARTAL_ID,11}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{QUARTAL_BEZ,12}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{WOCHE_BEZ,13}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{Vorjahr,14}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{VORMONAT_1,15}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{VORMONAT_2,16}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{VORMONAT_3,17}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{MonatIndex,18}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_DateVaules.{JahresIndex,19}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

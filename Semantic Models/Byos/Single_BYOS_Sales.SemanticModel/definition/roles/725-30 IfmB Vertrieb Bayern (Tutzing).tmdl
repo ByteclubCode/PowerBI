@@ -1,0 +1,11 @@
+role '725-30 IfmB Vertrieb Bayern (Tutzing)'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "725-30"
+
+	tablePermission DIM_Filialen = [FilialeId] == "725-30"
+
+	tablePermission DIM_Mandaten = [Id] == 725
+
+	annotation PBI_Id = d49d6dffa0424f49861a6edaace6b77e
+

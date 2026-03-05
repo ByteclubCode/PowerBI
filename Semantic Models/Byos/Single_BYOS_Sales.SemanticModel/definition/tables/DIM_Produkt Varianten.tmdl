@@ -1,0 +1,52 @@
+/// Enthält die Produktvarianten und ihre Beschreibungen
+table 'DIM_Produkt Varianten'
+	lineageTag: aea1f632-1ed0-4d99-b708-65ed7cdffb0d
+
+	/// Label für Auswahl Variante. Wenn eine Variante ausgewählt, dann wird der Name der Variante ausgeben, sonst Mischvarianten
+	measure 'Ausgewählte Variante' = ```
+			
+			var ausgabe = "Mischvarianten"
+			var anzahl =  COUNT('DIM_Produkt Varianten'[AnzeigeName])
+			return 
+			   IF(anzahl = 1, SELECTEDVALUE('DIM_Produkt Varianten'[Kurzbeschreibung]), ausgabe)
+			```
+		lineageTag: 8906cb4c-6b3f-42b6-9e9b-13971a8320bf
+
+	column VariantId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 86eb41a7-7680-4674-9f03-bd585c4ec27c
+		summarizeBy: none
+		sourceColumn: VariantId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name der Variante
+	column AnzeigeName
+		dataType: string
+		lineageTag: 3dbdff66-672b-4094-9702-a3892a647c8e
+		summarizeBy: none
+		sourceColumn: AnzeigeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kurzbeschreibung
+		dataType: string
+		lineageTag: 67a7e6f1-ab36-43a2-9037-2b10230ea3cd
+		summarizeBy: none
+		sourceColumn: Kurzbeschreibung
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_Produkt Varianten-23ae0b7f-9ebf-4de7-83c0-8d07fd60bc4d' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_StockVariant = Quelle{[Schema="PowerBI",Item="vDIM_StockVariant"]}[Data]
+				in
+				    PowerBI_vDIM_StockVariant
+

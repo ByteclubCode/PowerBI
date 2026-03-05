@@ -1,0 +1,7 @@
+createOrReplace
+
+	role '000-00 Management'
+		modelPermission: read
+
+		annotation PBI_Id = ca9fd85f925e4713bed8a239fcad06e6
+

@@ -1,0 +1,83 @@
+/// Enthält die Filialen
+table DIM_Filialen
+	lineageTag: f200537d-9a68-4cda-8ff2-c11217875590
+
+	/// HauptlagerId des Filiale
+	column LagerId
+		dataType: int64
+		formatString: 0
+		lineageTag: eef2065b-50da-4dba-b05c-e6de56435b5a
+		summarizeBy: none
+		sourceColumn: LagerId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Stadt der Filiale
+	column Stadt
+		dataType: string
+		lineageTag: 90a1e317-ff82-4c3e-9fd7-932c1aa2faa3
+		summarizeBy: none
+		sourceColumn: Stadt
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Filialname
+	column FilialeName
+		dataType: string
+		lineageTag: 6fb2348d-3f3b-4b84-a0d3-81633524c237
+		summarizeBy: none
+		sourceColumn: FilialeName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gruppierung für Repair 
+	column GruppierungRMA
+		dataType: string
+		lineageTag: 5b2a871d-1c44-4907-994d-e7d8a0a66959
+		summarizeBy: none
+		sourceColumn: GruppierungRMA
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wenn Repair oder Store dann wird CRP oder APR ausgeben. 
+	column RMA
+		dataType: string
+		lineageTag: 22153570-ec7e-48e0-bc7d-295346a8b890
+		summarizeBy: none
+		sourceColumn: RMA
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Id der Filiale
+	column FilialeId
+		dataType: string
+		lineageTag: b427b15e-81cb-4569-b0b7-7dde33f3e37e
+		summarizeBy: none
+		sourceColumn: FilialeId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die AppleId der Filiale
+	column AppleId
+		dataType: int64
+		formatString: 0
+		lineageTag: f560af12-27ff-4f7b-9bde-9e1bf0b634bf
+		summarizeBy: none
+		sourceColumn: AppleId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Filialen-46eec371-39b2-4514-a6bb-f8edd782081b = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vDIM_Branche = BYTECLUB_DWH20{[Schema="PowerBI",Item="vDIM_Branche"]}[Data]
+				in
+				    PowerBI_vDIM_Branche
+
+	annotation PBI_QueryRelationships = {"columnCount":5,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{FilialeName,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{LagerId,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{PLZ,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Stadt,4}"],"ColumnCount":5,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Id,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{FilialeName,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{LagerId,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{PLZ,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vDIM_Branche.{Stadt,4}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

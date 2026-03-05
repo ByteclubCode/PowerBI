@@ -1,0 +1,827 @@
+/// Enthält die Umsatzdaten der Produkte
+/// 
+table 'FACT_Umsatz Produkt'
+	lineageTag: 9a0fa302-a7d4-4ff2-9765-f06b4703fe85
+
+	/// Gibt die Marge in Prozent aus
+	measure M_ArtikelMargeOhneKosten% = DIVIDE(SUM('FACT_Umsatz Produkt'[MargeOhneKosten]), SUM('FACT_Umsatz Produkt'[VKPreisGesamt]),0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\Marge
+		lineageTag: 083d4bf0-f5c6-4f7b-810a-7d0d6720f7a1
+
+	/// Gibt den Umsatz des Vorjahres aus
+	measure M_ArtikelUmsatz_VJ = ```
+			CALCULATE(SUM('FACT_Umsatz Produkt'[VKPreisGesamt]),DATEADD('DIM_Datum Umsatz'[Datum],-1,YEAR)) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Umsatz
+		lineageTag: cb832784-b963-4277-91f7-2a93b3a6957d
+
+	/// Gibt die Marge ohne Kosten des Vorjahres aus
+	measure M_ArtikelMargeOhneKosten_VJ = ```
+			CALCULATE(SUM('FACT_Umsatz Produkt'[MargeOhneKosten]),DATEADD('DIM_Datum Umsatz'[Datum],-1,YEAR)) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: b474f13a-f152-4038-90e0-219139c4368f
+
+	/// Gibt die Marge in Prozent ohne Kosten des Vormonats aus
+	measure M_ArtikelMarge%_VJ = ```
+			DIVIDE([M_ArtikelMargeOhneKosten_VJ],[M_ArtikelUmsatz_VJ],0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\Marge
+		lineageTag: b95c60f5-aa6f-4e96-af31-8912a1ad87e7
+
+	/// Gibt die Marge nach Variablen Kosten des Vorjahres aus
+	measure M_ArtikelMargeVariableKosten_VJ = CALCULATE(SUM('FACT_Umsatz Produkt'[MargeVariablekosten]),DATEADD('DIM_Datum Umsatz'[Datum], -1 ,YEAR))
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: 60b987d4-29c6-400e-b0f1-2874e67ed4fa
+
+	/// Gibt die Marge abzueglich aller Kosten des Vorjahres aus
+	measure M_ArtikelMargeGesamtKosten_VJ = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[MargeGesamtkosten]),
+			                DATEADD('DIM_Datum Umsatz'[Datum], -1,YEAR)
+			                ) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: e58c3ff3-f6c1-4157-ac7e-756cdfdc4d0f
+
+	/// Gibt die Marge in Prozent mit Variablen Kosten aus
+	measure M_ArtikelMargeVariableKosten% = DIVIDE(SUM('FACT_Umsatz Produkt'[MargeVariablekosten]), SUM('FACT_Umsatz Produkt'[VKPreisGesamt]),0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\Marge
+		lineageTag: 61453f2e-110b-4213-914d-804c4cd7c9d9
+
+	/// Gibt die Marge in Prozent abzueglich aller Kosten aus
+	measure M_ArtikelMargeGesamtKosten% = DIVIDE(SUM('FACT_Umsatz Produkt'[MargeGesamtkosten]), SUM('FACT_Umsatz Produkt'[VKPreisGesamt]),0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\Marge
+		lineageTag: 355f941f-47a0-4806-a5fa-17861a51292f
+
+	/// Gibt die Abweichung des Umsatzes zum Vorjahr aus
+	measure M_ArtikelUmsatzAbweichung_VJ = ```
+			SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) - [M_ArtikelUmsatz_VJ] 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Umsatz
+		lineageTag: 22eed680-fd1b-4714-bacb-dc0795377331
+
+	/// Gibt die Menge des Vorjahres aus
+	measure M_ArtikelMenge_VJ = ```
+			CALCULATE( SUM('FACT_Umsatz Produkt'[Menge]),DATEADD('DIM_Datum Umsatz'[Datum], -1,YEAR)) 
+			```
+		formatString: #,0
+		displayFolder: Measures\Menge
+		lineageTag: 0d3b780c-2ac7-4ba5-9abf-8d5aec33717f
+
+	/// Gibt die Abweichung zur Vorjahres Menge aus
+	measure M_ArtikelMengeAbweichung_VJ = ```
+			SUM('FACT_Umsatz Produkt'[Menge]) - [M_ArtikelMenge_VJ] 
+			```
+		formatString: #,0
+		displayFolder: Measures\Menge
+		lineageTag: c0a3c29c-06cc-4778-b722-89a748b210b1
+
+	/// Gibt die Abweichung zwischen aktueller Marge und Vorjahres Marge aus
+	measure M_ArtikelMargeGesamtKostenAbweichung_VJ = ```
+			SUM('FACT_Umsatz Produkt'[MargeGesamtkosten]) - [M_ArtikelMargeGesamtKosten_VJ] 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: 9861f50d-753f-4752-9eb4-121dc26da698
+
+	/// Gibt die Abweichung zum Vorjahr aus
+	measure M_ArtikelMargeOhneKostenAbweichung_VJ = ```
+			SUM('FACT_Umsatz Produkt'[MargeOhneKosten]) -[M_ArtikelMargeOhneKosten_VJ] 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: 3df12a5d-7aff-40c7-b00a-944f8b527616
+
+	/// Gibt die Abweichung der Marge mit Variablen Kosten zum Vorjahr aus
+	measure M_ArtikelMargeVariableKostenAbweichung_VJ = ```
+			SUM('FACT_Umsatz Produkt'[MargeVariablekosten]) - [M_ArtikelMargeVariableKosten_VJ] 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: f53a4019-dc00-4478-8095-acebbb928461
+
+	/// Gibt den Umsatz exklusiv der Versandkosten aus
+	measure M_UmsatzOhneVersand = CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 'FACT_Umsatz Produkt'[HatVersandkosten] == FALSE())
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Umsatz
+		lineageTag: ab02108d-09fc-41b0-8b5a-7d14205b43de
+
+	/// Gibt den Umsatz exklusive der Versandkosten des Vorjahres aus
+	measure M_UmsatzOhneVersand_VJ = CALCULATE( [M_UmsatzOhneVersand], DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR))
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Umsatz
+		lineageTag: 78f0f633-df91-4014-9d8e-23bac57c2b6b
+
+	/// Gibt den Versandkosten Umsatz aus
+	measure M_UmsatzVersand = ```
+			CALCULATE(SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 'FACT_Umsatz Produkt'[HatVersandkosten] = TRUE()) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Umsatz
+		lineageTag: 610e4321-400f-462c-aab4-735a5f29be64
+
+	/// Gibt den Versandkostenumatz des Vorjahres aus
+	measure M_UmsatzVersand_VJ = ```
+			CALCULATE( [M_UmsatzVersand] , DATEADD( 'DIM_Datum Umsatz'[Datum], -1, YEAR)) 
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Umsatz
+		lineageTag: 72c4bd50-1334-4474-99f3-63003d512920
+
+	/// Gibt die Abweichung in Prozent zwischen aktueller Marge und Vorjahres Marge aus
+	measure M_ArtikelMargeGesamtkostenAbweichung%_VJ = ```
+			DIVIDE( [M_ArtikelMargeGesamtKostenAbweichung_VJ],SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) ,  0) 
+			```
+		formatString: #,0.00\ %;-#,0.00\ %;#,0.00\ %
+		displayFolder: Measures\Marge
+		lineageTag: c9ba4959-6777-4894-a56f-1621f59cf5a0
+
+	/// Gibt die Abweichung zum Vorjahr in Prozent aus
+	measure M_ArtikelMargeOhneKostenAbweichung%_VJ = ```
+			DIVIDE( [M_ArtikelMargeOhneKosten_VJ],SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) ,  0) 
+			```
+		displayFolder: Measures\Marge
+		lineageTag: 93016e12-98d5-46e2-87d9-6372e03b58d4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Gibt die Marge des Vorjahres in Prozent aus
+	measure M_ArtikelMargeOhneKosten%_VJ = ```
+			DIVIDE(
+			    CALCULATE(
+			        SUM('FACT_Umsatz Produkt'[MargeOhneKosten]), DATEADD('DIM_Datum Umsatz'[Datum], -1 ,YEAR)), 
+			     CALCULATE(
+			         SUM('FACT_Umsatz Produkt'[VKPreisGesamt]),DATEADD('DIM_Datum Umsatz'[Datum], -1 ,YEAR))
+			         ,0)
+			         
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\Marge
+		lineageTag: 29015f69-80e3-40ef-a7c5-f9181151eb97
+
+	/// Gibt den Umsatz ohne CSR Umsatz aus
+	measure M_UmsatzOhneCSR = ```
+			
+			    CALCULATE(
+			        SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			        FILTER('FACT_Umsatz Produkt', 'FACT_Umsatz Produkt'[IstRepairUmsatz] = FALSE())
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\OhneCSR
+		lineageTag: 3f4bd13a-18d4-4271-8de7-331aae125022
+
+	/// Gibt die Marge ohne CSR Umsatz aus
+	measure M_MargeOhneCSR = ```
+			
+			    CALCULATE(
+			        SUM('FACT_Umsatz Produkt'[MargeOhneKosten]),
+			        FILTER('FACT_Umsatz Produkt', 'FACT_Umsatz Produkt'[IstRepairUmsatz] = FALSE())
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\OhneCSR
+		lineageTag: fafa6da2-5fd7-4ac3-93fc-5e5bac6baec4
+
+	/// Gibt die Prozentuale Marge ohne CSR Marge aus
+	measure M_Marge%OhneCSR = ```
+			
+			    DIVIDE([M_MargeOhneCSR], [M_UmsatzOhneCSR], 0) 
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\OhneCSR
+		lineageTag: 79f06e50-cb31-4659-9772-c4d3bd8b1524
+
+	/// Gibt für die APR den Umsatz aus Repair aus
+	measure 'Umsatz CRS' = ```
+			
+			    CALCULATE(SUM('FACT_Umsatz Produkt'[VKPreisStueck]) , 
+			        FILTER('FACT_Umsatz Produkt', [IstRepairUmsatz] = TRUE())
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Nur CRS
+		lineageTag: d5c0abd4-c090-43f9-bf7c-b3f9e1bbfb78
+
+	/// Gibt den Repair Umsatz des Vorjahres zurück
+	measure 'Umsatz CRS VJ' = ```
+			
+			    CALCULATE(SUM('FACT_Umsatz Produkt'[VKPreisStueck]) , 
+			        FILTER('FACT_Umsatz Produkt', [IstRepairUmsatz] = TRUE()), 
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Nur CRS
+		lineageTag: 8076f586-b9da-4691-9d81-8367de1739ad
+
+	/// Umsatz aus APR ohne SSR Umsatz des VJ
+	measure 'Umsatz Ohne CSR VJ' = ```
+			
+			    CALCULATE(
+			        SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			        FILTER('FACT_Umsatz Produkt', 'FACT_Umsatz Produkt'[IstRepairUmsatz] = FALSE()) , 
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\OhneCSR
+		lineageTag: a28d29c8-e47b-4aab-9373-9ef03fb6dbce
+
+	/// Rabatt des Vorjahres
+	measure 'Rabatt VJ' = ```
+			
+			    CALCULATE(SUM('FACT_Umsatz Produkt'[RabattAusPosition]), 
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR)
+			    )
+			```
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: Measures\Rabatt
+		lineageTag: ecf47145-deeb-4de1-a232-49ac68709c2a
+
+	/// Gibt den Prozentualen Rabatt des VJ aus
+	measure 'Rabatt % VJ' = ```
+			
+			    CALCULATE(SUM('FACT_Umsatz Produkt'[RabattAusPosition]) / (SUM('FACT_Umsatz Produkt'[VKPreisGesamt]) + SUM('FACT_Umsatz Produkt'[VKPreisStueck])),
+			    DATEADD('DIM_Datum Umsatz'[Datum], -1, YEAR) 
+			    )
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\Rabatt
+		lineageTag: 6186c874-677f-419f-b002-4f4cb6c62a86
+
+	/// Gibt die Marge in Prozent abzueglich aller Kosten des Vorjahres aus
+	measure M_ArtikelMargeGesamtkosten%_VJ = ```
+			
+			    DIVIDE([M_ArtikelMargeGesamtkosten_VJ], [M_ArtikelUmsatz_VJ], 0)
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Measures\Marge
+		lineageTag: 389ebd0b-4091-4947-88a7-029208d8096e
+
+	/// Gibt den Umsatz des Vormonats aus
+	measure 'M_Artikel Umsatz Vormonat' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[VKPreisGesamt]), 
+			            DATEADD('DIM_Datum Umsatz'[Datum], -1, MONTH)
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Umsatz
+		lineageTag: b78bc3f0-2fd0-4f0f-a185-6934bc5f31be
+
+	/// Gibt die Menge zum Vormonat aus
+	measure 'M_Artikel Menge Vormonat' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[Menge]), 
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, MONTH) 
+			    )
+			```
+		formatString: #,0
+		displayFolder: Measures\Menge
+		lineageTag: 75ffa21c-aaa6-4e18-a861-cb0ad53f6ff8
+
+	/// Gibt die Marge abzueglich aller Kosten des Vormonats aus
+	measure 'M_Artikel Marge Gesamtkosten Vormonat' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[MargeGesamtkosten]),
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, MONTH) 
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: e554833c-15ce-40b6-ade1-b469502bf39e
+
+	/// Gibt die Marge ohne Kosten des Vormonats aus
+	measure 'M_Artikel Marge Ohne Kosten Vormonat' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[MargeOhneKosten]),
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, MONTH) 
+			    )
+			```
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		displayFolder: Measures\Marge
+		lineageTag: e110e219-146e-4cdf-8e33-e802b7bcb6eb
+
+	/// Gibt die Marge abzueglich aller Variabler Kosten des Vormonats aus
+	measure 'M_Artikel Marge Variable Kosten Vormonat' = ```
+			
+			    CALCULATE( SUM('FACT_Umsatz Produkt'[MargeVariablekosten]),
+			        DATEADD('DIM_Datum Umsatz'[Datum], -1, MONTH) 
+			    )
+			```
+		displayFolder: Measures\Marge
+		lineageTag: c4c39c6c-812b-4b6c-bac0-6239ef805458
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Gibt den Durchschnitts Umsatz der Vorjahre zurück. 
+	measure 'Durchschnitts Umsatz der VJ' = ```
+			
+			    CALCULATE(
+			            AVERAGE('FACT_Umsatz Produkt'[VKPreisStueck]) 
+			        ,FILTER(
+			            ALL('DIM_Datum Umsatz'),
+			                'DIM_Datum Umsatz'[Jahr] < MAX('DIM_Datum Umsatz'[Jahr])))
+			```
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: Measures\Umsatz
+		lineageTag: 2e54070f-eb13-4aee-aa88-ba06a7f07341
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Gibt die Durchschnitts Margen der Vorjahre zurück. 
+	measure 'Durchschnitts Marge GesamtKosten der VJ' = ```
+			
+			    CALCULATE(AVERAGE('FACT_Umsatz Produkt'[MargeGesamtkosten]) 
+			        ,FILTER(ALL('DIM_Datum Umsatz'),'DIM_Datum Umsatz'[Jahr] < MAX('DIM_Datum Umsatz'[Jahr])))
+			```
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: Measures\Marge
+		lineageTag: a7546481-d6e0-43f3-bfe9-17ec19d19807
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Die Positionsid des Datensatzes
+	column PositionsId
+		dataType: int64
+		isKey
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 716c1ed3-1772-4f19-b1b3-2a8ea0d68824
+		summarizeBy: none
+		sourceColumn: PositionsId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Referenz zu FACT_Umsatz Belege
+	column SalesDataId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1c96472b-a049-4a5c-85a0-c200cc70640d
+		summarizeBy: none
+		sourceColumn: SalesDataId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Referenz Id zu Produkten
+	column ArtikelId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 190ebb11-e532-45ec-a343-412ad178be4e
+		summarizeBy: none
+		sourceColumn: ArtikelId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// EK pro Stueck 
+	column EKProStueck
+		dataType: double
+		isNullable: false
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 8f340cd2-0584-42a9-b973-04bf5e95d76d
+		summarizeBy: sum
+		sourceColumn: EKProStueck
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Finaler EK nach allen Abzügen und Aufschlägen
+	column EKFinal
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 982e3593-aefb-480d-8b12-1d2e43355e6f
+		summarizeBy: sum
+		sourceColumn: EKFinal
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der VK Preis des Einzel Stücks aus der Position
+	column VKPreisStueck
+		dataType: decimal
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		sourceProviderType: money
+		lineageTag: 597c8d81-1ba9-4626-8377-2880e7b9b94a
+		summarizeBy: sum
+		sourceColumn: VKPreisStueck
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der VK Gesamtpreis aus der Position 
+	column VKPreisGesamt
+		dataType: decimal
+		isNullable: false
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		sourceProviderType: money
+		lineageTag: f32af63b-e54d-4d00-ab4a-5c1637076745
+		summarizeBy: sum
+		sourceColumn: VKPreisGesamt
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Rabatt aus der Position
+	column RabattAusPosition
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 8a86d570-0128-4639-8551-c982f8501d1d
+		summarizeBy: sum
+		sourceColumn: RabattAusPosition
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gibt die Menge aus der Position aus
+	column Menge
+		dataType: double
+		isNullable: false
+		formatString: #,0
+		lineageTag: 37582532-55a5-4e6e-8ef1-ce0385f1526c
+		summarizeBy: sum
+		sourceColumn: Menge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	/// Marge ohne Abzuege
+	column MargeOhneKosten
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 2c042d69-4df6-4f95-bf6c-f19fb2e6bc44
+		summarizeBy: sum
+		sourceColumn: MargeOhneKosten
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Marge abzueglich aller Variabler Kosten
+	column MargeVariablekosten
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 9942e106-e912-433f-bcc1-98837000661d
+		summarizeBy: sum
+		sourceColumn: MargeVariablekosten
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Marge abzueglich aller Kosten
+	column MargeGesamtkosten
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: d1e3287b-58a4-4bca-8d74-9b4b49faccca
+		summarizeBy: sum
+		sourceColumn: MargeGesamtkosten
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Variablen Zahlartkosten aus der Position
+	column ZahlartKostenVariable
+		dataType: decimal
+		isNullable: false
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		sourceProviderType: money
+		lineageTag: 2f0ab257-89d1-4660-9f46-5afa2509ee12
+		summarizeBy: sum
+		sourceColumn: ZahlartKostenVariable
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Fixen Zahlartkosten aus der Position
+	column ZahlartKostenFix
+		dataType: decimal
+		isNullable: false
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		sourceProviderType: money
+		lineageTag: 417db52e-0f45-4186-aee0-01055a5be9f4
+		summarizeBy: sum
+		sourceColumn: ZahlartKostenFix
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Gesamten Zahlartkosten aus der Position
+	column ZahlartKostenGesamt
+		dataType: decimal
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		sourceProviderType: money
+		lineageTag: d6e35254-f840-4577-bb92-2dbc37b968d0
+		summarizeBy: sum
+		sourceColumn: ZahlartKostenGesamt
+
+		annotation SummarizationSetBy = Automatic
+
+	column EDUNachlassStueck
+		dataType: double
+		isNullable: false
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		lineageTag: 7f800eff-3586-4193-a777-416012424991
+		summarizeBy: sum
+		sourceColumn: EDUNachlassStueck
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column EDUNachlassPosition
+		dataType: double
+		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
+		sourceProviderType: decimal(32, 6)
+		lineageTag: c30a2c6e-53ec-4f11-a1fe-011466e29d34
+		summarizeBy: sum
+		sourceColumn: EDUNachlassPosition
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hat Versandkosten Ja/Nein
+	column HatVersandkosten
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: a0dbd63c-b96c-414b-8f46-98431389318f
+		summarizeBy: none
+		sourceColumn: HatVersandkosten
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hat Zahlartkosten Ja/Nein
+	column HatZahlkosten
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 101d4e6f-c79f-4215-9404-50120fab379f
+		summarizeBy: none
+		sourceColumn: HatZahlkosten
+
+		annotation SummarizationSetBy = Automatic
+
+	column EDUAbrechnungBemerkung
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: fb1334a5-8166-44bb-8aba-fd6718e085e5
+		summarizeBy: none
+		sourceColumn: EDUAbrechnungBemerkung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Referenz zur Kundengruppe aus Position
+	column KundengruppeId
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c783782a-752f-426e-a44d-967771e0f098
+		summarizeBy: none
+		sourceColumn: KundengruppeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Backlog Menge, wird berechnet aus Bestellter und Gelieferter Menge
+	column BacklogMenge
+		dataType: int64
+		isHidden
+		lineageTag: 7d07e9fc-04f3-4357-ac5f-abd3f48e64e3
+		summarizeBy: sum
+		sourceColumn: BacklogMenge
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Backlog VK, wird berechnet aus Bestellter und Gelieferter Menge
+	column BacklogVkPreis
+		dataType: decimal
+		isHidden
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 374a7201-ea19-46b3-806a-d660cad00ecb
+		summarizeBy: sum
+		sourceColumn: BacklogVkPreis
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Backlog Marge Ohne Kosten, wird berechnet aus Bestellter und Gelieferter Menge
+	column BacklogMargeOhneKosten
+		dataType: decimal
+		isHidden
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 991f762c-621c-4902-abc1-84101875e9e6
+		summarizeBy: sum
+		sourceColumn: BacklogMargeOhneKosten
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Backlog Marge Variable Kosten, wird berechnet aus Bestellter und Gelieferter Menge
+	column BacklogMargeVariablekosten
+		dataType: decimal
+		isHidden
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 2089b3c8-86bb-496a-b51a-9fdf3b011efe
+		summarizeBy: sum
+		sourceColumn: BacklogMargeVariablekosten
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Backlog Marge Gesamtkosten, wird berechnet aus Bestellter und Gelieferter Menge
+	column BacklogMargeGesamtkosten
+		dataType: decimal
+		isHidden
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 17e3fbc6-e919-441e-9f17-f309d9d8be1b
+		summarizeBy: sum
+		sourceColumn: BacklogMargeGesamtkosten
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Reservierter Bestand aus der Position
+	column ReservierterBestand
+		dataType: double
+		lineageTag: 378006ca-bccd-44fb-aed1-c16a3e54402d
+		summarizeBy: sum
+		sourceColumn: ReservierterBestand
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Wenn True dann Umsatz aus Repair
+	column IstRepairUmsatz
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6afc8a1c-7e01-48ee-b001-599e14e1394b
+		summarizeBy: none
+		sourceColumn: IstRepairUmsatz
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Datenquelle aktuell BYOS oder COSY 2
+	column Datenquelle
+		dataType: string
+		lineageTag: afcf1545-d300-491b-b04d-998f2b5a3521
+		summarizeBy: none
+		sourceColumn: Datenquelle
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Backlog EK, wird berechnet aus Bestellter und gelieferter Menge. 
+	column BacklogEK
+		dataType: decimal
+		isHidden
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 4360d9dc-0646-4b2f-9b5f-fcb910077d82
+		summarizeBy: sum
+		sourceColumn: BacklogEK
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Referenz zu DIM_Produkt Varianten
+	column StockVariantId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ead0cb9c-05e1-45e8-b94f-e6f2ec6b176d
+		summarizeBy: none
+		sourceColumn: StockVariantId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Abweichende Artikelbezeichnung zur Artikelbeschreibung aus BYOS
+	column AlternativeProduktBezeichnung
+		dataType: string
+		lineageTag: 8778f632-b7f0-4cb9-bd98-4b5663c674fc
+		summarizeBy: none
+		sourceColumn: AlternativeProduktBezeichnung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der UVP aus der Position 
+	column UVP
+		dataType: decimal
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: d3e21d9d-f5e1-4d5f-9ad8-98e9da7e40c7
+		summarizeBy: sum
+		sourceColumn: UVP
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Mitarbeiter der die Position erstell hat
+	column Mitarbeiter
+		dataType: string
+		lineageTag: 2d5f1173-24e3-4e41-892f-4d9594e07199
+		summarizeBy: none
+		sourceColumn: Mitarbeiter
+
+		annotation SummarizationSetBy = Automatic
+
+	column EDUSW2AbrechnungBemerkung
+		dataType: string
+		lineageTag: 5a57dca0-a9db-498d-9144-5bcc0175a0ab
+		summarizeBy: none
+		sourceColumn: EDUSW2AbrechnungBemerkung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die KostenstellenId aus den Positionen
+	column CostCenterId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7b44e31c-7d60-4eac-b521-0307ea728979
+		summarizeBy: none
+		sourceColumn: CostCenterId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AppleSegment
+		dataType: string
+		lineageTag: c9da71b8-46cf-4a35-8e6c-cbf4adc80dc5
+		summarizeBy: none
+		sourceColumn: AppleSegment
+
+		annotation SummarizationSetBy = Automatic
+
+	column VoraussichtlicheLieferzeittext
+		dataType: string
+		lineageTag: 1e321171-21de-4e20-b904-296eff91aa88
+		summarizeBy: none
+		sourceColumn: VoraussichtlicheLieferzeittext
+
+		annotation SummarizationSetBy = Automatic
+
+	column VoraussichtlicheLieferzeitInTagen
+		dataType: int64
+		formatString: 0
+		lineageTag: ef5017f2-2960-4b70-a109-242be4cf4be8
+		summarizeBy: sum
+		sourceColumn: VoraussichtlicheLieferzeitInTagen
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT_Umsatz Produkt-52af3aed-9eb6-4abc-8cd2-dd640716c045' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Databases("Aletheia"),
+				    BYTECLUB_DWH20 = Quelle{[Name="BYTECLUB_DWH20"]}[Data],
+				    PowerBI_vFACT_ProductSales = BYTECLUB_DWH20{[Schema="PowerBI",Item="vFACT_ProductSales"]}[Data]
+				in
+				    PowerBI_vFACT_ProductSales
+
+	annotation PBI_QueryRelationships = {"columnCount":11,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{PositionsId,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{SalesDataId,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{ArtikelId,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoEKPreisFinal,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoEKPreisFinalGesamt,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoVKPreisStueck,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoVKPreisGesamt,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoRabattAusPosition,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{MengePosition,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoMarge,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{KostenAusZahlart,10}"],"ColumnCount":11,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{PositionsId,0}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{SalesDataId,1}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{ArtikelId,2}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoEKPreisFinal,3}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoEKPreisFinalGesamt,4}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoVKPreisStueck,5}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoVKPreisGesamt,6}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoRabattAusPosition,7}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{MengePosition,8}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{NettoMarge,9}","Server.Database\\/2/SQL/aletheia;BYTECLUB_DWH20/PowerBI/PowerBI.vFACT_ProductSales.{KostenAusZahlart,10}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

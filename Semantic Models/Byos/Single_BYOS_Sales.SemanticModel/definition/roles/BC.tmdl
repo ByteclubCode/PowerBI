@@ -1,0 +1,7 @@
+role BC
+	modelPermission: read
+
+	tablePermission DIM_Mandaten = [Firmenverbund] == "BC"
+
+	annotation PBI_Id = 0ab6ed7d10854a28aa2355429b04d91a
+

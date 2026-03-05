@@ -1,0 +1,11 @@
+role '600-998 Zentralwerkstatt Kollau'
+	modelPermission: read
+
+	tablePermission 'FACT_Umsatz Belege' = [FilialeId] == "600-998"
+
+	tablePermission DIM_Filialen = [FilialeId] == "600-998"
+
+	tablePermission DIM_Mandaten = [Id] == 600
+
+	annotation PBI_Id = c32494737d294816ab843fb06e94a6d5
+

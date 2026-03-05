@@ -1,0 +1,435 @@
+/// Enthält die Kunden aus den Leasingverträgen
+table 'DIM_Leasing Kunden'
+	lineageTag: 072201d9-5b42-410e-8eff-cbfb95da4cef
+
+	/// Die Id des Kontos
+	column KundenId
+		dataType: int64
+		formatString: 0
+		lineageTag: a349f600-709e-4e6a-ac43-dbe635440247
+		summarizeBy: none
+		sourceColumn: KundenId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Anrede des Kunden
+	column Anrede
+		dataType: string
+		lineageTag: f5fda8a4-2fb2-494b-abff-fe6e09d193d5
+		summarizeBy: none
+		sourceColumn: Anrede
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Land des Kunden
+	column Land
+		dataType: string
+		lineageTag: b1410d81-8f0f-4181-a68c-13906b6ae1a4
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Land
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Laenderkuerzel 
+	column Laenderkuerzel
+		dataType: string
+		lineageTag: c831e30d-c58f-4881-9215-2d3e769b4f36
+		summarizeBy: none
+		sourceColumn: Laenderkuerzel
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Postleitzahl des Kunden
+	column PLZ
+		dataType: string
+		lineageTag: ee110b28-50b7-4c02-8cba-5b6d63628eac
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: PLZ
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die ersten 3 Stellen der Postleitzahl
+	column PLZ3Stellen
+		dataType: string
+		lineageTag: 20bdb031-0583-4056-93bc-3046fb2052d8
+		summarizeBy: none
+		sourceColumn: PLZ3Stellen
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Kunden
+	column Name
+		dataType: string
+		lineageTag: b541dcca-e910-4649-8424-31d498da30ef
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Nachname des Kunden
+	column Nachname
+		dataType: string
+		lineageTag: 3e5853b4-94fb-44ba-b7f0-d45a771d7c6d
+		summarizeBy: none
+		sourceColumn: Nachname
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Straße der Adresse
+	column Straße
+		dataType: string
+		lineageTag: f6ffb2e5-1608-4080-b4f0-a4e835be0e40
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: Straße
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die Rechtsform des Kunden
+	column Rechtform
+		dataType: string
+		lineageTag: 222aa878-4186-4e06-b8df-f686f76ca158
+		summarizeBy: none
+		sourceColumn: Rechtform
+
+		annotation SummarizationSetBy = Automatic
+
+	column Schulform
+		dataType: string
+		lineageTag: 289e6cda-1632-44b7-b6c9-06254f25c9da
+		summarizeBy: none
+		sourceColumn: Schulform
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Funktion des Kunden innerhalb seines Unternehmens 
+	column Funktion
+		dataType: string
+		lineageTag: 7fe41532-f2f5-4053-b93b-4200fe48f21d
+		summarizeBy: none
+		sourceColumn: Funktion
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name des Kunden
+	column AnzeigeName
+		dataType: string
+		lineageTag: 80826567-857d-4f43-8d41-a0073dc32e8d
+		summarizeBy: none
+		sourceColumn: AnzeigeName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// K/A
+	column Vertriebskanal
+		dataType: string
+		lineageTag: 2387c03f-519e-4796-87b6-7201349b469d
+		summarizeBy: none
+		sourceColumn: Vertriebskanal
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Branche des Kunden
+	column Branche
+		dataType: string
+		lineageTag: a4ece992-54e6-4a15-895d-18c2ede521de
+		summarizeBy: none
+		sourceColumn: Branche
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Der Sachbearbeiter aus dem Kundenkonto
+	column Bearbeiter
+		dataType: string
+		lineageTag: f2d5731b-13c1-4c2f-bfbb-12de7891af61
+		summarizeBy: none
+		sourceColumn: Bearbeiter
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Das Kreditlimit des Kunden
+	column Kreditlimit
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 9c0481c6-8c73-4214-9691-18267b844e78
+		summarizeBy: none
+		sourceColumn: Kreditlimit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	/// Die Preisgruppe des Kunden
+	column Preisgruppe
+		dataType: string
+		lineageTag: 188e8365-ca6c-4719-a05c-fe6fad1d217b
+		summarizeBy: none
+		sourceColumn: Preisgruppe
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Marker aus der Abteilung B2B
+	column Dachnummer
+		dataType: string
+		lineageTag: 8eec18e0-9f80-4efa-9ec0-1b8d7c77cf61
+		summarizeBy: none
+		sourceColumn: Dachnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Konto ist Intercompany Ja/Nein
+	column IntercompanyMerkmal
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5d2613de-79f4-4094-bc7d-45a093641688
+		summarizeBy: none
+		sourceColumn: IntercompanyMerkmal
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Standardzahlart aus den Konto
+	column Zahlbedingung
+		dataType: string
+		lineageTag: efac5e2c-0ca6-4715-87c3-c0e6938222e5
+		summarizeBy: none
+		sourceColumn: Zahlbedingung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Standardlieferart 
+	column Lieferbedingung
+		dataType: string
+		lineageTag: ca2c7ba9-98e8-4bb0-b328-76edc3b22c22
+		summarizeBy: none
+		sourceColumn: Lieferbedingung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gruppierung nach B2B, B2C oder (leer)
+	column RechtsformGruppe
+		dataType: string
+		lineageTag: 7f725c1e-1dc0-41d8-bf6b-d1152dbbf986
+		summarizeBy: none
+		sourceColumn: RechtsformGruppe
+
+		annotation SummarizationSetBy = Automatic
+
+	column GfdBVertriebsbereich
+		dataType: string
+		lineageTag: cd8176a0-8008-4c9b-a789-6f55ff08c9fe
+		summarizeBy: none
+		sourceColumn: GfdBVertriebsbereich
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kundensegmentierung nach Apple
+	column AppleSegment
+		dataType: string
+		lineageTag: 5cab0a55-ceab-4a9d-b57b-f774c060fd21
+		summarizeBy: none
+		sourceColumn: AppleSegment
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wie EDUKategorie
+	column Kundengruppe
+		dataType: string
+		lineageTag: 491ef32c-4171-48a8-8828-4173731fcbb1
+		summarizeBy: none
+		sourceColumn: Kundengruppe
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kundenberater aus den Konto
+	column Kundenberater
+		dataType: string
+		lineageTag: 9355a9fe-2b65-4fec-8fcf-11a9f86b25e4
+		summarizeBy: none
+		sourceColumn: Kundenberater
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Kundenname plus Id im Format (id) Name
+	column KundenNamePlusNummer
+		dataType: string
+		lineageTag: eba923f9-b844-4007-8176-36eb832023f7
+		summarizeBy: none
+		sourceColumn: KundenNamePlusNummer
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Längengrade der Adresse
+	column Latitude
+		dataType: double
+		lineageTag: 9f74a5d8-69fe-4b1c-b842-e3c5fc7e3530
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Breitengrad der Adresse
+	column Longitude
+		dataType: double
+		lineageTag: 5a8887fc-f134-404c-a548-cd9a4b49517e
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Datum der Kontoerstellung
+	column Erstelldatum
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3d6a1f39-7de8-4f3c-a26c-0e8e7ebc7d17
+		summarizeBy: none
+		sourceColumn: Erstelldatum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Vertriebsweg, Online oder Offline
+	column Kundenvertriebsweg
+		dataType: string
+		lineageTag: b661e420-564e-458f-8bfb-5605ae2b81d7
+		summarizeBy: none
+		sourceColumn: Kundenvertriebsweg
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ursprung des Kunden. Online oder Offline
+	column Ursprung
+		dataType: string
+		lineageTag: 5bf345cb-819b-47ec-9941-c8bf22c4a678
+		summarizeBy: none
+		sourceColumn: Ursprung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Beschreibt den Ursprung des Kunden. Mögliche Werte sind: 
+	/// Keine Klassifizierung : Keine Umsätze 
+	/// Sales : Nur Käufe 
+	/// Repair : Nur Reparaturen
+	/// Sales zu Repair : Erst Kauf, dann Reparatur 
+	/// Repair zu Sales : Erst Reparatur, dann Kauf
+	column Klassifizierung
+		dataType: string
+		lineageTag: 6de7d77a-e32b-4789-b0d2-257f3b6e2c0b
+		summarizeBy: none
+		sourceColumn: Klassifizierung
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Anzahl der Rechnungen aus den Kundenkonto
+	column AnzahlRechnungen
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e66e70b-2df9-4879-a72e-d6c852a17522
+		summarizeBy: none
+		sourceColumn: AnzahlRechnungen
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Bundesland des Kunden
+	column Bundesland
+		dataType: string
+		lineageTag: 3a280ed1-940a-404d-94b4-1f3b8bacdaad
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Bundesland
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wie Landkreis
+	column Kreis
+		dataType: string
+		lineageTag: 3be2bc9e-44da-4f8d-9810-d67e7ad82152
+		dataCategory: County
+		summarizeBy: none
+		sourceColumn: Kreis
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Bezieht sich auf Kreis und gibt an ob Stadt oder Kreis. 
+	column Typ
+		dataType: string
+		lineageTag: 8871c1b9-e5c7-450d-b727-a1d8d61b7ebd
+		summarizeBy: none
+		sourceColumn: Typ
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hat einen MKT Marker
+	column marker
+		dataType: string
+		lineageTag: 6bea8b9a-8304-4c63-8aca-d93b575f47f7
+		summarizeBy: none
+		sourceColumn: marker
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Educationkategorie nach Apple
+	column EDUKategorie
+		dataType: string
+		lineageTag: b73c6dca-f0bf-48c3-80d3-f9c1f7875b28
+		summarizeBy: none
+		sourceColumn: EDUKategorie
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Die UmsatzsteuerId des Kunden
+	column UStId
+		dataType: string
+		lineageTag: 5b53e2d9-031b-40f6-9706-47bb81b630a3
+		summarizeBy: none
+		sourceColumn: UStId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum des ersten Umsatzes
+	column ErsterVerkauf
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 56aa7b2e-ca8e-4f75-bdb0-4456ed6a5710
+		summarizeBy: none
+		sourceColumn: ErsterVerkauf
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Datum des Letzten Kaufes
+	column LetzerVerkauf
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 14b5611e-210a-420b-a053-a46b8a1c81f4
+		summarizeBy: none
+		sourceColumn: LetzerVerkauf
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Anzahl der Gutschriften aus dem Kundenkonto
+	column AnzahlGutschriften
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ddfb96e-d21d-45af-af85-89e718663076
+		summarizeBy: none
+		sourceColumn: AnzahlGutschriften
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_Leasing Kunden-81dd7c5c-4b94-47c3-8933-7e046787e190' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vDIM_Customer = Quelle{[Schema="PowerBI",Item="vDIM_Customer"]}[Data]
+				in
+				    PowerBI_vDIM_Customer
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,19 @@
+createOrReplace
+
+	function 'bpi.Formating.Currency' = ```
+			() => 
+			VAR CurrentValue = 
+			    CALCULATE ( SELECTEDMEASURE (), ALLSELECTED () )
+			VAR _abs = ABS(CurrentValue)
+			VAR _format = SWITCH (
+			        TRUE (),
+			        _abs <= 1E3, "€#,0.00",
+        			_abs <= 1E6, "€#,0,.00 K",
+        			_abs <= 1E9, "€#,0,,.00 M",
+        			_abs <= 1E12, "€#,0,,.00 M"
+			    ) 
+			RETURN
+			_format
+			```
+		lineageTag: 780f2fc9-7b4f-4800-b60b-457ff5760e89
+

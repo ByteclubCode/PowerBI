@@ -1,0 +1,34 @@
+table 'FACT_Budget '
+	lineageTag: 961cfbab-d759-4f98-a2f4-b22595220962
+
+	column Id
+		dataType: string
+		isHidden
+		lineageTag: 44a6ac0a-2cf3-4bda-8c2b-ba91fdb6a390
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 454d90e1-3ccf-4256-bc83-95577e2e14bd
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"de-DE"}
+
+	partition 'FACT_Budget ' = m
+		mode: import
+		source =
+				let
+				    Quelle = Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
+				    PowerBI_vFACT_BudgetGroupPlan = Quelle{[Schema="PowerBI",Item="vFACT_BudgetGroupPlan"]}[Data]
+				in
+				    PowerBI_vFACT_BudgetGroupPlan
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Single_BYOS_Sales"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7b05766a-9fc8-40a3-8529-15fa06e93adc"
+  }
+}
