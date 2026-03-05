@@ -119,8 +119,12 @@ table FACT_AppleCareAbo
 		mode: import
 		source =
 				let
-				    Quelle = Sql.Database("172.20.20.156", "BYTECLUB_DWH20"),
+				    Quelle =  Sql.Database("ALETHEIA", "BYTECLUB_DWH20"),
 				    PowerBI_vFACT_AppleCareAbo = Quelle{[Schema="PowerBI",Item="vFACT_AppleCareAbo"]}[Data]
 				in
 				    PowerBI_vFACT_AppleCareAbo
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
 
